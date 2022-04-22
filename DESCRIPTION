@@ -1,0 +1,11 @@
+Package: rankrate
+Title: Statistical Models for Preference Learning w/ Rankings and Ratings
+Version: 0.0.0.9000
+Authors@R: 
+    person("Michael", "Pearce", , "mpp790@uw.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9313-271X"))
+Description: This package implements key estimation procedures of the Mallows-Binomial model, the first joint statistical model for preference learning for rankings and ratings. 
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
