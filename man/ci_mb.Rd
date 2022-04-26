@@ -11,7 +11,7 @@ ci_mb(
   interval = 0.9,
   nsamples = 100,
   all = FALSE,
-  method = c("ASTAR", "Greedy", "GreedyLocal", "FV"),
+  method = c("ASTAR", "ASTAR_LP", "Greedy", "GreedyLocal", "FV"),
   localsearch = 0
 )
 }

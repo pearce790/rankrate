@@ -8,7 +8,7 @@ fit_mb(
   Pi,
   X,
   M,
-  method = c("ASTAR", "Greedy", "GreedLocal", "FV"),
+  method = c("ASTAR", "ASTAR_LP", "Greedy", "GreedyLocal", "FV"),
   localsearch = 0
 )
 }

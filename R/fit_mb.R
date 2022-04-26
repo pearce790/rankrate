@@ -19,9 +19,11 @@
 #' fit_mb(Pi=Pi,X=X,M=5,method="FV",localsearch=3)
 #'  
 #' @export
-fit_mb <- function(Pi,X,M,method=c("ASTAR","Greedy","GreedLocal","FV"),localsearch=0){
+fit_mb <- function(Pi,X,M,method=c("ASTAR","ASTAR_LP","Greedy","GreedyLocal","FV"),localsearch=0){
   if(method == "ASTAR"){
     return(ASTAR(Pi,X,M))
+  }else if(method == "ASTAR_LP"){
+    return(ASTAR_LP(Pi,X,M))
   }else if(method == "Greedy"){
     return(Greedy(Pi,X,M,localsearch))
   }else if(method == "GreedyLocal"){

@@ -21,7 +21,7 @@
 #'  
 #' @export
 ci_mb <- function(Pi,X,M,interval=0.90,nsamples=100,all=FALSE,
-                  method=c("ASTAR","Greedy","GreedyLocal","FV"),localsearch=0){
+                  method=c("ASTAR","ASTAR_LP","Greedy","GreedyLocal","FV"),localsearch=0){
   I <- max(nrow(X),nrow(Pi))
   J <- ncol(X)
   if(all){bs_pi0 <- matrix(NA,nrow=nsamples,ncol=J)}
