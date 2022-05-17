@@ -19,7 +19,7 @@ fit_mb(
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{method}{String specifying method, with allowable options "ASTAR","Greedy","GreedLocal",and "FV".}
+\item{method}{String specifying method, with allowable options "ASTAR","ASTAR_LP","Greedy","GreedyLocal",and "FV".}
 
 \item{localsearch}{Numeric for use with the Greedy and FV methods; see documentation of those estimation functions for details. Defaults to 0 indicating no local search.}
 }

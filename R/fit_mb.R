@@ -5,7 +5,7 @@
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
-#' @param method String specifying method, with allowable options "ASTAR","Greedy","GreedLocal",and "FV". 
+#' @param method String specifying method, with allowable options "ASTAR","ASTAR_LP","Greedy","GreedyLocal",and "FV". 
 #' @param localsearch Numeric for use with the Greedy and FV methods; see documentation of those estimation functions for details. Defaults to 0 indicating no local search.
 #' 
 #' @return List with elements pi0 (estimated consensus ranking MLE),  p (estimated object quality parameter MLE), theta (estimated scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
