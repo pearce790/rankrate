@@ -2,7 +2,8 @@
 #' 
 #' This function estimates the maximum likelihood or maximum a posteriori estimates of a Bradley-Terry-Luce-Binomial distribution via an Expectation-Maximization (EM) algorithm.
 #' 
-#' @import stats, matrixStats
+#' @import stats
+#' @import matrixStats
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.
