@@ -140,6 +140,7 @@ gibbs_btlbmm <- function(Pi,X,M,I,J,Pi_full=NULL,
       
 
       if(is.na(logprob)){logprob <- -Inf} #automatic rejection if probability is invalid (essentially impossible parameter values).
+      u <- runif(1,min=0,max=1)
       if(log(u) < logprob){
         q.out[iter,,k] <- prop_trans[1:J]
         rho.out[iter,k] <- prop_trans[J+1]
