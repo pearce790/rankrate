@@ -138,7 +138,8 @@ gibbs_btlbmm <- function(Pi,X,M,I,J,Pi_full=NULL,
         sum(c(curr_trans[J+1],curr_trans[1:J]-2*log(1+exp(curr_trans[1:J]))))
       logprob <- loglikratio + logqpriorratio + logrhopriorratio + logjacobianratio
       
-      u <- runif(1)
+
+      if(is.na(logprob)){logprob <- -Inf} #automatic rejection if probability is invalid (essentially impossible parameter values).
       if(log(u) < logprob){
         q.out[iter,,k] <- prop_trans[1:J]
         rho.out[iter,k] <- prop_trans[J+1]
