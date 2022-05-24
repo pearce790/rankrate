@@ -1,6 +1,6 @@
-#' MLE and MAP Estimation of a BTL-B model
+#' MLE and MAP Estimation of a BTL-B Mixture Model model
 #' 
-#' This function estimates the maximum likelihood or maximum a posteriori estimates of a Bradley-Terry-Luce-Binomial distribution via an Expectation-Maximization (EM) algorithm.
+#' This function estimates the maximum likelihood or maximum a posteriori estimates of a Bradley-Terry-Luce-Binomial distribution with potentially K mixture components via an Expectation-Maximization (EM) algorithm.
 #' 
 #' @import stats
 #' @import matrixStats
@@ -27,12 +27,12 @@
 #' Pi <- matrix(c(1,2,3,4,5,2,1,NA,NA,NA),byrow=TRUE,nrow=2)
 #' Pi_full <- matrix(c(1,2,3,4,5,2,1,3,4,NA),byrow=TRUE,nrow=2)
 #' X <- matrix(c(0,1,2,3,4,1,2,2,5,5),byrow=TRUE,nrow=2)
-#' fit_btlb(Pi=Pi,X=X,M=6,I=2,J=5,tol=0.01)
-#' fit_btlb(Pi=Pi,X=X,M=6,I=2,J=5,tol=0.01,a=5,b=1,gamma1=10,gamma2=10)
+#' fit_btlbmm(Pi=Pi,X=X,M=6,I=2,J=5,tol=0.01)
+#' fit_btlbmm(Pi=Pi,X=X,M=6,I=2,J=5,tol=0.01,a=5,b=1,gamma1=10,gamma2=10)
 #'  
 #' @export
-fit_btlb <- function(Pi,X,M,I,J,Pi_full=NULL,tol=1,maxiter=50,verbose=FALSE,
-                     K=1,alpha0=1,a=1,b=1,gamma1=1,gamma2=0){
+fit_btlbmm <- function(Pi,X,M,I,J,Pi_full=NULL,tol=1,maxiter=50,kmeans=FALSE,verbose=FALSE,
+                       K=1,alpha0=1,a=1,b=1,gamma1=1,gamma2=0){
   
   if(any(dim(X)!=c(I,J))){stop("Requires dim(X) = c(I,J)")}
   if(length(alpha0)==1){alpha0 <- rep(alpha0,K)}
@@ -41,7 +41,9 @@ fit_btlb <- function(Pi,X,M,I,J,Pi_full=NULL,tol=1,maxiter=50,verbose=FALSE,
   if(is.null(Pi_full)){
     Pi_full <- matrix(NA,nrow=nrow(Pi),ncol=J)
     for(i in 1:nrow(Pi)){Pi_full[i,] <- c(na.exclude(Pi[i,]),setdiff(1:J,na.exclude(Pi[i,])))}
-  }else{if(nrow(Pi)!=nrow(Pi_full)){stop("nrow(Pi) must equal nrow(Pi_full)")}
+  }else{
+    if(nrow(Pi)!=nrow(Pi_full)){stop("nrow(Pi) must equal nrow(Pi_full)")}
+    if(any(Pi!=Pi_full[,1:ncol(Pi)],na.rm=T)){stop("Existing entries in Pi, Pi_full must be equivalent")}
   }
   
   Ri <- apply(Pi,1,function(pi){length(na.exclude(pi))})
@@ -49,10 +51,20 @@ fit_btlb <- function(Pi,X,M,I,J,Pi_full=NULL,tol=1,maxiter=50,verbose=FALSE,
   #initializing
   Zcurr <- Znew <- matrix(1/K,nrow=I,ncol=K)
   alphacurr <- alphanew <- rep(1/K,K)
-  Xfilled <- X
-  for(j in 1:J){Xfilled[is.na(Xfilled[,j]),j] <- mean(Xfilled[,j],na.rm=T)}
-  pcurr <- pnew <- as.matrix(t(kmeans(na.exclude(Xfilled),K)$centers/M))
-  thetacurr <- thetanew <- rep(1,K)
+  
+  if(kmeans){
+    Xfilled <- X
+    for(j in 1:J){Xfilled[is.na(Xfilled[,j]),j] <- mean(Xfilled[,j],na.rm=T)}
+    pcurr <- pnew <- as.matrix(t(kmeans(na.exclude(Xfilled),K)$centers/M))
+  }else{
+    pcurr <- pnew <- matrix(NA,nrow=J,ncol=K)
+    for(k in 1:K){
+      pcurr[,k] <- pnew[,k] <- apply(X[sample(I,I/K,replace=T),],2,function(x){mean(x,na.rm=T)})/M
+    }
+    pcurr[is.na(pcurr)] <- 0.5
+  }
+  if(gamma1==1 & gamma2==0){thetacurr <- thetanew <- rep(5,K)
+  }else{thetacurr <- thetanew <- rgamma(K,gamma1,gamma2)}
   
   loglikcurr <- sum(unlist(lapply(1:I,function(i){
     logSumExp(unlist(lapply(1:K,function(k){

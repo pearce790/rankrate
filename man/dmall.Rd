@@ -4,7 +4,7 @@
 \alias{dmall}
 \title{Mallows density function}
 \usage{
-dmall(Pi, pi0, theta, log = FALSE)
+dmall(Pi, pi0, theta, log = FALSE, Pi_full = NULL)
 }
 \arguments{
 \item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
@@ -14,6 +14,8 @@ dmall(Pi, pi0, theta, log = FALSE)
 \item{theta}{Numeric specifying the Mallows scale parameter.}
 
 \item{log}{Boolean indicating if loglikelihood should be returned.}
+
+\item{Pi_full}{Matrix indicating which values were considered when providing a ranking. For each row, first entries should match the corresponding values in Pi. Remaining entries indicate the unranked objects. For example, if a judge only views objects 1,2,4,5 and provides ranking 1<4, then Pi_full should have row 1,4,2,5 or 1,4,5,2.}
 }
 \value{
 (Log) likelihood of rankings under a Mallows distribution.

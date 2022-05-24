@@ -21,7 +21,7 @@
 dbtl <- function(Pi,worth,log=FALSE,Pi_full=NULL){
   if(!is.matrix(Pi)){stop("Pi must be a matrix of (partial) rankings")}
   if(!is.null(Pi_full)){if(nrow(Pi)!=nrow(Pi_full)){stop("nrow(Pi) must equal nrow(Pi_full).")}}
-  if(length(worth)<max(Pi,Pi_full,na.rm=T)){stop("Ensure one worth parameter for every object in Pi and/or Pi_full")}
+  if(length(worth)<max(c(0,Pi,Pi_full),na.rm=T)){stop("Ensure one worth parameter for every object in Pi and/or Pi_full")}
   
   if(sum(apply(Pi,1,function(pi){!all(is.na(pi))}))==0){ #if all rankings empty, return likelihood of 1 (convenience)
     if(log){return(0)}else{return(1)}

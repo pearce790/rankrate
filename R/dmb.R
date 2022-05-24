@@ -11,6 +11,7 @@
 #' @param theta Numeric specifying the Mallows scale parameter.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
 #' @param log Boolean indicating if loglikelihood should be returned.
+#' @param Pi_full For rankings based on incomplete object access. See documentation for dmall.
 #'  
 #' @return (Log) likelihood of rankings under a Mallows-Binomial distribution.
 #'  
@@ -21,11 +22,11 @@
 #' dmb(Pi=Pi,X=X,p=c(.1,.2,.5,.9),theta=2,M=5,log=TRUE)
 #'  
 #' @export
-dmb <- function(Pi,X,p,pi0=NULL,theta,M,log=FALSE){
+dmb <- function(Pi,X,p,pi0=NULL,theta,M,log=FALSE,Pi_full=NULL){
   if(!is.matrix(X)){stop("X must be a matrix of ratings")}
   if(length(p)!=ncol(X)){stop("p must equal ncol(X)")}
   if(is.null(pi0)){pi0 <- order(p)}
-  logd <- dmall(Pi,pi0,theta,log=T)+sum(apply(X,1,function(x){dbinom(x,M,p,log=T)}),na.rm=T)
+  logd <- dmall(Pi,pi0,theta,log=T,Pi_full)+sum(apply(X,1,function(x){dbinom(x,M,p,log=T)}),na.rm=T)
   if(log){return(logd)
   }else{return(exp(logd))}
 }

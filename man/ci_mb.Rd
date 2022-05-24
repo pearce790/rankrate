@@ -41,7 +41,6 @@ This function calculates confidence intervals for parameters in a Mallows-Binomi
 \examples{
 Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
 X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ci_mb(Pi=Pi,X=X,M=5,method="ASTAR")
-ci_mb(Pi=Pi,X=X,M=5,method="FV",interval=0.95,nsamples=200,all=TRUE,localsearch=1)
+ci_mb(Pi=Pi,X=X,M=5,method="FV",interval=0.95,nsamples=20,all=TRUE,localsearch=1)
  
 }
