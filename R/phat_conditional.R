@@ -1,24 +1,26 @@
 #' Estimate phat in a Mallows-Binomial given an order constraint
-#' 
+#'
 #' This function calculates the MLE of p in a Mallows-Binomial(p,theta) distribution given Order(p).
-#' 
+#'
 #' @import nloptr
-#' 
+#'
 #' @param X Matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
 #' @param order Vector specifying a top-r or complete ordering of the desired p vector.
-#'  
+#'
 #' @return Vector of length J that is the MLE of p given Order(p) and X.
-#'  
+#'
 #' @examples
 #' X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
 #' phat_conditional(X=X,M=5,order=c(1,2,3,4))
 #' phat_conditional(X=X,M=5,order=c(2,1))
-#' 
+#'
 #' @export
 phat_conditional <- function(X,M,order){
+  # get constant
   J <- ncol(X)
-  
+
+  # optimization functions: f is objective, g is order constraints
   opt_f <- function(p,X,M,order,J){
     # quantity that must be optimized with respect to p
     return(-sum(apply(X,1,function(x){dbinom(x,M,p,log=T)}),na.rm=T))
@@ -27,12 +29,42 @@ phat_conditional <- function(X,M,order){
     # contraints, which are met when all quantities returned are nonpositive
     return(c(-diff(p[order]),p[order[length(order)]]-p[setdiff(1:J,order)]))
   }
-  res <- nloptr(x0=apply(X,2,function(x){mean(x,na.rm=T)})/M,
-                eval_f = opt_f, eval_g_ineq = opt_g,
-                lb = rep(0,J), ub = rep(1,J),
-                X = X, M = M, order = order, J = J,
-                opts = list("algorithm"="NLOPT_LN_COBYLA","xtol_abs"=1e-8,maxeval=1000))
-  res$solution[which(res$solution==0)] <- 1e-8
-  res$solution[which(res$solution==1)] <- 1-1e-8
-  res$solution
+
+  # optimize: ensure solutions are feasible (i.e., >0, <1, and in proper order!)
+  # allows for once "re-do" if no feasible solutions are found.
+  starts <- matrix(data=c(apply(X,2,function(x){mean(x,na.rm=T)})/M,runif(J*3)),
+                   ncol=J,byrow=TRUE)
+  solutions <- t(apply(starts,1,function(x0){
+    res <- nloptr(x0=apply(X,2,function(x){mean(x,na.rm=T)})/M,
+                  eval_f = opt_f, eval_g_ineq = opt_g,
+                  lb = rep(0,J), ub = rep(1,J),
+                  X = X, M = M, order = order, J = J,
+                  opts = list("algorithm"="NLOPT_LN_COBYLA","xtol_abs"=1e-8,maxeval=1000))
+    res$solution[which(res$solution==0)] <- 1e-8
+    res$solution[which(res$solution==1)] <- 1-1e-8
+    res$solution
+  }))
+  feasible <- apply(solutions,1,function(solution){all(opt_g(solution,X,M,order,J)<=0)})
+  if(all(feasible==FALSE)){
+    starts <- matrix(data=runif(J*10),
+                     ncol=J,byrow=TRUE)
+    solutions <- t(apply(starts,1,function(x0){
+      res <- nloptr(x0=apply(X,2,function(x){mean(x,na.rm=T)})/M,
+                    eval_f = opt_f, eval_g_ineq = opt_g,
+                    lb = rep(0,J), ub = rep(1,J),
+                    X = X, M = M, order = order, J = J,
+                    opts = list("algorithm"="NLOPT_LN_COBYLA","xtol_abs"=1e-8,maxeval=1000))
+      res$solution[which(res$solution==0)] <- 1e-8
+      res$solution[which(res$solution==1)] <- 1-1e-8
+      res$solution
+    }))
+    feasible <- apply(solutions,1,function(solution){all(opt_g(solution,X,M,order,J)<=0)})
+    if(all(feasible==FALSE)){stop("No feasible solutions found!")}
+  }
+  obj <- apply(solutions,1,function(solution){opt_f(solution,X,M,order,J)})
+  obj[feasible==FALSE] <- Inf
+  feasible_and_best <- which.min(obj)
+
+  # return solution
+  return(solutions[feasible_and_best,])
 }
