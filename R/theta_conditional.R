@@ -1,6 +1,6 @@
 #' Estimate thetahat in a Mallows-Binomial given a constraint
 #' 
-#' This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint.
+#' This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint. The constraint is a partial or complete central ranking.
 #' 
 #' @import stats
 #' 

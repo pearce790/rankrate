@@ -1,0 +1,63 @@
+ratings <- matrix(c(0,2,4,6,
+                    2,1,4,6,
+                    1,3,4,6),
+                  byrow=T,nrow=3)
+ranks <- matrix(c(1,2,3,4,
+                  2,1,3,4,
+                  1,2,4,3),
+                byrow=T,nrow=3)
+I <- 3
+J <- 4
+M <- 6
+R <- apply(ranks,1,function(rank){ifelse(all(is.na(rank)),NA,max(rank,na.rm=T))})
+orderings <- as.orderings(ranks)
+get_totalcostheuristic <- function(curr_node){
+  dists_to_curr_node <- apply(orderings,1,function(pi){kendall(pi=curr_node,pi0=pi)})
+  get_theta <- optimize(function(theta){theta*sum(dists_to_curr_node)+
+      sum(unlist(lapply(R,function(r){psi(theta,J,r,log=T)})))},
+      c(0,10^8))
+  thetahat_given_curr_node <- get_theta$minimum
+  phat_given_curr_node <- phat_conditional(ratings,M,curr_node)
+  ratings_cost <- sum(apply(ratings,1,function(rating){-dbinom(rating,M,phat_given_curr_node,log=T)}))
+  orderings_cost <- get_theta$objective
+  total_cost_heuristic <- ratings_cost + orderings_cost
+  return(list(total=total_cost_heuristic,
+              phat=phat_given_curr_node,thetahat=thetahat_given_curr_node))
+}
+
+open <- matrix(NA,J,J+1)
+open[,1] <- 1:J
+closed <- matrix(NA,0,J+1)
+for(curr_node in 1:J){
+  open[curr_node,J+1] <- get_totalcostheuristic(curr_node)$total
+}
+
+while(TRUE){
+  curr_index <- which.min(open[,J+1])
+  curr_node <- na.exclude(open[curr_index,1:J])
+  print(c(curr_node))
+  closed <- rbind(closed,open[curr_index,])
+  if(length(curr_node)==J){
+    open <- open[-curr_index,]
+    break()
+  }
+  open <- open[-curr_index,]
+  remaining <- setdiff(1:J,curr_node)
+  for(remain in remaining){
+    new_open <- c(curr_node,remain)
+    open <- rbind(open,c(new_open,rep(NA,J-length(curr_node)-1),get_totalcostheuristic(new_open)$total))
+  }
+ 
+}
+open
+closed
+
+
+
+
+
+curr_node <- c(1)
+get_totalcostheuristic(curr_node)
+
+
+

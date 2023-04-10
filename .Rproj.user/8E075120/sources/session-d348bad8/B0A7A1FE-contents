@@ -1,0 +1,175 @@
+---
+title: "Introductory Tutorial"
+author: "Michael Pearce"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Welcome to the `rankrate` package! In this tutorial, we demonstrate how to aggregate rankings and ratings via the Mallows-Binomial model. For more information on the model and estimation techniques, see our paper in the Journal of Machine Learning Research:
+
+> Pearce, M. and E. A. Erosheva (2022). A unified statistical learning model for rankings
+> and scores with application to grant panel review. Journal of Machine Learning Research 23 (210).
+([link](https://jmlr.org/papers/v23/21-1262.html))
+
+Before we begin, make sure you have the `rankrate` package installed. For a more stable version, download our package directly from CRAN using the following code:
+
+```{r eval=FALSE}
+install.packages("rankrate")
+```
+
+Alternatively, you can download the most up-to-date version of the package from Github:
+
+```{r eval=FALSE}
+# install.packages("remotes") # run this line only if you don't have the remotes package installed.
+remotes::install_github("pearce790/rankrate")
+```
+
+Then, load the package using the following code (every time you open a new R session!)
+
+```{r}
+library(rankrate)
+```
+
+## Notation
+
+Throughout this tutorial, we will assume that you have $I$ judges who will assess a collection of $J$ objects. We assume that each and every judge considers each and every object, however, there can be some missing data: Judges need not rate every object, and judges may provide a partial ranking or no ranking at all!
+
+There are two data types:
+
+  1. Ratings, which must be integers between $0$ (best) and $M$ (worst). If your ratings are not in this format, usually a linear transformation will fix this!
+  2. Rankings, which we study in the form of an ordering (see below). If judges provide a partial ranking, we let $R$ denote the length of the ranking ($R\leq J$).
+  
+We have two parameters in the model, which we seek to estimate:
+
+  1. $p$, which is a vector of length $J$ on the unite interval. The $j$th value in $p$ represents the *quality* of object $j$, where low values are better.
+  2. $\theta$, which is a positive scale parameter that represents the level of consensus among the judges. Higher values indicate stronger consensus, although precise interpretation varies based on $J$.
+  
+We let $\pi_0 = \text{Order}(p)$, which is the *true ranking of objects from best to worst*.
+  
+## Example Data
+
+Let's create an example dataset! We will assume there are $I=20$ judges and $J=8$ objects. In our example, we assume that $M = 10$, $R = 6$, and that
+$$p = [0.10 \ 0.15 \ 0.30 \ 0.35 \ 0.5 \ 0.70 \ 0.90 \ 0.95], \ \ \theta = 2$$
+
+```{r}
+set.seed(1)
+I <- 20
+J <- 6
+M <- 9
+R <- 4
+p <- c(0.10,0.13,0.50,0.53,0.56,.90)
+theta <- 1
+
+data <- rmb(I=I,p=p,theta=theta,M=M,R=R)
+X <- data$X
+Pi <- data$Pi
+```
+
+Let's first view our ratings: Each entry, $X_{ij}$ represents the rating assigned by judge $i$ to object $j$.
+
+```{r}
+pander::pander(X,caption="Ratings, X. Rows represent judges and columns represent objects. Value in table represent the rating assigned by judges to objects.",
+               stype="rmarkdown")
+```
+
+For example, we see that judge $3$ assigned their best rating to object $1$ (value of $1$) and their worst rating to object $8$ (value of $10$). They tied objects 2 and 4 by giving them both a rating of $5$.
+
+Now let's view rankings: Each row, $\Pi_i$ represents the ordering assigned by judge $i$:
+
+```{r}
+pander::pander(Pi,caption="Rankings, Pi. Rows represent judges and columns represent rank places. Values in table represent objects assigned by judges to each rank place.",
+               stype="rmarkdown")
+```
+
+For example, we see that judge $3$ thought the ordering of objects was $$2\prec1\prec2\prec4\prec5\prec7$$
+In words, they thought object $1$ was in first place, object $3$ was in second place, object $2$ was in third place, object $4$ was in fourth place, object $5$ was in fifth place, and object $7$ was in sixth place. This also implies that objects 6 and 8 were worse than the rest (which were ranked), but no order is imposed between the two of them!
+
+Note that judge $3$'s ranking doesn't perfectly align with the order of their ratings!
+
+## Model Estimation
+
+We now fit a Mallows-Binomial model to our data! The primary function for model estimation is `ASTAR`, which requires us to specify only $Pi$, $X$, and $M$.
+
+```{r}
+model_fit <- ASTAR(Pi,X,M)
+```
+
+We may also calculate an approximate confidence interval for our model results using the `ci_mb` function:
+
+```{r cache=TRUE}
+model_ci <- ci_mb(Pi,X,M,interval = 0.95,nsamples = 200, all=TRUE,method="ASTAR")
+```
+
+Confidence intervals are calculated via the nonparametric boostrap, and thus require the user to specify how many bootstrap samples (`nsamples`) should be created. We let the function calculate a 95% confidence interval (`interval = 0.95`), we have it save all bootstrap estimates (`all = TRUE`) and we have it estimate using the exact ASTAR algorithm (`method = ASTAR`).
+
+(There are also four additional estimation algorithms in the package, one exact and three approximate. See full paper for details. The examples below are not run.)
+
+```{r eval=FALSE}
+model_fit_exact_2 <- ASTAR_LP(Pi,X,M)
+model_fit_approx_1 <- FV(Pi,X,M,localsearch=0)
+model_fit_approx_2 <- Greedy(Pi,X,M,localsearch=0)
+model_fit_approx_3 <- GreedyLocal(Pi,X,M)
+```
+
+## Interpreting Model Results
+
+The main `ASTAR` function returns four objects: Point estimates $\hat\pi_0$, $\hat p$, and $\hat\theta$, plus the integer-valued object `num_nodes` which indicates how many orderings were searched while calculating the MLE (see full paper for details).
+
+The `ci_mb` function, when `all=TRUE`, returns 3 objects: `ci`, a summary table of confidence intervals for model parameters; `bootstrap_pi0`, the bootstrap distribution of $\hat\pi_0$; and `bootstrap_ptheta`, the bootstrap distribution of $(\hat p,\hat\theta)$.
+
+We plot the results of our model-fitting exercise below:
+
+```{r}
+library(ggplot2)
+library(reshape2)
+library(gridExtra)
+
+Estimates_p <- melt(model_ci$boostrap_ptheta[,1:J])
+Estimates_p$Var1 <- "Bootstrap"
+names(Estimates_p) <- c("Type","Object","Value")
+Estimates_p <- rbind(data.frame(Type="Point Estimate",Object=paste0(1:J),Value=model_fit$p),Estimates_p)
+
+Estimates_theta <- data.frame(Type = c("Point Estimate",rep("Bootstrap",nrow(model_ci$boostrap_ptheta))),
+                              Object="theta",Value=c(model_fit$theta,model_ci$boostrap_ptheta[,J+1]))
+
+gg_p<-ggplot(Estimates_p,aes(x=Object,y=Value))+theme_bw()+
+  geom_violin()+
+  ylim(c(0,1))+ylab("Estimate")+xlab(element_blank())+
+  scale_x_discrete(labels=c(expression(p[1]),expression(p[2]),expression(p[3]),expression(p[4]),
+                            expression(p[5]),expression(p[6])))+
+  geom_point(data=subset(Estimates_p,Type=="Point Estimate"),size=2)+
+  ggtitle("Parameter Estimates",
+          "Point estimates (dots) and sampling distribution (violin plots)")+
+  theme(panel.grid.major.x = element_blank(),panel.grid.minor.x = element_blank())
+
+gg_theta<-ggplot(Estimates_theta,aes(x=Object,y=Value))+theme_bw()+
+  geom_violin()+
+  ylim(c(0,3))+ylab("Estimate")+xlab(expression(theta))+
+  geom_point(data=subset(Estimates_theta,Type=="Point Estimate"),size=2)+
+  ggtitle("","")+
+  theme(axis.ticks.x=element_blank(),axis.text.x = element_blank(),axis.title.y=element_blank(),
+        panel.grid.major.x = element_blank(),panel.grid.minor.x = element_blank())
+
+grid.arrange(gg_p,gg_theta,nrow=1,widths=c(.85,.15))
+
+Estimates_rankplace <- melt(t(apply(model_ci$bootstrap_pi0,1,order)))
+names(Estimates_rankplace) <- c("Sample","Object","Rank")
+ggplot(Estimates_rankplace,aes(x=as.factor(Object),y=Rank))+theme_bw()+
+  geom_boxplot()+xlab("Object")+ylab("Rank Place")+
+  scale_y_continuous(breaks=1:J)+
+  ggtitle("Estimated Rank Place","Sampling distribution by object")+
+  theme(panel.grid.minor.y=element_blank())
+```
+
+

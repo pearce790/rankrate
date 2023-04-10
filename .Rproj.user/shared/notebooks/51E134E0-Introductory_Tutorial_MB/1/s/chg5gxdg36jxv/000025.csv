@@ -1,0 +1,8 @@
+"0",""
+"0","Estimates_rankplace <- melt(t(apply(model_ci$bootstrap_pi0,1,order)))"
+"0","names(Estimates_rankplace) <- c(""Sample"",""Object"",""Rank"")"
+"0","ggplot(Estimates_rankplace,aes(x=as.factor(Object),y=Rank))+theme_bw()+"
+"0","  geom_boxplot()+xlab(""Object"")+ylab(""Rank Place"")+"
+"0","  scale_y_continuous(breaks=1:J)+"
+"0","  ggtitle(""Estimated Rank Place"",""Sampling distribution by object"")+"
+"0","  theme(panel.grid.minor.y=element_blank())"

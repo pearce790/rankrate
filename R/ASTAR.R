@@ -1,6 +1,6 @@
-#' Calculate the exact MLE of a Mallows-Binomial distribution using an A* algorithm
+#' Calculate the exact MLE of a Mallows-Binomial distribution using an A* search algorithm
 #' 
-#' This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). Algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
+#' This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). The algorithm may be very slow when number of objects, J, exceeds 15, but is often still tractable for larger J when ranking and rating consensus among judges is strong.
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.

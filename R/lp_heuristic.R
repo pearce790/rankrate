@@ -43,7 +43,7 @@ lp_heuristic <- function(Q,Pi,I,J,order){
   }else{trios_constraints <- matrix(0,nrow=0,ncol=length(S)^2)}
   
   sol <- lp(direction = "min",
-            objective = -as.vector(t(coeffs)),
+            objective.in = -as.vector(t(coeffs)),
             const.mat = rbind(pairs_constraints,trios_constraints),
             const.dir = c(rep("==",nrow(pairs_constraints)),
                           rep(">=",nrow(trios_constraints))),

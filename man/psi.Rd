@@ -19,7 +19,7 @@ psi(theta, J, R, log = FALSE)
 Numeric representing normalizing constant of a Mallows distribution.
 }
 \description{
-This function calculates the normalizing constant of a Mallows distribution under the Kendall distance
+This function calculates the normalizing constant of a Mallows distribution under the Kendall distance.
 }
 \examples{
 psi(theta=1,J=10,R=8)

@@ -1,6 +1,6 @@
 #' Calculate Q Matrix
 #' 
-#' This function calculates the Q matrix given a collection of (partial) rankings.
+#' This function calculates the Q matrix given a collection of (partial) rankings. For use in estimation functions, but not likely on its own.
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param J Total number of objects assessed.

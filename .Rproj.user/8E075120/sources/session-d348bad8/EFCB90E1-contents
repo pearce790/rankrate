@@ -1,0 +1,55 @@
+checkformat_ranks <- function(ranks,I,J){
+  check1 <- is.matrix(ranks)
+  check2 <- nrow(ranks) == I
+  check3 <- ncol(ranks) == J
+  check4 <- all(ranks %in% c(0:J,NA))
+  check5 <- all(apply(ranks,1,function(rank){
+    all(sort(setdiff(rank,c(0,NA))) == 1:max(rank,na.rm=T)) &
+      length(rank[rank %in% 1:J]) == max(rank,na.rm=T)
+  }))
+  
+  if(!check1){stop("Ensure ranks is a matrix object")}
+  if(!check2){stop("Ensure ranks has I rows")}
+  if(!check3){stop("Ensure ranks has J columns")}
+  if(!check4){stop("Ensure each value in ranks is in c(0:J,NA)")}
+  if(!check5){stop("Ensure each set of ranks has unique values (no ties or skipped ranks)")}
+  
+  return(TRUE)
+}
+as.orderings <- function(ranks){
+  
+  I <- nrow(ranks)
+  J <- ncol(ranks)
+  if(!checkformat_ranks(ranks,I,J)){stop()}
+  
+  if(any(ranks==0,na.rm=T)){
+    ## Separate Ballots Case
+    
+    orderings <- matrix(data=NA,nrow=I,ncol=J)
+    ballots <- matrix(data=0,nrow=I,ncol=J)
+    for(i in 1:I){
+      num_ranks <- max(ranks[i,],na.rm=T)
+      orderings[i,1:num_ranks] <- unlist(lapply(1:num_ranks,function(place){which(ranks[i,] == place)}))
+      ballots[i,] <- (ranks[i,] %in% 1:num_ranks) | is.na(ranks[i,])
+    }
+    attr(orderings,"ballots") <- ballots
+    
+  }else{
+    
+    ## Partial or Complete Rankings
+    orderings <- matrix(data=NA,nrow=I,ncol=J)
+    for(i in 1:I){
+      num_ranks <- max(ranks[i,],na.rm=T)
+      orderings[i,1:num_ranks] <- unlist(lapply(1:num_ranks,function(place){which(ranks[i,] == place)}))
+    }
+  }
+  
+  return(orderings)
+}
+
+
+as.orderings(matrix(c(1,2,2,
+                      2,1,2,
+                      1,3,2),nrow=3,byrow=T))
+
+

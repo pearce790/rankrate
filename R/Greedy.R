@@ -1,6 +1,6 @@
 #' Estimate the MLE of a Mallows-Binomial distribution using the Greedy method
 #' 
-#' This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method.
+#' This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method, as described in Pearce and Erosheva (2022).
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.

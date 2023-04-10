@@ -1,0 +1,1528 @@
+
+%\documentclass[letterpaper, 12pt]{article}
+
+%%%%Steen uses amsart instead of article. Then don't need packages
+
+\documentclass[leqno, 12pt]{article}
+
+%\documentclass[leqno, 12pt]{amsart}
+
+%%%%\documentclass[leqno, 12pt]{amsart} 
+
+%%How use "leqno" in my \documentclass format rather than "reqno"???
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm} 
+\usepackage{graphicx}
+
+
+%%%INSERTED FEB 9, 2016
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\widecheck[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\scalebox{-1}{\tmpbox}}%
+}
+\parskip 1ex
+%%%END INSERTED 
+
+%%%INSERTED FEB 9, 2016
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\widebreve[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.1pt\bigcup\kern-.1pt}  
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG CUP
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\scalebox{1}{\tmpbox}}%
+}
+\parskip 1ex
+%%%END INSERTED
+%%%EXAMPLE: $\widebreve{AAA}$ NEED TO IMPROVE THIS!!
+
+%\usepackage{mathabx} NOOO
+
+%\usepackage{mathabx}THIS GIVES \precneq but changes other things...
+
+%!!!Make sure the following is ok:
+\usepackage{comment}
+
+%%\usepackage{subfigure}
+
+\newcommand{\bP}{\bf P}
+\newcommand{\bT}{\bf T}
+\newcommand{\bR}{\bf R}
+\newcommand{\be}{\bf e}
+
+\def\ci{\perp\!\!\!\perp}
+\def\notci{\rlap/{\!\!\ci}}
+\def\simm{\buildrel{\rm M}\over\sim}
+\def\sima{\buildrel{\rm A}\over\sim}
+\def\siml{\buildrel{\rm L}\over\sim}
+\def\tod{\buildrel d\over\to}
+\def\toL1{\buildrel \mathit{L_1}\over\longrightarrow}
+\def\top{\buildrel p\over\to}
+\def\toas{\buildrel a.s.\over\to}
+\def\towpr1{\buildrel w.pr.1\over\to}
+\def\11{\buildrel 1-1\over\longleftrightarrow}
+\def\eqd{\buildrel d\over=}
+\def\adj{\!\cdot\!\cdot\!\cdot\!}
+\def\notadj{\!\not\!\!\cdot\!\cdot\!\cdot}
+\def\~{\tilde}
+\def\stms{\!\setminus\!} 
+\def\^{\hat}
+\def\u{\breve}
+\def\c{\check}
+\def\o{^{\circ}}
+\def\a{\acute}
+\def\la{\leftarrow} 
+\def\ra{\rightarrow}
+\def\lra{\leftrightarrow}
+\def\LRA{\Leftrightarrow}
+\def\implies{\Rightarrow}
+\def\Implies{\Longrightarrow}
+\def\Sig{\Sigma}
+\def\sig{\sigma}
+\def\Lam{\Lambda}
+\def\Gam{\Gamma}
+\def\gam{\gamma}
+\def\lam{\lambda}
+\def\alp{\alpha}
+\def\bet{\beta}
+\def\del{\delta}
+\def\Del{\Delta}
+\def\eps{\epsilon}
+\def\zet{\zeta}
+\def\ups{\upsilon}
+\def\Ups{\Upsilon}
+\def\var{\vartheta}
+%\def\the{\theta}
+%\def\The{\Theta}
+\def\dia{\diamond}
+\def\ddia{{\diamond\diamond}}
+\def\la{\langle}
+\def\ra{\rangle} 
+
+%\def\ome{\omega}
+\def\ome{\omega}
+%\def\Ome{\Omega}
+\def\Ome{\Omega}
+\def\kap{\kappa}
+\def\sa{{\cal A}}
+\def\sb{{\cal B}}
+\def\sf{{\cal F}}
+\def\sg{{\cal G}}
+\def\sp{{\cal P}}
+\def\ss{{\cal S}}
+\def\st{{\cal T}}
+\def\sx{\cal X}
+\def\sy{\cal Y}
+\def\sz{\cal Z}
+\def\sp{\cal P}
+\def\tr{{\rm tr}}
+\def\prtl{\partial}
+\def\nul{\emptyset}
+\def\E{{\rm E}}
+\def\P{{\rm P}}
+\def\V{{\rm Var}}
+\def\C{{\rm Cov}}
+\def\R1{{\bf R}^1}
+\def\B1{{\cal B}^1}
+\def\Rp{{\bf R}^p}
+\def\Bp{{\cal B}^p}
+\def\Rk{{\bf R}^k}
+\def\Bk{{\cal B}^k}
+\def\Rn{{\bf R}^n}
+\def\Bn{{\cal B}^n}
+\def\Rs{{\bf R}^s}
+\def\Bs{{\cal B}^s}
+\def\Rr{{\bf R}^r}
+\def\Br{{\cal B}^r}
+\def\Rsr{{\bf R}^{s-r}}
+\def\Bsr{{\cal B}^{s-r}}
+
+\def\bR{\bar{\bf R}}
+\def\bB{\bar{\cal B}}
+%\def\bR1{{\bar{\bf R}}^1}
+%\def\bB1{{\bar{\cal B}}^1}
+\def\bRp{\bar{\bf R}^p}
+\def\bBp{\bar{\cal B}^p}
+\def\bRn{\bar{\bf R}^n}
+\def\bBn{\bar{\cal B}^n}
+\def\bg{\bar g}
+\def\nid{\noindent}
+\def\cS{\cal S}
+\def\thfr{\therefore}
+\def\ubar{\underline}
+\def\narsqcup{\!\sqcup\!}%narrow square cup
+
+\def\ts{\textstyle}
+\def\t12{\textstyle{1\over2}}
+\def\ton{\textstyle{1\over n}}
+\def\ds{\displaystyle}
+%\def\square{\bar\sqcup}
+%\newcommand{\tsup}{\textsuperscript}
+\def\tsup{\textsuperscript}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{examp}[thm]{Example}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{rmk}[thm]{Remark}
+
+%CAREFUL: the commands \sx, \sa, \sp sometimes messes other symbols up.
+
+\def\smalltype{\let\rm=\eightrm \let\bf=\eightbf \let\it=\eightit \let\sl=\eightsl
+ \baselineskip=9pt \rm}
+\font\tenrm=cmr10
+\font\tenbf=cmbx10
+\font\tenit=cmti10
+\font\tensl=cmsl10
+\def\medtype{\let\rm=\tenrm \let\bf=\tenbf \let\it=\tenit \let\sl=\tensl
+ \baselineskip=12pt \rm}
+\font\twelverm=cmr12
+\font\twelvebf=cmbx12
+\font\twelveit=cmti12 
+\font\twelvesl=cmsl12
+\def\bigtype{\let\rm=\twelverm \let\bf=\twelvebf \let\it=\twelveit \let\sl=\twelvesl
+ \baselineskip=14pt \rm}
+ 
+ \begin{document}
+
+\title{Estimating the Ratio of Means in a Zero-inflated Poisson Mixture Model\footnote{Key words: Zero-inflated Poisson mixture, ratio of means, maximum likelihood estimator, EM algorithm, information matrix, standard error, Bayes estimator, conjugate prior, empirical Bayes estimator, zero-truncated Poisson distribution.} }
+\author{Michael D. Perlman\footnote{mdperlma@uw.edu.} {\ }and Michael Pearce\footnote{mpp790@uw.edu.}\\Department of Statistics\\
+University of Washington%\\Technical Report 649}
+}
+
+\maketitle
+
+\begin{abstract}
+
+\nid The problem of estimating the ratio of the means of a two-component Poisson mixture model is considered, when each component is subject to zero-inflation, i.e., excess zero counts.  The resulting {\it zero-inflated Poisson mixture (ZIPM) model} can be viewed as a three-component Poisson mixture model with one degenerate component. The EM algorithm is applied to obtain frequentist estimators and their standard errors, the latter determined via an explicit expression for the observed information matrix. Bayes and empirical Bayes estimators also are obtained by means of conjugate priors and their data-based variants. {\bf NUMERICAL STUDY...} Lastly, the ZIPM distribution and the ZTP (zero-truncated Poisson) distribution are compared.
+\end{abstract}
+
+\newpage 
+
+\vskip6pt
+
+\nid{\bf 1. Introduction.} 
+
+Baker and Holdsworth (2013) present data relevant to the determination of the relative abundances of  two subspecies of frigatebirds (FB), least (LFB) and great (GFB), in the Coral Sea Islands off the coast of Northeast Australia. The available data is indirect, consisting only of counts of nests in several standardized sites over several days, rather than direct observations of individuals.  Furthermore, the nests of LFB and  GFB usually are indistinguishable, (possibly) differing only in their relative numbers per site. If the expected numbers of nests per site for LFB and GFB  are denoted by $\mu$ and $\nu$ respectively, it is desired to estimate their ratio $\theta\equiv\mu/\nu$, where $0<\theta<\infty$.
+
+Because no further constraint can be imposed on $\theta$ {\it a priori}, the problem is unidentifiable as stated, i.e. $(\mu,\nu)$ is indistinguishable from $(\nu,\mu)$. It is known, however, that LFB is less prevalent than GFB, which will render the model identifiable, see below.
+
+Furthermore, it is typical of such field studies that data is lost due to uncontrollable factors such as tropical storms, resulting in excessive numbers of zero counts.  As is commonly done, we shall adopt the zero-inflated Poisson (ZIP) distribution to represent this feature (cf. Lambert (1992)). 
+
+%COMMENT
+\begin{comment}
+Consider an ecological study aimed at determining the relative reproductive rate of a newly discovered invasive subspecies A of ant compared to that of the native subspecies B. The  available data is indirect, consisting only of counts of nests in several standardized sites, rather than direct observations of individuals.  Furthermore, the nests of the two subspecies are indistinguishable, (possibly) differing only in their relative numbers per site. If the expected numbers of nests per site for A and B are denoted by $\mu$ and $\nu $respectively, it is desired to estimate their ratio $\theta\equiv\mu/\nu$, where $0<\theta<\infty$.
+
+Because little is known about the characteristics of  A, no further constraint can be imposed on $\theta$, which renders the problem unidentifiable as stated, i.e. $(\mu,\nu)$ is indistinguishable from $(\nu,\mu)$.
+However, it is reasonable to assume that the newly discovered subspecies A is less prevalent than the  established subspecies B, at least initially, which will render the model identifiable, see below.
+
+Furthermore, it is typical of such field studies that data is lost due to uncontrollable factors such as rain, resulting in excessive numbers of zero counts.  As is commonly done, we shall adopt the zero-inflated Poisson (ZIP) distribution to represent this feature (cf. Lambert (1992)). 
+\end{comment}
+%END
+
+Let $N_{ij}$ denote the number of FB nests observed in month $i$ at site $j$.  Let ${\cal I}\equiv\{1,\dots,I\}$ and ${\cal J}\equiv\{1,\dots,J\}$ be the corresponding  index sets, and set ${\cal K}={\cal I}\times{\cal J}$, $K=|{\cal K}|=IJ$.
+%\begin{align*}
+%{\cal K}&={\cal I}\times{\cal J},\qquad K=|{\cal K}|=IJ.
+%\end{align*}
+For $(i,j)\in{\cal K}$, consider random variables (rvs)
+\begin{align}
+Y_j&\sim\mathrm{Bernoulli}(\pi),\label{Ydef}\\
+M_{ij}\,|\,Y_j&\sim\mathrm{Poisson}\big\{t_i[(1-0^{Y_j})\mu+0^{Y_j}\nu]\big\};\label{Mdef}\\
+N_{ij}&=Z_{ij}M_{ij},\label{Ndef}\\%\label{1}\\
+Z_{ij}&\sim\mathrm{Bernoulli}(\eps);\label{Zdef}
+\end{align}
+where $0^0=1$, $\{Y_j\}$ and $\{Z_{ij}\}$ are mutually independent, and $\{M_{ij}\}$
+and $\{Z_{ij}\}$ are conditionally mutually independent given $\{Y_j\}$. Thus $M_{ij}$ {\it is a $\pi$- mixture} of $\mathrm{Poisson}(t_i\mu)$ and $\mathrm{Poisson}(t_i\nu)$ rvs, where each $t_i>0$ is known, reflecting a monthly feature common to all sites, such as average temperature,  and $\mu,\nu\in(0,\infty)$ are unknown. Here  $N_{ij}$ is a  {\it zero-inflated Poisson mixture (ZIPM) rv} with zero-inflation parameter $1-\eps\in(0,1)$. 
+
+The main focus of this paper is the problem of estimating the ratio $\theta\equiv\mu/\nu$ based solely on the observed data $\{N_{ij}\}$, with $\{Y_j\}$, $\{M_{ij}\}$, and $\{Z_{ij}\}$ unobserved.  Here $\theta,\lam\in(0,\infty)$, where $\lam\equiv\nu$ is viewed as a nuisance parameter. In terms of $(\theta,\lam)$, \eqref{Mdef} can be rewritten as
+\begin{align}
+M_{ij}\,|\,Y_j\sim\mathrm{Poisson}(t_i\theta^{Y_j}\lam).\label{Mdef2}
+\end{align}
+As noted above, for identifiability of $(\mu,\nu)$, and therefore of $\theta$, a restriction must be imposed: we assume that $0<\pi\le1/2$, corresponding to the assumption that LFB occurs no more frequently than GFB. Both frequentist and Bayesian analyses will be presented.
+ 
+The preliminary problem where ${\{Y_j\}}$ are unobserved and $\{M_{ij}\}$ are observed is reviewed in Section 2, serving as a guidepost for the main problem. This is a well-known two-component Poisson mixture model; here $\{Z_{ij}\}$ and $\{N_{ij}\}$ are irrelevant.  A standard application of the EM algorithm yields the MLEs $\^\pi,\^\mu$, $\^\nu$, and $\^\theta$, then their standard errors are approximated via the observed information matrix $I_{\bf m}$, found explicitly\footnote{We are not aware of explicit expressions for the observed information matrix. Approximate methods are usually used, such as the SEM algorithm (cf. Jamshidian and Jennrich (2000, \S5.3)) or the bootstrap (cf. McLachlan and Peel (2000, \S2.16.2)).} in \eqref{DDD1}. 
+
+For Bayesian analysis (cf. Laurent and Lagrand (2012)), the integrated likelihood function
+\begin{align*}
+ f_{\var,\del}(\mathbf{y},\mathbf{m}\,|\,\theta)&=\int_0^{1/2}\int_0^\infty  f(\mathbf{y},\mathbf{m}\,|\,\pi,\lam,\theta)\var(\pi)\gam_\del(\lam)d\pi d\lam
+\end{align*}
+w.r.to  a gamma prior probability density function (pdf) $\gam_\del(\lam)$ and any proper prior pdf $\var(\pi)$ for $\pi\in(0,\t12]$ is obtained (cf. \eqref{04A}). From this the integrated likelihood $f_{\var,\del}(\mathbf{m}\,|\,\theta)$ of ${\bf M}$ itself can be found explicitly (cf. \eqref{elemsymm1}). No conjugate prior family is available, but for any prior pdf $\phi(\theta)$ the posterior pdf $f_{\var,\del}(\theta\,|\,\mathbf{m})\propto f_{\var,\del}(\mathbf{m}\,|\,\theta)\phi(\theta)$ can be simulated via MCMC methods, yielding Bayes estimators and credible intervals. Alternatively, a data-based conjugate prior $\phi_{\alp,\bet}$ that depends on the unobserved $\{Y_j\}$ can be obtained; the values of $\{Y_j\}$ are then imputed by the EM algorithm, thereby yielding empirical Bayes posterior pdfs, estimators, and credible intervals.
+
+The main problem, where only the ZIPM rvs $\{N_{ij}\}$ are observed and are not i.i.d., is treated in Section 3. This can be viewed as a three-component Poisson mixture model where one of the components is degenerate at 0.\footnote{A three-component mixture model with two degenerate components, one non-degenerate Poisson component, and i.i.d. observations was considered by Arora and Chaganty  (2021) where, as here, an explicit expression for the information matrix is given.}  Now the EM algorithm yields the MLEs $\^\pi,\^\eps,\^\mu$, $\^\nu$, and hence $\^\theta$, then their standard errors are approximated via the observed information matrix $I_{\bf n}$, obtained explicitly in \eqref{00Y}-\eqref{endInfo}, a main contribution of this study.\footnote{A note on terminology: Our ZIPM model is a special case of the {\it generalized ZIP (GZIP) model} in B\"{o}hning (1998, p.841). This is called the FZIP (fixed mixture weights) model by Lim {\it et al} (2014, p.152), who use the term GZIP for the more general case where the mixture weights depend on covariates.}
+
+For Bayesian analysis of the main problem, the integrated likelihood 
+\begin{align}
+f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta) &=\int_0^{1/2}\int_0^1\int_0^\infty  f(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\pi,\eps, \theta,\lam)\var(\pi)\xi_{\eta,\kap}(\eps)\gam_\del(\lam)d\pi d\eps d\lam\nonumber 
+\end{align}
+w.r.to the gamma prior pdf $\gam_\del(\lam)$, a beta prior $\xi_{\eta,\kap}(\eps)$ for $\eps\in(0,1)$, and any proper prior pdf $\var(\pi)$ for $\pi\in(0,\t12]$  is obtained (cf. \eqref{04B}). From this the integrated likelihoods $f_{\var,\eta,\kap,\del}(\mathbf{z},\mathbf{n}\,|\,\theta)$ and $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$ can be obtained explicitly, cf. \eqref{elemsymm3} and \eqref{elemsymm4}, although the latter is computationally challenging. Again no conjugate prior family is available, but for any prior pdf $\phi(\theta)$ the posterior pdf $f_{\var,\eta,\kap,\del}(\theta\,|\,\mathbf{n})\propto f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)\phi(\theta)$ can be simulated via MCMC methods to obtain Bayes estimators and credible intervals. 
+
+Alternatively, a data-based prior can be determined, requiring imputation of  the unobserved $\{Y_j\}$ and $\{Z_{ij}\}$ by the EM algorithm, again yielding empirical Bayes posterior pdfs, estimators, and credible intervals.
+
+{\bf ADD NUMERICAL STUDY/ SIMULATION STUDY NEW SECTION 4/5?...}
+
+The paper concludes with a comparison of the conditional ZIPM distribution and the ZTP (zero-truncated Poisson) distribution in Section {\bf 5?6?}.
+
+\nid{\it Notation:} Column vectors and arrays denoted by Roman letters appear in bold type, their components  in plain type; caps denote rvs: 
+\begin{align*}
+{\bf t}&\equiv(t_1,\dots,t_I)'\in\mathbb{R}^I,\\
+{\bf y}&\equiv(y_1,\dots,y_J)'\in\{0,1\}^J,& {\bf Y}&\equiv(Y_1,\dots,Y_J)'\in\{0,1\}^J,\\
+{\bf z}&\equiv(z_{ij})\in\{0,1\}^{\cal K},& {\bf Z}&\equiv(Z_{ij})\in\{0,1\}^{\cal K},\\
+{\bf m}&=(m_{ij})\in\mathbb{Z}_+^{\cal K},&  {\bf M}&=(M_{ij})\in\mathbb{Z}_+^{\cal K},\\
+{\bf n}&=(n_{ij})\in\mathbb{Z}_+^{\cal K},&  {\bf N}&=(N_{ij})\in\mathbb{Z}_+^{\cal K},
+\end{align*}
+where $\mathbb{Z}_+$ is the set of nonnegative integers. Sums and products will range over the index sets ${\cal I}$ and ${\cal J}$ unless otherwise specified, e.g.,
+\begin{align*}
+\sum\nolimits_i&=\sum\nolimits_{i=1}^I,& \prod\nolimits_{j}&=\prod\nolimits_{j=1}^J,& \sum\nolimits_{i,j}&=\sum\nolimits_{i=1}^I\sum\nolimits_{j=1}^J,
+\end{align*}
+etc. 
+Summation over one or both of the indices $i,j$ involving 
+%$t_i$, $y_j$, 
+$m_{ij}$, $n_{ij}$, $z_{ij}$, or their random (capitalized) versions will be indicated by simply dropping the indices that are summed over, e.g.,
+\begin{align*}
+m_i&=\sum\nolimits_{j}m_{ij},& N_j&=\sum\nolimits_{i}N_{ij},&\\
+m&=\sum\nolimits_{i,j}m_{ij},& n&=\sum\nolimits_{i,j}n_{ij}.
+\end{align*}
+We set ${\bf m}!=\prod_{i,j} m_{ij}!$ and ${\bf n}!=\prod_{i,j} n_{ij}!$\;. Lastly, all conditioning events ${\bf Y}={\bf y}$, ${\bf N}={\bf n}$, etc., will be abbreviated as ${\bf y}$, ${\bf n}$, etc.
+\vskip6pt
+
+\nid {\bf 2. Preliminary problem: ${\bf Y}$ unobserved, ${\bf M}$ observed.}  
+
+\nid Here $M_{ij}$ is a $\pi$-mixture of 
+%$\mathrm{Poisson}(t_i\theta\lam)\equiv\mathrm{Poisson}(t_i\mu)$ and $\mathrm{Poisson}(t_i\lam)\equiv\mathrm{Poisson}(t_i\nu)$, 
+$\mathrm{Poisson}(t_i\mu)$ and $\mathrm{Poisson}(t_i\nu)$ rvs, where $\pi$ is the unknown mixing probability, cf. \eqref{Mdef}. 
+%Thus $Y_1,\dots,Y_J$ are i.i.d. unobserved 0-1 rvs such that{\bf OMITT??} HEREE
+%\begin{align}
+%Y_j&\sim\mathrm{Bernoulli}(\pi),\label{H}\\
+%M_{ijk}\,|\,Y_j&\sim\mathrm{Poisson}(t_i\theta^{Y_j}\lam).\label{I}
+%\end{align}
+Thus the probability mass function (pmf) of the observed data array $\mathbf{M}\equiv(M_{ij})$ is 
+\begin{align}
+f_{\pi,\mu,\nu}(\mathbf{m})
+&=\prod_{i,j}\left[\pi e^{-t_i\mu}(t_i\mu)^{m_{ij}}+(1-\pi)e^{-t_i\nu}(t_i\nu)^{m_{ij}}\right]/m_{ij}!\label{F}\\\
+&=\prod_{i,j}\left[\pi e^{-t_i\mu}\mu^{m_{ij}}+(1-\pi)e^{-t_i\nu}\nu^{m_{ij}}\right]\cdot\Xi_\mathbf{t}(\mathbf{m}),\nonumber
+\end{align}
+where $\Xi_\mathbf{t}(\mathbf{m})=\left(\prod_it_i^{m_{i}}\right)/{\bf m}!$.
+Note that the $K\equiv IJ$ rvs $M_{ij}$ are independent but non-identically distributed (i.n.i.d.) if $t_1,\dots,t_I$ are non-identical. The joint pmf of the complete (unobserved and observed) data $(\mathbf{Y},\mathbf{M})$ is 
+\begin{align}
+ f_{\pi,\mu,\nu}(\mathbf{y},\mathbf{m})&=f_\pi({\bf y})f_{\mu,\nu}(\mathbf{m}\,|\,{\bf y})\nonumber\\
+ &=\prod_j\pi^{y_j}(1-\pi)^{1-y_j} \prod_{i,j}\left(e^{-t_i\mu}\mu^{m_{ij}}\right)^{y_j}\left(e^{-t_i\nu}\nu^{m_{ij}}\right)^{1-y_j}\Xi_\mathbf{t}(\mathbf{m})\label{K}\\
+&=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\prod_j\left[\left(e^{-\bar t\mu}\right)^{I}\mu^{m_j}\right]^{y_j}\left[\left(e^{-\bar t\nu}\right)^{I}\nu^{m_j}\right]^{1-y_j}\Xi_\mathbf{t}(\mathbf{m}),\label{KKK}\\
+&=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[e^{-\bar t\bar y\mu}\mu^{\overline{my}}e^{-\bar t(1-\bar y)\nu}\nu^{\overline{m(1-y)}}\right]^K\Xi_\mathbf{t}(\mathbf{m}),\label{A}
+%\sum_j m_jy_j
+ %&=e^{-\bar tI[R\mu+(1-R)\nu]n}\mu^{m_S}\nu^{m_T}\cdot\Xi
+\end{align}
+where $\bar  y=\frac{1}{J}\sum_jy_j$,
+\begin{align}
+\overline{my}&
+%\frac{1}{n}\sum_i\sum_j\sum_km_{ijk}y_j
+=\frac{1}{K}\sum_jm_jy_j,\label{T}\\
+%m_j&=\sum_{i=1}^I\sum_km_{ijk},\\
+\overline{m(1-y)}&=\frac{1}{K}\sum_jm_j(1-y_j)
+%=\frac{1}{n}\sum_i\sum_j\sum_km_{ijk}(1-y_j)
+=\bar m-\overline{my},\label{1TT}\\
+\bar m&=\frac{1}{K}\sum_{i,j}m_{ij}=\frac{m}{K}.\label{TT}%\\
+%\Xi_\mathbf{t}(\mathbf{m})&\ts=\left(\prod_it_i^{m_{i}}\right)\left(\prod_{i,j}m_{ij}!\right)^{-1}.\label{Xitm}
+\end{align}
+Thus $f_{\pi,\mu,\nu}(\mathbf{y},\mathbf{m})$ determines an exponential family with sufficient statistic $(\bar Y, \overline{MY},\overline{M(1-Y)})$, where these are defined similarly to $(\bar y, \overline{my},\overline{m(1-y)})$.
+\vskip 4pt
+
+\begin{comment}
+\nid{\it Identifiability:} {\bf CHANGE or CUT}In the mixture model determined by $f_{\pi,\mu,\nu}$ in \eqref{F}, the parameters $\pi,\mu,\nu$ are not fully identifiable, since $f_{\pi,\mu,\nu}=f_{1-\pi,\nu,\mu}$. Thus, without further specification it is impossible to distinguish between $\theta$ and $1/\theta$. Equivalently, $|\log\theta|$ can be estimated but not $\log\theta$. 
+
+{\bf CHANGE or CUT}To deal with this, a restriction on the parametrization must be imposed. Often it is assumed that $\mu$ and $\nu$ are ordered, e.g. $\mu<\nu$ which is equivalent to $\theta<1$, but this is inappropriate here. Instead we impose the restriction $\pi\le1/2$, corresponding  to the assumption that A occurs no more often than B.
+\vskip4pt
+\end{comment}
+
+\nid{\bf 2.1. Frequentist analysis: The EM algorithm.} To obtain the MLEs $\^\pi,\^\mu,\^\nu$ and thus $\^\theta=\^\mu/\^\nu$, it is straightforward to apply the EM algorithm (cf. Aitken and Rubin (1985), McLachlan and Krishnan (2008)) as follows:
+%\footnote{cf. McLachlan and Krishnan (2008).}
+%\footnote{See e.g. M. D. Perlman  (2020), STAT 513 Notes, Example 15.8.
+
+%\nid https://sites.stat.washington.edu/people/mdperlma/STAT\%20513\%20MDP\%20Notes.pdf}
+
+For $j=1,\dots,J$ define
+\begin{align*}
+{\bf M}_j&=\{M_{i,j}\,|\,i=1,\dots,I\},\\
+{\bf m}_j&=\{m_{i,j}\,|\,i=1,\dots,I\}.
+\end{align*}
+Because \eqref{A} is an exponential family, for $l=0,1,\dots$, the $(l+1)$-st E-step simply imputes $y_j$ to be
+\begin{align}
+(\widehat{y_j})_{l+1}&=\E_{\^\pi_l,\^\mu_l,\^\nu_l}[Y_j\,|\,{\bf m}]\nonumber\\
+ &=\P_{\^\pi_l,\^\mu_l,\^\nu_l}[Y_j=1\,|\,{\bf m}_j]\nonumber\\
+ &=\frac{\^\pi_l\prod_{i}e^{-t_i\^\mu_l}(t_i\^\mu_l)^{m_{ij}}}{\^\pi_l\prod_{i}e^{-t_i\^\mu_l}(t_i\^\mu_l)^{m_{ij}}+(1-\^\pi_l)\prod_{i}e^{-t_i\^\nu_l}(t_i\^\nu_l)^{m_{ij}}}\nonumber\\
+%&=\frac{ \^\pi_le^{-\bar tIK\^\mu_l}\^\mu_l^{m_j} }{\^\pi_le^{-\bar tIK\^\mu_l}\^\mu_l^{m_j}+(1-\^\pi_l)e^{-\bar tIK\^\nu_l}\^\nu_l^{m_j}}\label{P}\\
+&=\frac{\^\pi_l}{\^\pi_l+(1-\^\pi_l)e^{-I\bar t(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{m_j}}\label{P}
+\end{align}
+by Bayes formula. From \eqref{A}, the complete-data MLEs are found to be
+\begin{align*}
+\~\pi&=\bar  y,\\
+\~\mu&=\frac{\overline{my}}{\ \ \bar t\bar y\ \ },\\
+\~\nu&=\frac{\overline{m(1-y)}}{\ \ \bar t\,(1-\bar y)\ \ }.
+%=\frac{\bar m-\overline{my}}{\ \ \bar t\,(1-\bar y)\ \ }.
+\end{align*}
+Thus the $(l+1)$-st M-step yields the updated estimates
+\begin{align}
+\^\pi_{l+1}&=\frac{1}{J}\sum_j(\widehat{y_j})_{l+1},\label{B}\\
+\^\mu_{l+1}&=\frac{\overline{m(\^y)_{l+1}}}{\ \ \bar t\;\overline{(\^y)_{l+1}}\ \ },\label{C}\\
+\^\nu_{l+1}&=\frac{\overline{m(1-\^y)_{l+1}}}{\ \ \bar t\,\overline{(1-\^y)_{l+1}}\ \ }
+=\frac{\bar m-\overline{m(\^y)_{l+1}}}{\ \ \bar t-\bar t\,\overline{(\^y)_{l+1}}\ \ },\label{D}
+\end{align}
+where $(\^y)_{l+1}=((\widehat{y_1})_{l+1},\dots,(\widehat{y_J})_{l+1})$ and, as Aitken and Rubin (1985, p.69) state, the constraint $\pi\le\t12$ is ignored. Then, as they note, assuming convergence to a maximum $(\^\pi,\^\mu,\^\nu)$ of the likelihood function, the same maximum value will occur at $(1-\^\pi,\^\nu,\^\mu)$, so we simply take the MLE to be that for which the first component is $\le\t12$, say $(\^\pi,\^\mu,\^\nu)$ for the sake of specificity.
+
+Various improvements to the EM algorithm have been suggested to increase its speed of convergence, see for example McLachlan and Krishnan (2008, Ch. 4) and McLachlan and Peel (2000, Ch. 2).
+
+Finally, from \eqref{C} and \eqref{D} we obtain the following updated estimator of $\theta$ (which does not depend on $\bar t$):
+\begin{align}
+\^\theta_{l+1}&=\frac{\^\mu_{l+1}}{\^\nu_{l+1}}=\frac{\overline{m(\^y)_{l+1}}}{\ \ \overline{(\^y)_{l+1}}\ \ }\frac{1-\overline{(\^y)_{l+1}}}{\ \ \bar m-\overline{m(\^y)_{l+1}}\ \ }=\frac{\frac{1}{\ \overline{(\^y)_{l+1}}\ }-1}{\frac{\bar m}{\ \overline{m(\^y)_{l+1}}\ }-1}\;.\label{E}
+\end{align}
+
+%\nid{\it Starting value $\^\pi_0$ for the EM algorithm:} Under the restriction $\pi\le1/2$, a simple way to choose $\^\pi_0$ is as follows. Plot a histogram of the entire data set $\{m_{ij}\}$ and attempt to discern two prevalent mixture components, either by eye or by density estimation (cf. Silverman (1986)), then determine their relative weights. Take $\^\pi_0$ to be the lesser of these weights. 
+%\vskip4pt
+
+\nid{\it Standard error for the MLE $\^\theta$:} For simplicity of notation, set $\ome=(\pi,\mu,\nu)$ and $\^\ome_l=(\^\pi_l,\^\mu_l,\^\nu_l)$. Assume that the EM iterates $\ome_l$ converge to $\^\ome\equiv(\^\pi,\^\mu,\^\nu)$, the actual MLEs based on the observed data ${\bf M}$. Then if $K\equiv IJ$ is large, it follows from Theorem 2 of Hoadley (1971) that
+%\begin{align*}
+%(\^\pi_l,\^\mu_l,\^\nu_l)\to(\^\pi,\^\mu,\^\nu)\quad\mathrm{as}\ \ l\to\infty.
+%\end{align*}
+\begin{align}
+\sqrt{K}(\^\ome-\ome)\approx N_3[0,\,K{\cal I}^{-1}_{\bf M}(\ome)],\label{Q}
+\end{align}
+where, with $f_\ome({\bf m})$ given by \eqref{F}, 
+\begin{align}
+{\cal I}_{\bf M}(\ome)&\equiv-\E_\ome[\nabla_\ome^2\log f_\ome({\bf M})]\label{QQ}
+\end{align}
+%\frac{1}{n}
+is the total expected information matrix ($3\times3$) for the sample ${\bf M}$.\footnote{For any smooth function $g\equiv g(\ome)$, the gradient $\nabla_\ome g$ is the $3\times1$ vector $(\frac{\prtl g}{\prtl \pi},\frac{\prtl g}{\prtl \mu},\frac{\prtl g}{\prtl \nu})'$ and the Hessian $\nabla_\ome^2g$ is the $3\times3$ matrix of mixed partial derivatives $\frac{\prtl^2 g}{\prtl \pi^2}, \frac{\prtl^2 g}{\prtl \pi\prtl\mu},...,\frac{\prtl^2 g}{\prtl \nu^2}$.} 
+
+However, as noted by Efron and Hinkley (1978) and Louis (1982),  
+observed information $I_{\bf m}(\ome)$ usually yields a better normal approximation and often is more readily computed %(via the EM algorithm) 
+than expected information, so we replace \eqref{Q} and \eqref{QQ} by 
+\begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_3[0,\,KI^{-1}_{\bf m}(\ome)],\nonumber\\%\label{YZ}\\
+I_{\bf m}(\ome)&\equiv-\nabla_\ome^2\log f_\ome({\bf m})\nonumber\\%\label{Y}\\
+&=-\E_\ome[\nabla_\ome^2\log f_\ome({\bf m})\,|\,{\bf m}]\nonumber\\%\label{S}\\
+&=-\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})\,|\,{\bf m}]+\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y}\,|\,{\bf m})\,|\,{\bf m}].\label{Y1}
+%&-E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})-\nabla_\ome^2\log f_\ome({\bf Y}\,|\,{\bf m})\,|\,{\bf M}={\bf m}],\nonumber%\label{QQQQ}
+\end{align}
+%COMMENT
+\begin{comment}
+\begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_3[0,\,KI^{-1}_{\bf m}(\ome)],\nonnumber\\%\label{QQQ}\\
+I_{\bf m}(\ome)&\equiv-\nabla_\ome^2\log f_\ome({\bf m})\nonumber\\%\label{QQQQ}\\%\label{S}\\
+&{\buildrel *\over=}-\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})+\nabla_\ome\log f_\ome({\bf Y},{\bf m})\nabla_\ome\log f_\ome({\bf Y},{\bf m})'\,|\,{\bf m}],\nonumber
+\end{align}
+where the equality ${\buildrel *\over=}$ %in \eqref{QQQQ} 
+follows from eqn. (3.2) in Louis.\footnote{As Louis notes, the final term in his (3.2) vanishes when evaluated at the MLE, as we shall do, so is omitted here. Also see my discussion preceding \eqref{X0}-\eqref{X5}. }
+\end{comment}
+%ENDCOMMENT
+From \eqref{A},
+\begin{align}
+ %\frac{1}{n}
+ \log f_\ome(\mathbf{Y},\mathbf{m})
+ &=J[\bar Y\log\pi+(1-\bar Y)\log(1-\pi)]\nonumber\\
+ &\ \ \ \ +K[\overline{mY}\log\mu-\bar t\bar Y\mu+\overline{m(1-Y)}\log\nu-\bar t(1-\bar Y)\nu]+h_\mathbf{t}(\mathbf{m});\nonumber\\ 
+ %\label{R}
+% \nabla_\ome\log f_\ome({\bf Y},{\bf m})&=\begin{pmatrix}\frac{\ J(\bar Y-\pi)\ }{\pi(1-\pi)}\\ L\left[\frac{\ \overline{mY}\ }{\mu}-\bar t\bar Y\right]\\L\left[\frac{\ \overline{m(1-Y)}\ }{\nu}-\bar t(1-\bar Y)\right]\end{pmatrix};\nonumber\\
+\nabla_\ome\log f_\ome({\bf Y},{\bf m})&=\begin{pmatrix}\frac{\ J(\bar Y-\pi)\ }{\pi(1-\pi)}\\ K\left[\frac{\ \overline{mY}\ }{\mu}-\bar t\bar Y\right]\\K\left[\frac{\ \overline{m(1-Y)}\ }{\nu}-\bar t(1-\bar Y)\right]\end{pmatrix};\nonumber\\%\nonumber\\
+%=CUT?\begin{pmatrix}\frac{J(\bar Y-\pi)}{\pi(1-\pi)}\\ n\left[\overline{(\frac{\bar m}{\mu}-\bar t)Y}\right]\\ n\left[\overline{(\frac{\bar m}{\nu}-\bar t)(1-Y)}\right]\end{pmatrix};\nonumber\\
+-\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})&=\begin{pmatrix}\frac{\ J\left[(1-2\pi)\bar Y+\pi^2\right]\ }{\pi^2(1-\pi)^2}&0&0\\0&K\left[\frac{\ \overline{mY}\ }{\mu^2}\right]&0\\0&0&K\left[\frac{\ \overline{m(1-Y)}\ }{\nu^2}\right]\end{pmatrix};\label{Z}
+\end{align}
+where $\overline{mY}$ and $\overline{m(1-Y)}$ are defined similarly to \eqref{T} and $h_\mathbf{t}(\mathbf{m})$ does not depend on $\ome$.
+
+Furthermore by \eqref{K}, for fixed ${\bf m}$,
+\begin{align}
+  f_\ome(\mathbf{y}\,|\,\mathbf{m})&= f_\ome(\mathbf{y},\mathbf{m})/f_{\ome}(\mathbf{m})\nonumber\\
+ &\propto\prod_j\left(\pi e^{-\bar tI\mu}\mu^{m_j}\right)^{y_j}\left[(1-\pi )e^{-\bar tI\nu}\nu^{m_j}\right]^{1-y_j},%\label{KKK}
+%\sum_j m_jy_j
+ %&=e^{-\bar tI[R\mu+(1-R)\nu]n}\mu^{m_S}\nu^{m_T}\cdot\Xi
+\end{align}
+hence $Y_1,\dots,Y_J$ are conditionally independent given ${\bf m}$ with
+\begin{align}
+[Y_j\,|\,\mathbf{m}]&\sim\mathrm{Bernoulli}(p_j),\label{W}\\
+p_j\equiv p_j(\ome;\bar t;\bar m_j)&=\frac{\pi e^{-\bar tI\mu}\mu^{m_j}}{\pi e^{-\bar tI\mu}\mu^{m_j}+(1-\pi ) e^{-\bar tI\nu}\nu^{m_j}}\;.\nonumber\\
+&=\frac{\pi (e^{-\bar t\mu}\mu^{\bar m_j})^{I} }{\pi(e^{-\bar t\mu}\mu^{\bar m_j})^{I} +(1-\pi )(e^{-\bar t\nu}\nu^{\bar m_j})^{I} }\;,\label{WW}
+\end{align}
+where $\bar m_j=\ts\frac{1}{I}m_j$. From \eqref{W}, 
+%straightforward moment calculations yield
+\begin{align}
+\E_\ome[\,\bar Y\,|\,{\bf m}]&=\bar p;\nonumber\\
+\E_\ome[\,\overline{mY}\,|\,{\bf m}]&=\overline{mp};\nonumber\\
+\E_\ome[\,\overline{m(1-Y)}\,|\,{\bf m}]&=\overline{m(1-p)};\nonumber
+\end{align}
+where $\overline{mp}$ and $\overline{m(1-p)}$ are defined similarly to \eqref{T}-\eqref{1TT} and 
+%with $\alp,\bet=\mu$ or $\nu$,
+\begin{align*}
+\bar p&=\ts\frac{1}{J}\sum_jp_j,\\
+\overline{p(1-p)}&=\ts\frac{1}{J}\sum_jp_j(1-p_j).%\\
+\end{align*}
+Furthermore, 
+%$(\bar Y-\pi)^2+\bar Y(1-\bar Y)=(1-2\pi)\bar Y+\pi^2$, so
+\begin{align*}
+\E_\ome[\,(1-2\pi)\bar Y+\pi^2\,|\,{\bf m}]&=(1-2\pi)\bar p+\pi^2.%\label{nice}
+\end{align*}
+% and similarly for $p$ replaced by $1-p$, $Y$, or $1-Y$. 
+Thus from \eqref{Z}, the first term in \eqref{Y1} is given by 
+\begin{align}
+-\E_\ome&[\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})\,|\,{\bf m}]\nonumber\\ \nonumber\\
+%-\nabla_\ome^2\log f_\ome({\bf Y}\,|\,{\bf m})\,|\,{\bf M}={\bf m}]
+%&=-E_\ome\left[\begin{pmatrix}\frac{J\left[(\bar Y-\pi)^2+\bar Y(1-\bar Y)\right]}{\pi^2(1-\pi)^2}&0&0\\0&n\left[\frac{\ \overline{mY}\ }{\mu^2}\right]&0\\0&0&n\left[\frac{\ \overline{m(1-Y)}\ }{\nu^2}\right]\end{pmatrix}\Bigg|\,{\bf M}={\bf m}\right]\nonumber\\ \nonumber\\
+&=\begin{pmatrix}\frac{J\left[(1-2\pi)\bar p+\pi^2\right]}{\pi^2(1-\pi)^2}&0&0\\0&K\left[\frac{\ \overline{mp}\ }{\mu^2}\right]&0\\0&0&K\left[\frac{\ \overline{m(1-p)}\ }{\nu^2}\right]\end{pmatrix}=:D(\ome;\bar t;{\bf m}).\label{ZZ}
+\end{align}
+
+The second term in \eqref{Y1} is obtained as follows: From \eqref{W},
+\begin{align*}
+ f_\ome(\mathbf{Y}\,|\,\mathbf{m})&=\prod_jp_j^{Y_j}(1-p_j)^{1-Y_j};\\
+ \log f_\ome(\mathbf{Y}\,|\,\mathbf{m})&=\sum\limits_jY_j\log p_j+(1-Y_j)\log(1-p_j);\\
+ \nabla_\ome\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})&=\sum\limits_j\frac{(Y_j-p_j)}{p_j(1-p_j)}\nabla_\ome p_j;\\
+%\nabla_\ome^2\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})&\ts=\sum_j\frac{p_j(1-p_j)(Y_j-p_j)\nabla_\ome^2p_j-\nabla_\ome p_j(\nabla_\ome p_j)'-(Y_j-p_j)\nabla_\ome p_j[\nabla_\ome(p_j(1-p_j)]'}{p_j^2(1-p_j)^2}\\
+\nabla_\ome^2\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})&\ts=\sum\limits_j\left[\frac{(Y_j-p_j)\nabla_\ome^2p_j-(\nabla_\ome p_j)(\nabla_\ome p_j)'}{p_j(1-p_j)}-\frac{(Y_j-p_j)(\nabla_\ome p_j)[\nabla_\ome(p_j(1-p_j))]'}{p_j^2(1-p_j)^2}\right];\\
+\E_\ome[\nabla_\ome^2\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})\,|\,{\bf m}]&=-\sum\limits_j\frac{(\nabla_\ome p_j)(\nabla_\ome p_j)'}{p_j(1-p_j)}\\
+&=\sum\limits_j(\nabla_\ome\log p_j)[\nabla_\ome\log(1-p_j)]'.
+\end{align*}
+From \eqref{WW},
+\begin{align*}
+\log p_j&=\log \pi-I\bar t \mu+I\bar m_j\log\mu-\log\gam_j,\\
+\gam_j\equiv\gam_j(\ome;\bar t;\bar m_j):&=\pi (e^{-\bar t\mu}\mu^{\bar m_j})^{I}+(1-\pi )(e^{-\bar t\nu}\nu^{\bar m_j})^{I},
+\end{align*}
+from which it can be shown that
+\begin{align*}
+\nabla_\ome\log p_j&=\frac{(e^{-\bar t\nu}\nu^{\bar m_j})^{I}}{\gam_j}\left(\frac{1}{\pi},(1-\pi)\Big(\frac{\bar m_j}{\mu}-\bar t\Big)I,-(1-\pi)\Big(\frac{\bar m_j}{\nu}-\bar t\Big)I\right)',\\
+\nabla_\ome\log(1-p_j)&=-\frac{p_j}{1-p_j}\nabla_\ome\log p_j\\
+&=-\frac{\pi}{1-\pi}\Big[e^{\bar t(\nu-\mu)}\Big(\frac{\mu}{\nu}\Big)^{\bar m_j}\Big]^{I}\nabla_\ome\log p_j\\
+&=-\frac{(e^{-\bar t\mu}\mu^{\bar m_j})^{I}}{\gam_j}\left(\frac{1}{1-\pi},\pi\Big(\frac{\bar m_j}{\mu}-\bar t\Big)I,-\pi\Big(\frac{\bar m_j}{\mu}-\bar t\Big)I\right)',\\
+(\nabla_\ome\log p_j)[\nabla_\ome\log(1-p_j)]'&=-\frac{[e^{-\bar t(\mu+\nu)}(\mu\nu)^{\bar m_j}]^{I}}{\gam_j^2}\del_j\del_j',\\
+%\eta_j\equiv\eta(\ome;\bar t;\bar m_j):&\ts=-\frac{e^{-\bar tIK(\mu+\nu)}(\mu\nu)^{m_j}}{\gam_j^2}\\
+%%&=-p_j(1-p_j)\del_j\del_j',\\
+%&=-\frac{[e^{\bar t(\nu-\mu)}(\frac{\mu}{\nu})^{\bar m_j}]^{IK}}{\{\pi[e^{\bar t(\nu-\mu)}(\frac{\mu}{\nu})^{\bar m_j}]^{IK}+(1-\pi)\}^2},\\
+\del_j\equiv\del_j(\ome;\bar t;m_j):&=\left(\frac{1}{\sqrt{\pi(1-\pi)}},\ I\sqrt{\pi(1-\pi)}\Big(\frac{\bar m_j}{\mu}-\bar t\Big),\ -I\sqrt{\pi(1-\pi)}\Big(\frac{\bar m_j}{\nu}-\bar t\Big)\right)'.
+\end{align*}
+%since $K=IJ$. 
+Therefore
+\begin{align}
+\E_\ome[\nabla_\ome^2\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})\,|\,{\bf m}]
+&=-\sum\limits_j\frac{[e^{-\bar t(\mu+\nu)}(\mu\nu)^{\bar m_j}]^I}{\gam_j^2}\del_j\del_j'.\label{secondterm}
+\end{align}
+Thus by \eqref{Y1}, \eqref{ZZ},  and \eqref{secondterm}, the observed information matrix is 
+\begin{align}
+I_{\bf m}(\ome)&=D(\ome;\bar t;{\bf m})-e^{-\bar tI(\mu+\nu)}\Del(\ome;\bar t;{\bf m})\Del(\ome;\bar t;{\bf m})';\label{DDD1}\\
+\Del(\ome;\bar t;{\bf m}):&=
+\begin{pmatrix}\frac{(\mu\nu)^{I\bar m_1/2}}{\gam_1}\del_1,&\dots\ ,&\frac{(\mu\nu)^{I\bar m_J/2}}{\gam_J}\del_J\end{pmatrix}.\nonumber
+%\sum\limits_jp_j(1-p_j)\del_j\del_j'
+\end{align}
+
+%COMMENT
+\begin{comment}
+TO BE CHANGEDFrom \eqref{DDD1}, the 6 distinct entries of $I_{\bf m}(\ome)$, a symmetric $3\times3$ matrix, are as follows:
+% $I_{\pi\pi}(\ome),I_{\pi\mu}(\ome),\dots,I_{\nu\nu}(\ome)$:
+\begin{align} 
+ I_{\pi\pi}(\ome)&=\frac{J[\bar p(1-\bar p)-\overline{p(1-p)}-(J-1)(\bar p-\pi)^2]}{\pi^2(1-\pi)^2}\label{W0}\\
+ I_{\pi\mu}(\ome)&=\frac{-Jn\left[(\bar p-\pi)\,\overline{(\frac{\bar m}{\mu}-\bar t)p}\,+\frac{1}{J}\,\overline{(\frac{\bar m}{\mu}-\bar t)p(1-p) }\right]}{\pi(1-\pi)}\label{W1}\\
+ I_{\pi\nu}(\ome)&=\frac{-Jn\left[(\bar p-\pi)\,\overline{(\frac{\bar m}{\nu}-\bar t)(1-p)}-\frac{1}{J}\ts\overline{(\frac{\bar m}{\nu}-\bar t)p(1-p) }\,  \right]}{\pi(1-\pi)}\label{2}\\
+ I_{\mu\mu}(\ome)&=\ts n\left\{\frac{\,\overline{mp}}{\mu^2}-n\left[\overline{(\frac{\bar m}{\mu}-\bar t)p}\right]^2-\frac{n}{J}\,\overline{(\frac{\bar m}{\mu}-\bar t)^2p(1-p)}\right\}\label{W3}\\
+ I_{\mu\nu}(\ome)&=\ts-n^2\left[\overline{(\frac{\bar m}{\mu}-\bar t)p}\ \overline{(\frac{\bar m}{\nu}-\bar t)(1-p)}+\frac{1}{J}\overline{\,(\frac{\bar m}{\mu}-\bar t)(\frac{\bar m}{\nu}-\bar t)p(1-p) \,}\right]\label{W4}\\
+ I_{\nu\nu}(\ome)&=\ts n\left\{\frac{\,\overline{m(1-p)}}{\nu^2}-n\left[\overline{(\frac{\bar m}{\nu}-\bar t)(1-p)}\right]^2-\frac{n}{J}\,\overline{(\frac{\bar m}{\nu}-\bar t)^2p(1-p)}\right\}\;.\label{W5}
+ \end{align}
+\end{comment}
+%END COMMENT
+
+ Now estimate $I_{\bf m}(\ome)$ in the normal approximation
+ \begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_3[0,\,KI^{-1}_{\bf m}(\ome)]\nonumber%\label{U0}
+\end{align}
+by replacing $\ome$ in $I_{\bf m}(\ome)$ by its MLE $\^\ome\equiv(\^\pi,\^\mu,\^\nu)$ to obtain
+ \begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_3[0,\,KI^{-1}_{\bf m}(\^\ome)].\label{U}
+\end{align}
+This requires replacing $\pi,\mu,\nu$ by $\^\pi,\^\mu,\^\nu$ wherever the former three appear in the entries of $I_{\bf m}(\ome)$, including in $p_j$, $\del_j$, and $\gam_j$. For large $K$ the $3\times3$ matrix $I_{\bf m}(\^\ome)$ is positive definite, hence invertible.
+
+Lastly, an approximate confidence interval for $\theta\equiv\mu/\nu\equiv g(\ome)$ is obtained from \eqref{U} via propagation of error: for $\^\theta=\^\mu/\^\nu$,
+\begin{align}
+\sqrt{K}(\^\theta-\theta)&\approx N[0,\,K(\nabla_\ome g(\ome)|_{\^\ome})'I^{-1}_{\bf m}(\^\ome)\nabla_\ome g(\^\ome)|_{\^\ome}]]\nonumber\\%\label{Z1}\\
+&= N\left[0,\,K\left(\frac{\prtl g}{\prtl\pi}\Big|_{\^\ome},\frac{\prtl g}{\prtl\mu}\Big|_{\^\ome},\frac{\prtl g}{\prtl\nu}\Big|_{\^\ome}\right)I^{-1}_{\bf m}(\^\ome)\left(\frac{\prtl g}{\prtl\pi}\Big|_{\^\ome},\frac{\prtl g}{\prtl\mu}\Big|_{\^\ome},\frac{\prtl g}{\prtl\nu}\Big|_{\^\ome}\right)'\right]\nonumber\\%\label{Z2}\\
+&= N\left[0,\,K\left(0,\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)I^{-1}_{\bf m}(\^\ome)\left(0,\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)'\right]\nonumber\\%\label{Z3}\\
+&=N\left[0,\,K\left(\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)(I_{22}-I_{21}I_{11}^{-1}I_{12})^{-1}\left(\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)'\,\right]\nonumber\\%\label{Z3}\\
+&\equiv N(0,\^\sig^2).\label{Z4}
+\end{align}
+where $I_{\bf m}(\^\ome)=\begin{pmatrix}I_{11}&I_{12}\\I_{21}&I_{22}\end{pmatrix}$ with $I_{11}:1\times1$ and $I_{22}:2\times2$. Thus computation of $\^\sig^2$ only requires the inversion of a $2\times2$ matrix. This yields the following approximate $(1-\alp)$ confidence interval for $\theta$:
+\begin{align}
+\ts\^\theta\pm\frac{\^\sig}{\sqrt{n}}z_{\alp/2},\label{V}
+\end{align}
+where $z_{\alp/2}$ is the upper $(1-\frac{\alp}{2})$-quantile of the standard normal distribution.
+\vskip4pt
+%\newpage
+
+\nid{\bf 2.2. Bayesian analysis.} Here $\theta$ and $\lam$ are treated as random, so rewrite the joint pmf \eqref{A} of the complete (unobserved and observed) data $(\mathbf{Y},\mathbf{M})$ in terms of $\pi, \theta,\lam$ as follows:
+\begin{align}
+ f(\mathbf{y},\mathbf{m}\,|\,\pi,\lam,\theta)&=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J e^{-\{K\bar t[\bar y\theta+(1-\bar y)]\lam\}}\lam^m\theta^{K\overline{my}}\cdot\Xi_\mathbf{t}(\mathbf{m}),\label{4A}
+\end{align} 
+since $K[\overline{my}+\overline{m(1-y)}]=K \bar m=m$. For fixed $\theta$, the set of gamma pdfs $\gam_\del(\lam)$ with shape parameter $\del>0$ and scale parameter 1\footnote{Any positive scale parameter can be reduced to 1 simply by re-scaling $t_1,\dots,t_J$.}  is a conjugate family of prior pdfs for $f(\mathbf{m}\,|\,{\bf y};\,\theta,\lam)$:
+\begin{align}
+\gam_\del(\lam)=[\Gam(\del)]^{-1}\lam^{\del-1}e^{-\lam},\quad 0<\lam<\infty.\label{gdel}
+\end{align}
+If, in addition to the prior pdf $\gam_\del(\lam)$ for $\lam$, we assume {\it any} proper prior density $\var(\pi)$ for $\pi\in(0,\t12]$, then the integrated joint pmf of $(\mathbf{Y},\mathbf{M})$ is
+\begin{align}
+ f_{\var,\del}(\mathbf{y},\mathbf{m}\,|\,\theta)&=\int_0^{1/2}\int_0^\infty  f(\mathbf{y},\mathbf{m}\,|\,\pi,\lam,\theta)\var(\pi)\gam_\del(\lam)d\pi d\lam\nonumber\\
+ &=
+g_\var(J\bar y)\cdot\frac{\Gam(m+\del)\left(\prod_it_i^{m_i}\right)}{\Gam(\del){\bf m}!}\frac{\theta^{K\overline{my}}}{\{K\bar t[\bar y\theta+(1-\bar y)]+1\}^{m+\del}},\label{04A}\\
+&\equiv  f_{\var}(\mathbf{y})\cdot  f_{\del}(\mathbf{m}\,|\,\mathbf{y};\theta),\label{04AV}
+\end{align}
+where $m=\sum\nolimits_{i,j} m_{ij}$ and %=m_S+m_T$ and
+\begin{align*}
+g_\var(j)=\int_0^{1/2}\pi^{j}(1-\pi)^{J-j}\var(\pi)d\pi,\quad 0\le j\le J.
+\end{align*}
+
+The integrated likelihood $f_{\var,\del}(\mathbf{m}\,|\,\theta)$ of ${\bf M}$ itself can be found explicitly: 
+\begin{align}
+f_{\var,\del}(\mathbf{m}\,|\,\theta)&=\sum\nolimits_{{\bf y}\in\Ups}f_{\var,\del}(\mathbf{y},\mathbf{m}\,|\,\theta)\nonumber\\
+&=\frac{\Gam(m+\del)\left(\prod_it_i^{m_i}\right)}{\Gam(\del){\bf m}!}\sum_{j=0}^J\sum_{\{{\bf y}|J\bar y=j\}}\frac{g_\var(J\bar y)\theta^{K\overline{my}}}{\{K\bar t[\bar y\theta+(1-\bar y)]+1\}^{m+\del}}\nonumber\\
+&=\frac{\Gam(m+\del)\left(\prod_it_i^{m_i}\right)}{\Gam(\del){\bf m}!}\sum_{j=0}^J\left\langle\frac{g_\var(j)}{\{K\bar t[(\frac{j}{J})\theta+(1-\frac{j}{J})]+1\}^{m+\del}}\sum_{\{{\bf y}|\sum_{j} y_{j}=j\}}\theta^{\sum_{j}m_{j}y_{j}}\right\rangle\nonumber\\
+&=\frac{\Gam(m+\del)\left(\prod_it_i^{m_i}\right)}{\Gam(\del){\bf m}!}\sum_{j=0}^J\frac{g_\var(j)s_j({\bf m};\theta)}{\{K\bar t[(\frac{j}{J})\theta+(1-\frac{j}{J})]+1\}^{m+\del}},\label{elemsymm1}
+%&=\begin{pmatrix}m({\bf m})\\{\bf m}\end{pmatrix}\left(\prod_it_i^{m_i}\right)J^{m({\bf m})+1}\sum_{\ell=0}^J\frac{g_\var(\ell)s_\ell({\bf m};\theta)}{\{n\bar t[\ell\theta+(J-\ell)]+J\}^{m({\bf m})+1}},\label{elemsymm1}
+\end{align}
+where $s_j({\bf m};\theta)$ is the $j$-th elementary symmetric function of $\{\theta^{m_j}|j=1,\dots,J\}$:
+\begin{align}
+s_j({\bf m};\theta)
+%&=\sum_{\sig\subseteq\{1,\dots,J\},\,|\sig|=\ell}\prod_{l\in\sig}\theta^{m_{j_l}}\\
+=\sum_{\substack{\sig\subseteq{\cal J},\\|\sig|=j}}\ \prod_{j\in\sig}\theta^{m_j}=\sum_{\substack{\sig\subseteq{\cal J},\\|\sig|=j}}^{} \theta^{m_\sig},\label{elemsymm2}%\\
+%&=\sum_{\substack{\sig\subseteq\{1,\dots,J\}\\|\sig|=\ell}}^{} \theta^{m_\sig}
+\end{align}
+$m_\sig=\sum_{j\in\sig}m_j$, and $s_0({\bf m};\theta)=1$.
+Thus $(M_1,\dots,M_J)$ is a sufficient statistic for $\theta$ but $f_{\var,\del}(\mathbf{m}\,|\,\theta)$ is not an exponential family, so no conjugate prior is available. Note, however, that for any prior density $\phi(\theta)$ the posterior pdf
+\begin{equation}\label{post1}
+f_{\var,\del}(\theta\,|\,\mathbf{m})\propto f_{\var,\del}(\mathbf{m}\,|\,\theta)\phi(\theta),
+\end{equation}
+which is available explicitly via \eqref{elemsymm1}. Thus MCMC methods (cf. Robert and  Casella (2004))
+ can be used to obtain the corresponding Bayes estimator and posterior confidence intervals.
+
+Alternatively, it follows from \eqref{04A} and  \eqref{04AV} that
+\begin{align}
+ f_{\del}(\mathbf{m}\,|\,\mathbf{y};\,\theta)
+  &= \frac{\Gam(m+\del)\left(\prod_it_i^{m_i}\right)}{\Gam(\del){\bf m}!}\frac{\theta^{K\overline{my}}}{\{K\bar t[\bar y\theta+(1-\bar y)]+1\}^{m+\del}}.\label{04AX}
+\end{align}
+If ${\bf Y}$ were observed, this would suggest the conjugate family of prior pdfs 
+\begin{align}
+\phi_{\alp,\bet;K\bar t,\bar y}(\theta)&=c(\alp,\bet;K\bar t,\bar y)\frac{\theta^{\alp-1}}{\{K\bar t[\bar y\theta+(1-\bar y)]+1\}^{\alp+\bet}},\quad 0<\theta<\infty;\label{D1}\\
+c(\alp,\bet;K\bar t,\bar y)&=\frac{\Gam(\alp+\bet)(K\bar t\bar y)^\alp[K\bar t(1-\bar y)]^\bet}{\Gam(\alp)\Gam(\bet)},\nonumber
+%\label{D2}
+\end{align}
+where $\alp,\bet>0$. This is essentially an $F$-density whose
+%but require that $\bar y$ be known, which fails since ${\bf Y}$ is unobserved. 
+prior mean is finite if $\bet>1$ and is given by
+\begin{align}
+\E_{\alp,\bet;\bar y}[\theta]&=\frac{c(\alp,\bet;K\bar t,\bar y)}{c(\alp+1,\bet-1;K\bar t,\bar y)}\nonumber\\
+&=\frac{(1-\bar y)\alp}{\bar y(\bet-1)}.\label{D3}
+\end{align}
+The posterior pdf of $\theta$ given ${\bf y}$ and ${\bf m}$ would be 
+\begin{align}
+f_{\del,\alp,\bet}(\theta\,|\,{\bf y}, {\bf m})&\propto f_\del(\mathbf{m}\,|\,{\bf y};\theta)\phi_{\alp,\bet;K\bar t,\bar y}(\theta)\label{1F}\\
+&\propto \frac{\theta^{K\overline{my}+\alp-1}}{\{K\bar t[\bar y\theta+(1-\bar y)]+1\}^{m+\alp+\bet+\del} },\label{2F}
+\end{align}
+hence
+\begin{align}
+f_{\del,\alp,\bet}(\theta\,|\,{\bf y}, {\bf m})=\phi_{K\overline{my}+\alp,K\overline{m(1-y)}+\bet+\del;K\bar t,\bar y}(\theta).\label{4B}
+\end{align}
+In particular, the Bayes estimator of $\theta$ would be  the posterior mean
+\begin{align}
+\E_{K\overline{my}+\alp,K\overline{m(1-y)}+\bet+\del;\bar y}[\theta\,|\,{\bf y}, {\bf m}]=\frac{(1-\bar y)(K\overline{my}+\alp)}{\bar y(K\overline{m(1-y)}+\bet+\del-1)}\label{D4}
+\end{align}
+if $K\overline{m(1-y)}+\bet+\del>1$. 
+
+Of course, because ${\bf y}$ is unobserved, $\bar y$, $\overline{my}$, and $\overline{m(1-y)}$ are unknown. However, they can be imputed by the EM algorithm  given above, as follows. The EM algorithm will output
+\begin{align*}
+\^{\bar y}:&=\lim_{l\to\infty}\frac{1}{J}\sum_j(\widehat{y_j})_{l+1}\\
+\widehat{\overline{my}}:&=\lim_{l\to\infty}\frac{1}{K}\sum_jm_j(\widehat{y_j})_{l+1},\\
+\widehat{\overline{m(1-y)}}:&=\lim_{l\to\infty}\frac{1}{K}\sum_jm_j(1-(\widehat{y_j})_{l+1}),
+\end{align*}
+(recall \eqref{T}-\eqref{1TT}), where $(\widehat{y_j})_{l+1}$ is given by \eqref{P}-\eqref{D}. Then from \eqref{1F}-\eqref{D4}, we obtain the empirical Bayes posterior density (compare to \eqref{4B})
+\begin{align}
+f_{\del,\alp,\bet}(\theta\,|\,\^{\bf y}, {\bf m}):=\phi_{K\widehat{\overline{my}}+\alp,\,K\widehat{\overline{m(1-y)}}+\bet+\del;\,K\bar t,\,\^{\bar y}}(\theta)\label{3B}
+\end{align}
+and empirical Bayes estimator
+\begin{align}
+\^\theta_{\del,\alp,\bet}^\mathrm{EB}:=\frac{(1-\^{\bar y})(K\,\widehat{\overline{my}}+\alp)}{\^{\bar y}\left(K\,\widehat{\overline{m(1-y)}}+\bet+\del-1\right)},\label{D5}
+\end{align}
+provided that $K\,\widehat{\overline{m(1-y)}}+\bet+\del>1$. Empirical Bayes posterior confidence intervals for $\theta$ can be obtained from \eqref{3B}.
+\vskip4pt
+
+\nid {\bf Remark 2.1.} Taking $\alp=\bet=0$ leads to the prior pdf $\phi_{0,0;K\bar t,\bar y}(\theta)=\theta^{-1}$. This is no longer data-based but is an improper prior, hence cannot reflect actual prior knowledge about $\theta$. Nonetheless, proceeding formally from \eqref{3B} and \eqref{D5}, we obtain the posterior density 
+\begin{align}
+f_{\del,0,0}(\theta\,|\,\^{\bf y}, {\bf m}):=\phi_{K\widehat{\overline{my}},\,K\widehat{\overline{m(1-y)}}+\del;\,K\bar t,\,\^{\bar y}}(\theta),\label{3BB}
+\end{align}
+which is a proper density if $K\widehat{\overline{my}}>0$,
+% and $L\widehat{\overline{m(1-y)}}+\del>0$, 
+and from this the empirical Bayes estimator
+\begin{align}
+\^\theta_{\del,0,0}^\mathrm{EB}:=\frac{(1-\^{\bar y})(K\,\widehat{\overline{my}})}{\^{\bar y}\left(K\,\widehat{\overline{m(1-y)}}+\del-1\right)},\label{D55}
+\end{align}
+valid if $K\widehat{\overline{m(1-y)}}+\del>1$; this may have desirable frequentist properties.\hfill$\square$
+\vskip4pt
+
+\nid {\bf Remark 2.2.} Here $\theta$ and $\lam$ have been taken to be independent a priori, which conforms to the assumption that $\lam$ is a nuisance parameter. Alternatively, one might treat $\mu$ and $\nu$ as independent a priori and impose separate priors on each. Under the latter approach, however, $\theta=\mu/\nu=\mu/\lam$ so $\theta$ depends on $\lam$, hence $\lam$ is no longer a nuisance parameter.\hfill$\square$
+\vskip6pt
+
+%???Theorem 2 of Fahrmeir (1987) applies to show that  if ${\cal I}_{\bf M,\del}(\theta|{\bf y})$ is large\footnote{See condition (D) of Fahrmeir (1987), p.89.}
+
+%\newpage
+
+\nid {\bf 3. Main problem: ${\bf Y}$, ${\bf Z}$, ${\bf M}$ unobserved, ${\bf N}$ observed.} 
+
+\nid Here $N_{ij}$ is a zero-inflated Poisson mixture (ZIPM) rv: $N_{ij}$ is an $\eps$-mixture of $M_{ij}$ and $O_{ij}$, where $O_{ij}$ is degenerate at 0, so $O_{ij}\sim\mathrm{Poisson}(\lam=0)$; while $M_{ij}$ is a $\pi$-mixture of 
+$\mathrm{Poisson}(t_i\mu)\equiv\mathrm{Poisson}(t_i\theta\lam)$ and $\mathrm{Poisson}(t_i\nu)\equiv\mathrm{Poisson}(t_i\lam)$ rvs. Thus this problem can be viewed as a three-component Poisson mixture model with one degenerate component and non-i.i.d. observations. The three weights are
+$\pi\eps$, $(1-\pi)\eps$, and $1-\eps$, with the identifiability constraint $0<\pi\le1/2$
+
+For notational simplicity, set $\ome=(\pi,\eps,\mu,\nu)$. Under this three-component mixture model, the unconditional pmf of the observed data $\mathbf{N}\equiv\{N_{ij}\}$ is 
+\begin{align*}
+f_\ome(\mathbf{n})
+&\ts=\prod_{i,j}\left[\pi\eps e^{-t_i\mu}(t_i\mu)^{n_{ij}}+(1-\pi)\eps e^{-t_i\nu}(t_i\nu)^{n_{ij}}+(1-\eps)\,0^{n_{ij}}\right]/{\bf n}!,%\cdot\Xi(\mathbf{n}),\\%\label{4F}\\
+%%\Xi(\mathbf{n}):&\ts=\left(\prod_{i,j,k}n_{ijk}!\right)^{-1},\nonumber%\\
+%&=\prod_i\prod_j\prod_k\left[\pi e^{-t_i\mu}\mu^{m_{ijk}}+(1-\pi)e^{-t_i\nu}\nu^{m_{ijk}}\right].\nonumber
+\end{align*}
+where $0^0=1$. Again the $K\equiv IJ$ rvs $N_{ij}$ are independent but non-identically distributed (i.n.i.d.) if $t_1,\dots,t_I$ are non-identical. 
+
+The sample space of $({\bf Y}, ({\bf Z},{\bf N}))$ is $\Ups\times\Ome$, where $\Ups=\{0,1\}^{\cal J}$ and
+\begin{align*}
+\Ome&=\big[\{0,1\}^{\cal K}\times(\mathbb{Z}_+)^{\cal K}\big]\cap\{({\bf z},{\bf n})\,|\,\forall i,j,\, z_{ij}=0\implies n_{ij}=0\}\\
+&=\big[\{0,1\}^{\cal K}\times(\mathbb{Z}_+)^{\cal K}\big]\cap\big\{({\bf z},{\bf n})\,\big|\,\forall i,j,\,n_{ij}(1-z_{ij})=0\big\}\\
+&\ts=\big[\{0,1\}^{\cal K}\times(\mathbb{Z}_+)^{\cal K}\big]\cap\big\{({\bf z},{\bf n})\,\big|\,\prod_{i,j}0^{n_{ij}(1-z_{ij})}=1\big\},
+\end{align*}
+with $\mathbb{Z}_+$ the set of nonnegative integers. The joint pmf of the unobserved and observed data $(\mathbf{Y},\mathbf{Z},\mathbf{N})$ on $\Ups\times\Ome$ is given by
+%\newpage
+ \begin{align}
+ &f_\ome(\mathbf{y},\mathbf{z},\mathbf{n})\nonumber\\
+ &=f_\pi({\bf y})f_\eps({\bf z})f_{\mu,\nu}(\mathbf{n}\,|\,{\bf y},\mathbf{z})\nonumber\\
+ &\ts=\prod\nolimits_j\pi^{y_j}(1-\pi)^{1-y_j} \prod\nolimits_{i,j}\eps^{z_{ij}}(1-\eps)^{1-z_{ij}}\label{big}\\
+ &\ts\ \ \ \cdot\prod\nolimits_{i,j}\left[e^{-t_i\mu}(t_i\mu)^{n_{ij}}\right]^{y_jz_{ij}}\left[e^{-t_i\nu}(t_i\nu)^{n_{ij}}\right]^{(1-y_j)z_{ij}}0^{n_{ij}(1-z_{ij})}\big/{\bf n}!\nonumber%\\
+  \end{align}
+   \begin{align}
+ %\label{K}\\
+&=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[\eps^{\bar z}(1-\eps)^{1-\bar z}\right]^K\left[e^{-\overline{tyz}\mu}\mu^{\overline{nyz}}e^{-\overline{t(1-y)z}\,\nu}\nu^{\overline{n(1-y)z}}\,\right]^K\Xi_\mathbf{t}(\mathbf{z},\mathbf{n})\nonumber\\
+&=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[\eps^{\bar z}(1-\eps)^{1-\bar z}\right]^K\left[e^{-\overline{tyz}\mu}\mu^{\overline{ny}}e^{-\overline{t(1-y)z}\,\nu}\nu^{\overline{n(1-y)}}\,\right]^K\Xi_\mathbf{t}(\mathbf{z},\mathbf{n}),\label{big2}
+\end{align}
+where $\mathbf{y}=\{y_j\}$, $\mathbf{z}=\{z_{ij}\}$, $\mathbf{n}=\{n_{ij}\}$,
+\begin{align}
+%\bar  y&=\frac{1}{J}\sum\nolimits_jy_j,\nonumber\\%\label{TTTx}\\
+\bar  z&\ts=\frac{1}{K}\sum\nolimits_{i,j}z_{ij},\nonumber\\%\label{TTTxx}\\
+\overline{tz}&\ts=\frac{1}{K}\sum\nolimits_{i,j}t_{i}z_{ij}=\frac{1}{K}\sum_{i,j}t_{i}z_{ij},\nonumber\\
+\overline{tyz}&\ts=\frac{1}{K}\sum\nolimits_{i,j}t_{i}y_jz_{ij}=\frac{1}{K}\sum\nolimits_{i,j}t_{i}y_jz_{ij},\nonumber\\
+\Xi_\mathbf{t}(\mathbf{z},\mathbf{n})&\ts=\prod\nolimits_{i,j}t_i^{n_{ij}z_{ij}}0^{n_{ij}(1-z_{ij})}/{\bf n}!,\nonumber%\frac{\prod_{i,j}t_i^{n_{ij}z_{ij}}0^{n_{ij}(1-z_{ij})}}{{\bf n}!},\nonumber
+%%z_{ij}&=\sum_kz_{ijk},\nonumber\\
+%\end{align}
+%\begin{align}
+%%n_{ij}&=\sum\nolimits_kn_{ijk},\nonumber\\
+%%n_i&=\sum\nolimits_{j,k}n_{ijk},\nonumber\\
+%%n_j&=\sum\nolimits_{i,k}n_{ijk};\nonumber
+%n({\bf n})&=\sum\nolimits_{i,j,k}n_{ijk};\nonumber
+\end{align}
+and similarly with $y$ replaced by $1-y$. To obtain \eqref{big2} we have used the facts that for $(\mathbf{y},\mathbf{z},\mathbf{n})\in\Ups\times\Ome$,
+\begin{align}
+\overline{nyz}&
+\ts=\frac{1}{K}\sum\nolimits_{i,j}n_{ij}y_jz_{ij}\nonumber\\%,\label{Tx}\\
+&\ts=\frac{1}{K}\sum\nolimits_{i,j}n_{ij}y_j\nonumber\\
+&\ts=\frac{1}{K}\sum\nolimits_jn_jy_j\nonumber\\
+&\ts=\overline{ny},\nonumber\\%\label{Tx}\\
+\Xi_\mathbf{t}(\mathbf{z},\mathbf{n})
+&\ts=\prod_{i,j}t_i^{n_{ij}}0^{n_{ij}(1-z_{ij})}/{\bf n}!\nonumber\\
+&\ts=\prod_it_i^{n_i}\cdot\prod_{i,j}0^{n_{ij}(1-z_{ij})}/{\bf n}!,\nonumber
+%\prod_{i,j,k}\frac{t_i^{n_{ijk}z_{ijk}}}{n_{ijk}!}\label{xT}
+%&=\frac{\prod_{i,j}t_i^{n_{ij}}0^{n_{ij}(1-z_{ij})}}{{\bf n}!}\nonumber\\
+%&=\frac{\prod_it_i^{n_i}\cdot\prod_{i,j}0^{n_{ij}(1-z_{ij})}}{{\bf n}!},\nonumber%\label{xT}
+%%\left(\prod_i\prod_j\prod_kn_{ijk}!\right)^{-1}\\
+%\overline{n(1-z)}&=\frac{1}{n}\
+%\sum_i\sum_j\sum_kn_{ijk}(1-z_{ijk}),
+\end{align}
+and similarly with $y$ replaced by $1-y$. 
+% and $\mu$ replaced by $\nu$.
+%\footnote{\eqref{Tx}-\eqref{xT} hold since $0^{n_{ijk}(1-z_{ijk})}=0$ if $z_{ijk}=0$, $n_{ijk}\ne0$; $0^{n_{ijk}(1-z_{ijk})}=1$ otherwise.}
+Thus $f_{\ome}(\mathbf{y},\mathbf{z},\mathbf{n})$ determines an exponential family with support $\Ups\times\Ome$ and  sufficient statistic
+\begin{align*}
+(\bar Y, \bar Z,\,\overline{tYZ},\,\overline{t(1-Y)Z},\,\overline{nY},\,\overline{n(1-Y)}).
+\end{align*}
+%, where the latter are defined similarly to $\overline{tyz}$ and $\overline{nyz}$.
+\vskip4pt
+
+\nid{\bf 3.1. Frequentist analysis: the EM algorithm.} To obtain the MLEs $\^\eps,\^\pi,\^\mu,\^\nu$ and then $\^\theta=\^\mu/\^\nu$, it is again straightforward - albeit somewhat challenging, including notationally - to apply the EM algorithm, as follows:
+
+For $i=1,\dots,I$ and $j=1,\dots,J$,  define
+\begin{align*}
+%{\bf n}_{ij}&=\{n_{i,j}\,|\,k=1,\dots,K\},\\
+{\bf N}_j&=(N_{i,j}\,|\,i=1,\dots,I),\\
+{\bf n}_j&=(n_{i,j}\,|\,i=1,\dots,I);%\\
+%n_{ij}&=\sum\nolimits_kn_{ijk};\\
+%n_j&=\sum\nolimits_in_{ij};\\
+\end{align*}
+\begin{align*}
+1_{ij}^{\ne}\equiv1_{ij}^{\ne}(n_{ij})&=1-0^{n_{ij}},\\
+%1_{ij}^{\ne}\equiv1_{ij}^{\ne}({\bf n}_{ij})&=\sum\nolimits_k 1_{ijk}^{\ne},\\
+1_{j}^{\ne}\equiv1_{j}^{\ne}({\bf n}_j)&\ts=\sum\nolimits_i1_{ij}^{\ne},\\
+1^{\ne}\equiv1^{\ne}({\bf n})&\ts=\sum\nolimits_j1_{j}^{\ne},\\
+%n_{ij}^{\ne}&=\sum\nolimits_k n_{ijk}1_{ijk}^{\ne},\\
+%n_{j}^{\ne}&=\sum\nolimits_in_{ij}^{\ne},\\
+%\bar t_j^{\ne}\equiv\bar t_j^{\ne}({\bf n}_j)&=\frac{1}{I}\sum\nolimits_i t_i1_{ij}^{\ne};\\
+t_j^{\ne}\equiv t_j^{\ne}({\bf n}_j)&\ts=\sum\nolimits_i t_i1_{ij}^{\ne};\\
+%&\\
+%\end{align*}
+%\begin{align*}
+1_{ij}^=\equiv1_{ij}^=({\bf n}_j)&=0^{n_{ij}},\\
+%1_{ij}^=\equiv1_{ij}^=({\bf n}_{ij})&=\sum\nolimits_k 1_{ijk}^=,\\
+1_{j}^=\equiv1_{j}^=({\bf n}_j)&\ts=\sum\nolimits_i1_{ij}^=,\\
+%n_{ij}^{\ne}&=\sum\nolimits_k n_{ijk}1_{ijk}^{\ne},\\
+%n_{j}^{\ne}&=\sum\nolimits_in_{ij}^{\ne},\\
+1^=\equiv1^=({\bf n})&\ts=\sum\nolimits_j1_{j}^=,\\
+%\bar t_j^=\equiv\bar t_j^=({\bf n}_j)&=\frac{1}{I}\sum\nolimits_i t_i1_{ij}^=.\\
+t_j^=\equiv t_j^=({\bf n}_j)&\ts=\sum\nolimits_i t_i1_{ij}^=.
+\end{align*}
+Here $1_{ij}^{\ne}$ ($1_{ij}^=$) is the indicator function of the event $\{n_{ij}\ne0\}$ ($\{n_{ij}=0\}$), so $1_{j}^{\ne}$ ($1_{j}^=$) is the number of nonzero (zero) $n_{ij}$ with $j$ fixed, etc. Because \eqref{big} is an exponential family, Bayes formula shows that for $l=0,1,\dots$, the $(l+1)$-st E-step imputes $y_j$ as
+\begin{align}
+&(\widehat{y_j})_{l+1}\nonumber\\
+&=\E_{\^\ome_l}[Y_j\,|\,{\bf n}]\nonumber\\
+ &=\P_{\^\ome_l}[Y_j=1\,|\,{\bf N}_j={\bf n}_j]\nonumber\\
+  &=\P_{\^\ome_l}[Y_j=1]\P_{\^\ome_l}[{\bf N}_j={\bf n}_j\,|\,Y_j=1]/\P_{\^\ome_l}[{\bf N}_j={\bf n}_j]\nonumber\\
+ &=\frac{\^\pi_l\prod_{i}[\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]}{\^\pi_l\prod_{i}[\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]+(1-\^\pi_l)\prod_{i}[\^\eps_le^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]}\nonumber\\
+ %(\widehat{y_j})_{l+1}
+ &=\frac{\^\pi_l}{\^\pi_l+(1-\^\pi_l)e^{-t_j^{\ne}(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{n_j}\prod_i\left[\frac{\^\eps_le^{-t_i\^\nu_l}+(1-\^\eps_l)}{\^\eps_le^{-t_i\^\mu_l}+(1-\^\eps_l)}\right]^{1_{ij}^=}},\nonumber%label{hatyjell1}
+ %  &=\frac{A_{j,l}}{A_{j,l}+B_{j,l}};\nonumber
+   \end{align}
+   where $\^\ome_l=(\^\pi_l,\^\eps_l,\^\mu_l,\^\nu_l)$ (cf. \eqref{B6}-\eqref{zC6});
+   %and %CHECKKK
+ %  \begin{align}
+%     A_{j,l}:&\ts=\^\pi_l\^\eps_l^{1_{j}^{\ne}}e^{-t_j^{\ne}\^\mu_l}\left(\prod\nolimits_it_i^{n_{ij}}\right)\^\mu_l^{n_{j}}\prod_i[\^\eps_le^{-t_i\^\mu_l}+(1-\^\eps_l)]^{1_{ij}^=},\label{Aj}\\
+ %B_{j,l}:&\ts=(1-\^\pi_l)\^\eps_l^{1_{j}^{\ne}}e^{-t_j^{\ne}\^\nu_l}\left(\prod\nolimits_it_i^{n_{ij}}\right)\^\nu_l^{n_{j}}\prod_i[\^\eps_le^{-t_i\^\nu_l}+(1-\^\eps_l)]^{1_{ij}^=}.\label{Bj}
+%\end{align}
+%%SAVE THIS!!
+%\begin{align}
+%   &=\frac{\^\pi_l\^\eps_l^{1_{+j+}}(1-\^\eps_l)^{IK-1_{+j+}}e^{-\^\mu_l\sum\limits_i t_i1_{ij+}}(\prod\limits_it_i^{n_{ij+}})\^\mu_l^{n_{+j+}}}{\^\pi_l\^\eps_l^{1_{+j+}}(1-\^\eps_l)^{IK-1_{+j+}}e^{-\^\mu_l\sum\limits_i t_i1_{ij+}}(\prod\limits_it_i^{n_{ij+}})\^\mu_l^{n_{+j+}}+(1-\^\pi_l)\^\eps_l^{1_{+j+}}(1-\^\eps_l)^{IK-1_{+j+}}e^{-\^\nu_l\sum\limits_i t_i1_{ij+}}(\prod\limits_it_i^{n_{ij+}})\^\nu_l^{n_{+j+}}}\nonumber
+% \end{align}
+%This simplifies to
+%\begin{align}
+%(\widehat{y_j})_{l+1}&=\frac{\^\pi_l}{\^\pi_l+(1-\^\pi_l)e^{-t_j^{\ne}(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{n_j}\prod_i\left[\frac{\^\eps_le^{-t_i\^\nu_l}+(1-\^\eps_l)}{\^\eps_le^{-t_i\^\mu_l}+(1-\^\eps_l)}\right]^{1_{ij}^=}},\label{hatyjell1}
+%\end{align}
+this should be compared to \eqref{P}.
+
+Also at the $(l+1)$-st E-step, $y_jz_{ij}$ is imputed as 
+\begin{align}
+&(\widehat{y_jz_{ij}})_{l+1}\nonumber\\
+&=\E_{\^\ome_l}[Y_jZ_{ij}\,|\,{\bf n}]\nonumber\\
+ &=\P_{\^\ome_l}[Y_j=1,Z_{ij}=1\,|\,{\bf N}_j={\bf n}_j]\nonumber\\
+  &=\P_{\^\ome_l}[Y_j=1,Z_{ij}=1]\P_{\^\ome_l}[{\bf N}_j={\bf n}_j\,|\,Y_j=1,Z_{ij}=1]/\P_{\^\ome_l}[{\bf N}_j={\bf n}_j]\nonumber\\
+ &=\frac{\^\pi_l\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}\prod\nolimits_{i'\ne i}[\^\eps_le^{-t_{i'}\^\mu_l}(t_{i'}\^\mu_l)^{n_{i'j}}+(1-\^\eps_l)0^{n_{i'j}}]}{\^\pi_l\prod_{i}[\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]+(1-\^\pi_l)\prod_{i}[\^\eps_le^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]}\nonumber\\
+ &=(\widehat{y_j})_{l+1}\cdot\frac{\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}}{\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}} \nonumber\\
+ &=(\widehat{y_j})_{l+1}\cdot\left[1+\big({\ts\frac{1-\^\eps_l}{\^\eps_l}}\big)e^{t_i\^\mu_l}\right]^{-1_{ij}^=}. \nonumber
+\end{align}
+Thus $(1-y_j)z_{ij}$ and $z_{ij}$ are imputed, respectively, as
+\begin{align}
+[\widehat{(1-y_j)z_{ij}}]_{l+1}
+ &=[1-(\widehat{y_j})_{l+1}]\cdot\frac{\^\eps_le^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}}{\^\eps_le^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}} \nonumber\\
+ &=[1-(\widehat{y_j})_{l+1}]\cdot\left[1+\big({\ts\frac{1-\^\eps_l}{\^\eps_l}}\big)e^{t_i\^\nu_l}\right]^{-1_{ij}^=}; \nonumber\\
+%\end{align}
+%Lastly,
+%\begin{align}
+(\widehat{z_{ij}})_{l+1}&=(\widehat{y_jz_{ij}})_{l+1}+[\widehat{(1-y_j)z_{ij}}]_{l+1}.\nonumber
+ \end{align}
+Note that $(\widehat{y_jz_{ij}})_{l+1}\ne (\widehat{y_j})_{l+1}\cdot(\widehat{z_{ij}})_{l+1}$ in general.
+
+%COMMENT
+\begin{comment}
+Also at the $(l+1)$-st E-step, $z_{ij}$, $y_jz_{ij}$, and $(1-y_j)z_{ij}$ are imputed as
+\begin{align}
+(\widehat{z_{ij}})_{l+1}&=\E_{\^\ome_l}[Z_{ij}\,|\,{\bf n}]\nonumber\\
+ &=\P_{\^\ome_l}[Z_{ij}=1\,|\,{\bf N}_j={\bf n}_j]\nonumber\\
+  &=\P_{\^\ome_l}[Z_{ij}=1]\P_{\^\ome_l}[{\bf N}_j={\bf n}_j\,|\,Z_{ij}=1]/\P_{\^\ome_l}[{\bf N}_j={\bf n}_j]\nonumber\\
+ &=\frac{\^\eps_l[\^\pi_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\pi_l)e^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}]}{\^\eps_l[\^\pi_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\pi_l)e^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}]+(1-\^\eps_l)0^{n_{ij}}}\nonumber\\
+  &=\frac{\^\eps_l[\^\pi_l+(1-\^\pi_l)e^{-t_i(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{n_{ij}}]}{\^\eps_l[\^\pi_l+(1-\^\pi_l)e^{-t_i(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{n_{ij}}]+(1-\^\eps_l)e^{t_i\^\mu_l}(\frac{1}{\^\mu_l})^{n_{ij}}0^{n_{ij}}};\nonumber
+  %\label{hatyjell2}
+ \end{align}
+  \begin{align}
+&(\widehat{y_jz_{ij}})_{l+1}\nonumber\\
+&=\E_{\^\ome_l}[Y_jZ_{ij}\,|\,{\bf n}]\nonumber\\
+ &=\P_{\^\ome_l}[Y_j=1,Z_{ij}=1\,|\,{\bf N}_j={\bf n}_j]\nonumber\\
+  &=\P_{\^\ome_l}[Y_j=1,Z_{ij}=1]\P_{\^\ome_l}[{\bf N}_j={\bf n}_j\,|\,Y_j=1,Z_{ij}=1]/\P_{\^\ome_l}[{\bf N}_j={\bf n}_j]\nonumber\\
+ &=\frac{\^\pi_l\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}\prod\nolimits_{i'\ne i}[\^\eps_le^{-t_{i'}\^\mu_l}(t_{i'}\^\mu_l)^{n_{i'j}}+(1-\^\eps_l)0^{n_{i'j}}]}{\^\pi_l\prod_{i}[\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]+(1-\^\pi_l)\prod_{i}[\^\eps_le^{-t_i\^\nu_l}(t_i\^\nu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}]}\nonumber\\
+%  &=\frac{\^\pi_l\^\eps_le^{-IK\bar t\^\mu_l}\^\mu_l^{n_j}}
+ % {\^\eps_l^{1_{j}^{\ne}}(1-\^\eps_l)^{1_{j}^=}\left[\^\pi_l e^{-I\bar t_j^{\ne}\^\mu_l}\^\mu_l^{n_{j}}+(1-\^\pi_l)e^{-I\bar t_j^{\ne}\^\nu_l}\^\nu_l^{n_{j}} \right]}.\nonumber\\
+ &=(\widehat{y_j})_{l+1}\cdot\frac{\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}}{\^\eps_le^{-t_i\^\mu_l}(t_i\^\mu_l)^{n_{ij}}+(1-\^\eps_l)0^{n_{ij}}} \nonumber\\
+ &=(\widehat{y_j})_{l+1}\cdot\left[1+\big({\ts\frac{1-\^\eps_l}{\^\eps_l}}\big)e^{t_i\^\mu_l}\right]^{-1_{ij}^=}; \nonumber\\
+ %&=\frac{???\^\pi_l\^\eps_le^{-t_j^=\^\mu_l}\prod_i[\^\eps_le^{-t_i\^\mu_l}+(1-\^\eps_l)]^{-1_{ij}^=}}
+ % {\^\eps_l^{1_{j}^{\ne}}\left\{\^\pi_l+(1\!-\!\^\pi_l)e^{-t_j^{\ne}(\^\nu_l-\^\mu_l)}(\frac{\^\nu_l}{\^\mu_l})^{n_{j}}\prod_i\left[\frac{\^\eps_le^{-t_i\^\nu_l}+(1-\^\eps_l)}{{\^\eps_le^{-t_i\^\mu_l}+(1-\^\eps_l)}}\right]^{1_{ij}^=} \right\}};\nonumber\\
+  %\label{hatyjell3}\\
+ % &\nonumber\\
+&[\widehat{(1-y_j)z_{ij}}]_{l+1}=(\widehat{z_{ij}})_{l+1} -(\widehat{y_jz_{ij}})_{l+1}.\nonumber
+ \end{align}
+ Note that $(\widehat{y_jz_{ij}})_{l+1}\ne (\widehat{y_j})_{l+1}\cdot(\widehat{z_{ij}})_{l+1}$ in general.
+\end{comment}
+%END
+
+ % $\^\pi_l\^\eps_l^{1_{+j+}}(1-\^\eps_l)^{IK-1_{+j+}}e^{-\^\mu_l\sum_i t_i1_{ij+}}(\prod_it_i^{n_{ij+}})\^\mu_l^{n_{+j+}}$.  ^{1_{j}^=}
+
+%???${\bf N}_j$ or ${\bf N}$. Also earlier....
+
+From \eqref{big2}, the complete-data MLEs are found to be
+\begin{align*}
+\~\pi&=\bar  y,\\
+\~\eps&=\bar z,\\
+\~\mu&\ts=\frac{\overline{ny}}{\ \ \overline{tyz}\ \ },\\
+\~\nu&\ts=\frac{\overline{n(1-y)}}{\ \ \overline{t(1-y)z}\ \ }.
+\end{align*}
+Thus the $(l+1)$-st M-step yields the updated estimates
+\begin{align}
+\^\pi_{l+1}&\ts=\frac{1}{J}\sum_j(\widehat{y_j})_{l+1},\label{B6}\\
+\^\eps_{l+1}&\ts=\frac{1}{K}\sum_{i,j}(\widehat{z_{ij}})_{l+1},\label{B66}\\
+\^\mu_{l+1}&\ts=\frac{\overline{n(\widehat{y})_{l+1}}}{\ \ \overline{t(\widehat{yz})_{l+1}} \ \ }=\frac{\sum_jn_j(\widehat{y_j})_{l+1}}{\ \ \sum_{i,j}t_{i}(\widehat{y_jz_{ij}})_{l+1}\ \ },\label{C6}\\
+\^\nu_{l+1}&\ts=\frac{\overline{n[\widehat{(1-y)}]_{l+1}}}{\ \ \overline{t[\widehat{(1-y)z}]_{l+1}} \ \ }=\frac{\sum_{j}n_{j}[1-\widehat{y_j}]_{l+1}}{\ \ \sum_{i,j}t_{i}[\widehat{(1-y_j)z_{ij}}]_{l+1}\ \ }.\label{zC6}
+%??\^\nu_{l+1}&=\frac{\bar n-\overline{n\^y_{l+1}}}{\ \bar t\,(1-\overline{\^y_{l+1}})\ }=\frac{\overline{n(1-\^y_{l+1})}}{\ \ \bar t\,(1-\overline{\^y_{l+1}})\ \ },\label{D6}
+\end{align}
+%where $(\widehat{yz})_{l+1}=\{(\widehat{y_jz_{ijk}})_{l+1}\}$ and ....... 
+%If, at any stage, either $\^\pi_{l+1}$ or $\^\eps_{l+1}$ exceeds $1/2$, replace it by $1/2$.
+Again as in Aitken and Rubin (1985, p.69) the constraint $\pi\le\t12$ is ignored and, assuming convergence to a maximum $(\^\pi,\^\eps,\^\mu,\^\nu)$ of the likelihood function, the same maximum value will occur at $(1-\^\pi,\^\eps,\^\nu,\^\mu)$. Thus the MLE is taken to be that for which the first component is $\le\t12$, say $(\^\pi,\^\eps,\^\mu,\^\nu)$.
+
+
+
+Finally, the updated estimator $\^\theta_{l+1}\equiv\frac{\^\mu_{l+1}}{\^\nu_{l+1}}$ is obtained from \eqref{C6} and \eqref{zC6}; here, unlike \eqref{E}, it does depend on $\{t_i\}$.
+\vskip4pt
+
+%\nid{\it Starting value $\^\pi_0$ for the EM algorithm:} Under the restriction $\pi\le1/2$, a simple way to choose $\^\pi_0$ and $\^\eps_0$ is as follows. Plot a histogram of the entire data set $\{n_{ij}\}$ and attempt to discern a spike at 0 and two prevalent mixture components above 0, either by eye or by density estimation, then determine their weights. Take $1-\^\eps_0$ to be the weight of the spike at 0, then take $\^\pi_0$ to be the lesser of the relative weights of the two nonzero components. 
+%\vskip4pt
+
+\nid{\it Standard error for the MLE $\^\theta$:} Recall that $\ome=(\pi,\eps,\mu,\nu)$ and $\^\ome_l=(\^\pi_l,\^\eps_l,\^\mu_l,\^\nu_l)$ and assume as before that the EM iterates $\ome_l$ converge to $\^\ome\equiv(\^\pi,\^\eps,\^\mu,\^\nu)$, the actual MLEs based on the observed data ${\bf N}$. Again we rely on the results of Hoadley and Efron/Hinkley to provide the normal approximation
+\begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_4[0,\,KI^{-1}_{\bf n}(\ome)],\label{00YZ}\\
+I_{\bf n}(\ome)&\equiv-\nabla_\ome^2\log f_\ome({\bf n})\label{00Y}\\
+&=-\E_\ome[\nabla_\ome^2\log f_\ome({\bf n})\,|\,{\bf n}]\nonumber\\%\label{S}\\
+&=-\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf Z},{\bf n})\,|\,{\bf n}]+\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf Z}\,|\,{\bf n})\,|\,{\bf n}],\label{00Y1}
+%&-E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf m})-\nabla_\ome^2\log f_\ome({\bf Y}\,|\,{\bf m})\,|\,{\bf M}={\bf m}],\nonumber%\label{QQQQ}
+\end{align}
+where $I^{-1}_{\bf n}$ is the $4\times4$ observed information matrix.
+If $({\bf Y},{\bf Z},{\bf n})\in\Ups\times\Ome$ then by \eqref{big2}, 
+\begin{align}
+ %\frac{1}{n}
+ \log f_\ome(\mathbf{Y},\mathbf{Z},\mathbf{n})
+ &=J[\bar Y\log\pi+(1-\bar Y)\log(1-\pi)]+K[\bar Z\log\eps+(1-\bar Z)\log(1-\eps)]\nonumber\\
+ &\ \ \ \ +K[\overline{nY}\log\mu-\overline{tYZ}\mu+\overline{n(1-Y)}\log\nu-\overline{t(1-Y)Z}\nu]+\log\Xi_\mathbf{t}(\mathbf{n},\mathbf{z});\nonumber\\ 
+ \nonumber\\%\label{R}
+\nabla_\ome\log f_\ome({\bf Y},\mathbf{Z},{\bf n})&=\begin{pmatrix}\frac{\ J(\bar Y-\pi)\ }{\pi(1-\pi)}\\ \frac{\ K(\bar Z-\eps)\ }{\eps(1-\eps)}\\ K\left[\frac{\ \overline{nY}\ }{\mu}-\overline{tYZ}\right]\\K\left[\frac{\ \overline{n(1-Y)}\ }{\nu}-\overline{t(1-Y)Z}\right]\end{pmatrix};\nonumber\\
+%=CUT?\begin{pmatrix}\frac{J(\bar Y-\pi)}{\pi(1-\pi)}\\ n\left[\overline{(\frac{\bar m}{\mu}-\bar t)Y}\right]\\ n\left[\overline{(\frac{\bar m}{\nu}-\bar t)(1-Y)}\right]\end{pmatrix};\nonumber\\
+-\nabla_\ome^2\log f_\ome({\bf Y},\mathbf{Z},{\bf n})&=\begin{pmatrix}\frac{\ J\left[(1-2\pi)\bar Y+\pi^2\right]\ }{\pi^2(1-\pi)^2}&0&0&0\\0&\frac{\ K\left[(1-2\eps)\bar Z+\eps^2\right]\ }{\eps^2(1-\eps)^2} &0&0\\0&0&K\big[\frac{\ \overline{nY}\ }{\mu^2}\big]&0\\0&0&0&K\big[\frac{\ \overline{n(1-Y)}\ }{\nu^2}\big]\end{pmatrix}.\label{ZQ}
+\end{align}
+%\newpage
+
+Furthermore by \eqref{big}, for $({\bf y},{\bf z},{\bf n})\in\Ups\times\Ome$ with ${\bf n}$ fixed,
+\begin{align}
+f_\ome&(\mathbf{y},\mathbf{z}\,|\,\mathbf{n})= f_\ome(\mathbf{y},\mathbf{z},\mathbf{n})/f_{\ome}(\mathbf{n})\nonumber\\
+&\ts \propto\prod_j\pi^{y_j}(1-\pi)^{1-y_j} \nonumber\\
+ &\ts\ \ \cdot\prod_{i,j}\left\{\eps\left[e^{-t_i\mu}(t_i\mu)^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}(t_i\nu)^{n_{ij}}\right]^{1-y_j}\right\}^{z_{ij}}[(1-\eps)0^{n_{ij}}]^{1-z_{ij}}.\nonumber
+\end{align}
+From this, $\{Z_{ij}\}$ are conditionally independent given ${\bf Y}$ and ${\bf N}$, with
+\begin{align}
+[Z_{ij}\,|\,\mathbf{y},\mathbf{n}]&\sim\mathrm{Bernoulli}(r_{ij}),\label{Zcondindep}\\
+r_{ij}\equiv r(t_i;y_j,n_{ij})&\equiv r(\eps,\mu,\nu;t_i;y_j,n_{ij})\nonumber\\
+:&=\frac{\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}}{\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}+(1-\eps)0^{n_{ij}}}\nonumber\\
+&=1-0^{n_{ij}}+\frac{0^{n_{ij}}\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}}{\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}+(1-\eps)},\label{rijk}
+\end{align}
+%&=\left[1-0^{n_{ijk}}+\frac{0^{n_{ijk}}\eps e^{-t_i\mu}\mu^{n_{ijk}}t_i^{n_{ijk}}}{\eps e^{-t_i\mu}\mu^{n_{ijk}}t_i^{n_{ijk}}+(1-\eps)}\right],\label{r1}\\
+and 
+\begin{align*}
+&f_{\ome}({\bf y}\,|\,{\bf n})\\
+&\propto \sum_{\bf z}f_\ome(\mathbf{y},\mathbf{z}\,|\,\mathbf{n})\\
+&\propto
+\prod_j\pi^{y_j}(1-\pi)^{1-y_j}\cdot\prod_{i,j}\{\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}+(1-\eps)0^{n_{ij}}\}\\
+%&=\prod_j\pi^{y_j}(1-\pi)^{1-y_j}\eps^{1^{\ne}}(1-\eps)^{1^=}\prod_j\mu^{n_jy_j}\prod_j\nu^{n_j(1-y_j)}\prod_it_i^{{n_i}}\\
+&=\ \prod_j\pi^{y_j}(1-\pi)^{1-y_j}\\
+&\ \ \ \cdot\prod_{\{i,j|n_{ij}\ne0\}}\{\eps\left[e^{-t_i\mu}\mu^{n_{ij}}\right]^{y_j}\left[e^{-t_i\nu}\nu^{n_{ij}}\right]^{1-y_j}t_i^{n_{ij}}\}\cdot\prod_{\{i,j|n_{ij}=0\}}[\eps e^{-t_i\mu y_j}e^{-t_i\nu(1-y_j)}+(1-\eps)]\\
+&\propto\ \eps^{1^{\ne}}\prod_j[\pi e^{-t_j^{\ne}\mu}\mu^{n_j}]^{y_j}[(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}]^{1-y_j}\cdot\prod_j\prod_{\{i|n_{ij=0}\}}[\eps e^{-t_i\mu y_j}e^{-t_i\nu(1-y_j)}+(1-\eps)]\\
+&\propto\ \prod_j\left\{[\pi e^{-t_j^{\ne}\mu}\mu^{n_j}]^{y_j}[(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}]^{1-y_j}\cdot\prod_i[\eps e^{-t_i\mu y_j}e^{-t_i\nu(1-y_j)}+(1-\eps)]^{1_{ij}^=}\right\}\\
+&\propto\prod_jq_j^{y_j}(1-q_j)^{1-y_j},
+\end{align*}
+where
+\begin{align}
+q_j&\equiv q_j({\bf n}_j)\equiv q_j(\pi,\eps,\mu,\nu;{\bf t};{\bf n}_j)\nonumber\\
+:&=\frac{\pi e^{-t_j^{\ne}\mu}\mu^{n_j}\prod_i[\eps e^{-t_i\mu}+(1-\eps)]^{1_{ij}^=}}{\pi e^{-t_j^{\ne}\mu}\mu^{n_j}\prod_i[\eps e^{-t_i\mu}+(1-\eps)]^{1_{ij}^=}+(1-\pi) e^{-t_j^{\ne}\nu}\nu^{n_j}\prod_i[\eps e^{-t_i\nu}+(1-\eps)]^{1_{ij}^=}}\;.\nonumber
+\end{align}
+%\prod_it_i^{n_i}
+Thus $\{Y_j\}$ are conditionally independent given ${\bf N}$, with
+\begin{align}
+[Y_j\,|\,\mathbf{n}]&\sim\mathrm{Bernoulli}(q_j).\label{Ycondindep}
+\end{align}
+Therefore $E_\ome[\,\bar Y\,|\,{\bf n}]=\bar q\equiv \bar q({\bf n})$, while
+\begin{align*}
+%E_\ome[\,\bar Y\,|\,{\bf N}={\bf n}]&=\bar p;\\
+%E_\ome[\,\bar Z\,|\,{\bf N}={\bf n}]&=\bar q;\\
+\E_\ome[\,\overline{nY}\,|\,{\bf n}]
+&\ts=\frac{1}{K}\sum_{i,j}n_{ij}\E_\ome[Y_j\,|\,{\bf n}]\\
+&\ts=\frac{1}{K}\sum_{i,j}n_{ij}q_j\\
+&=\overline{nq};\\
+%\end{align*}
+%\begin{align*}
+\E_\ome[\,\overline{n(1-Y)}\,|\,{\bf n}]&\ts=\frac{1}{K}\sum_{i,j}n_{ij}(1-q_j)\\
+&=\overline{n(1-q)}.
+\end{align*}
+Furthermore, 
+\begin{align}
+%E_\ome[(\bar Y-\pi)^2\,|\,{\bf n}]
+% &=\ts(\bar q-\pi)^2+\frac{1}{J}\,\overline{q(1-q)};\\
+%E_\ome[\bar Y(1-\bar Y)\,|\,{\bf n}]
+%&=\bar q(1-\bar q)-\ts\frac{1}{J}\,\overline{q(1-q)}.%\\
+\E_\ome[\,(1-2\pi)\bar Y+\pi^2\,|\,{\bf n}]&=(1-2\pi)\bar q+\pi^2.\label{neat}
+\end{align}
+
+Next,
+\begin{align}
+\E_\ome[\,\bar Z\,|\,{\bf n}]&=\E_\ome\{\E_\ome[\,\bar Z\,|\,{\bf y},{\bf n}]\,|\,{\bf n}\};\nonumber\\
+&\ts=\frac{1}{K}\sum_{i,j}\E_\ome\{r(t_i;Y_j,n_{ij})\,|\,{\bf n}\};\nonumber\\
+&\ts=\frac{1}{K}\sum_{i,j}\{q_jr(t_i;1,n_{ij})+(1-q_j)r(t_i;0,n_{ij})\}\label{00A}\\
+&\equiv\overline{qr(1)+(1-q)r(0)}.\nonumber
+\end{align}
+From \eqref{rijk}, note that
+\begin{align}
+r(t_i;1,n_{ij})&=1-0^{n_{ij}}+\frac{0^{n_{ij}}\eps e^{-t_i\mu}\mu^{n_{ij}}t_i^{n_{ij}}}{\eps e^{-t_i\mu}\mu^{n_{ij}}t_i^{n_{ij}}+(1-\eps)},\label{r1}\\
+r(t_i;0,n_{ij})&=1-0^{n_{ij}}+\frac{0^{n_{ij}}\eps e^{-t_i\nu}\nu^{n_{ij}}t_i^{n_{ij}}}{\eps e^{-t_i\nu}\nu^{n_{ij}}t_i^{n_{ij}}+(1-\eps)},\label{r0}
+\end{align}
+and decompose $\sum_{i,j}$ as $\sum_{\{i,j|n_{ij}\ne0\}}$ + $\sum_{\{i,j|n_{ij}=0\}}$, so \eqref{00A} becomes 
+\begin{align}
+\E_\ome[\,\bar Z\,|\,{\bf n}]
+&\ts=\frac{1}{K}\sum\limits_{i,j}\left[1-0^{n_{ij}}+\frac{q_j0^{n_{ij}}\eps e^{-t_i\mu}\mu^{n_{ij}}t_i^{n_{ij}}}{\eps e^{-t_i\mu}\mu^{n_{ij}}t_i^{n_{ij}}+(1-\eps)}+\frac{(1-q_j)0^{n_{ij}}\eps e^{-t_i\nu}\nu^{n_{ij}}t_i^{n_{ij}}}{\eps e^{-t_i\nu}\nu^{n_{ij}}t_i^{n_{ij}}+(1-\eps)}\right]\nonumber\\
+&\ts=\frac{1^{\ne}}{K}+\frac{\eps}{K}\sum\limits_{\{i,j|n_{ij}=0\}}\left[\frac{q_j e^{-t_i\mu}}{\eps e^{-t_i\mu}+(1-\eps)}+\frac{(1-q_j) e^{-t_i\nu}}{\eps e^{-t_i\nu}+(1-\eps)}\right]\nonumber\\
+&\ts=\frac{1^{\ne}}{K}+\frac{\eps}{K}\sum\limits_{i,j}
+%_{\{i,j,k|n_{ijk=0}\}}
+1_{ij}^=\left[\frac{q_j }{\eps+(1-\eps)e^{t_i\mu}}+\frac{1-q_j}{\eps+(1-\eps) e^{t_i\nu}}\right]\nonumber\\
+:&=\rho(\eps,\mu,\nu;{\bf t};{\bf n})\equiv\rho.\nonumber
+\end{align}
+Lastly, 
+\begin{align*}
+\E_\ome[(1-2\eps)\bar Z+\eps^2\,|\,{\bf n}]&=(1-2\eps)\rho+\eps^2.
+\end{align*}
+
+Therefore $-\E_\ome[\nabla_\ome^2\log f_\ome({\bf Y},{\bf Z},{\bf n})\,|\,{\bf n})\,|\,{\bf n}]$ is evaluated explicitly as follows (recall \eqref{00Y1}-\eqref{ZQ}):
+\begin{align}
+-\E_\ome&[\nabla_\ome^2\log f_\ome({\bf Y},{\bf Z},{\bf n})\,|\,{\bf n})\,|\,{\bf n}]\nonumber\\ &\nonumber\\
+%%-\nabla_\ome^2\log f_\ome({\bf Y}\,|\,{\bf m})\,|\,{\bf M}={\bf m}]
+%&=-E_\ome\left[\begin{pmatrix}\frac{J\left[(\bar Y-\pi)^2+\bar Y(1-\bar Y)\right]}{\pi^2(1-\pi)^2}&0&0&0\\0&&0&0\\0&0&n\left(\frac{\ \overline{mY}\ }{\mu^2}\right)&0\\0&0&0&n\left[\frac{\ \overline{m(1-Y)}\ }{\nu^2}\right]\end{pmatrix}\Bigg|\,{\bf M}={\bf m}\right]\nonumber\\ \nonumber\\
+&=\begin{pmatrix}\frac{J\left[(1-2\pi)\bar q+\pi^2\right]}{\pi^2(1-\pi)^2}&0&0&0\\0&\frac{\ K\left[(1-2\eps)\rho+\eps^2\right]\ }{\eps^2(1-\eps)^2} &0&0\\0&0&K\left[\frac{\ \overline{nq}\ }{\mu^2}\right]&0\\0&0&0&K\left[\frac{\ \overline{n(1-q)}\ }{\nu^2}\right]\end{pmatrix}.\label{ZZ7}%=:D(\ome;{\bf t};{\bf n})
+\end{align}
+
+For the second term in \eqref{00Y1}, it follows from \eqref{Zcondindep} and \eqref{Ycondindep} that 
+\begin{align*}
+ f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})&=f_\ome(\mathbf{Y}\,|\,\mathbf{n})f_\ome(\mathbf{Z}\,|\,\mathbf{Y},\mathbf{n})\\
+ &\ts=\prod_jq_j^{Y_j}(1-q_j)^{1-Y_j}\prod_{i,}r_{ij}^{Z_{ij}}(1-r_{ij})^{1-Z_{ij}}\\
+  &\ts=\prod_jq_j^{Y_j}(1-q_j)^{1-Y_j}\prod_{\{i,j|n_{ij}=0\}}r_{ij}^{Z_{ij}}(1-r_{ij})^{1-Z_{ij}},
+  \end{align*}
+ since $n_{ij}\ne0\implies Z_{ij}=1$ and $r_{ij}=1$ for $(\mathbf{Y},\mathbf{Z},\mathbf{n})\in\Ups\times\Ome$. Thus
+ %\newpage
+ \begin{align*}
+ \log f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})&\ts=\sum_j[Y_j\log q_j+(1-Y_j)\log(1-q_j)]\\
+ &\ts\ \ \ +\sum_{\{i,j|n_{ij}=0\}}[Z_{ij}\log r_{ij}+(1-Z_{ij})\log(1-r_{ij})];\\
+ \nabla_\ome\log  f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})&\ts=\sum_j\frac{(Y_j-q_j)}{q_j(1-q_j)}\nabla_\ome q_j+\sum_{\{i,j|n_{ij}=0\}}\frac{(Z_{ij}-r_{ij})}{r_{ij}(1-r_{ij})}\nabla_\ome r_{ij};\\
+%\nabla_\ome^2\log f_\ome(\mathbf{Y}\,|\,\mathbf{m})&\ts=\sum_j\frac{p_j(1-p_j)(Y_j-p_j)\nabla_\ome^2p_j-\nabla_\ome p_j(\nabla_\ome p_j)'-(Y_j-p_j)\nabla_\ome p_j[\nabla_\ome(p_j(1-p_j)]'}{p_j^2(1-p_j)^2}\\
+\nabla_\ome^2\log  f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})&\ts=\sum_j\left[\frac{(Y_j-q_j)\nabla_\ome^2q_j-(\nabla_\ome q_j)(\nabla_\ome q_j)'}{q_j(1-q_j)}-\frac{(Y_j-q_j)(\nabla_\ome q_j)[\nabla_\ome(q_j(1-q_j))]'}{q_j^2(1-q_j)^2}\right]\\
++&\ts\sum\limits_{\{i,j|n_{ij}=0\}}\left[\frac{(Z_{ij}-r_{ij})\nabla_\ome^2r_{ij}-(\nabla_\ome r_{ij})(\nabla_\ome r_{ij})'}{r_{ij}(1-r_{ij})}-\frac{(Z_{ij}-r_{ij})(\nabla_\ome r_{ij})[\nabla_\ome(r_{ij}(1-r_{ij}))]'}{r_{ij}^2(1-r_{ij})^2}\right],
+\end{align*}
+where $r_{ij}\equiv r(t_i;y_j,n_{ij})$. Therefore
+\begin{align}
+\E_\ome[\nabla_\ome^2\log  f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})\,|\,{\bf n}]
+&\ts=-\sum_j\frac{(\nabla_\ome q_j)(\nabla_\ome q_j)'}{q_j(1-q_j)}-\sum\limits_{\{i,j|n_{ij}=0\}}\E_\ome\Big[\frac{(\nabla_\ome r_{ij})(\nabla_\ome r_{ij})'}{r_{ij}(1-r_{ij})}\,\Big|\,{\bf n}\Big]\nonumber\\
+&\ts=\sum_j(\nabla_\ome\log q_j)[\nabla_\ome\log(1-q_j)]'\label{twosums}\\
++&\ts\sum\limits_{\{i,j|n_{ij}=0\}}\E_\ome\Big\{(\nabla_\ome\log r(t_i;Y_j,n_{ij]}))[\nabla_\ome\log(1-r(t_i;Y_j,n_{ij}))]'\,\Big|\,{\bf n}\Big\},\nonumber
+\end{align}
+where we used the facts that for any functions $h({\bf n})$ and $h({\bf y},{\bf n})$,
+\begin{align*}
+\E_\ome[(Y_j-q_j)h({\bf n})\,|\,{\bf n}]&=h({\bf n})E_\ome[(Y_j-q_j)\,|\,{\bf n}]=0,\\
+\E_\ome[(Z_{ij}-r_{ij})h({\bf y},{\bf n})\,|\,{\bf n}]&=\E_\ome\{h({\bf y},{\bf n})\E_\ome[Z_{ij}-r_{ij}\,|\,{\bf y}, {\bf n}]\,|\,{\bf n}\}=0.
+\end{align*}
+
+Now note that 
+\begin{align*}
+\log q_j&\ts=\log \pi-t_j^{\ne}\mu+n_j\log\mu+\sum_i1_{ij}^=\log[\eps(e^{-t_i\mu}-1)+1]-\log\psi_j;\\
+\psi_j:&\ts=\pi e^{-t_j^{\ne}\mu}\mu^{n_j}\prod\limits_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}+(1-\pi) e^{-t_j^{\ne}\nu}\nu^{n_j}\prod\limits_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=};\\
+\frac{\prtl\psi_j}{\prtl\pi}&\ts= e^{-t_j^{\ne}\mu}\mu^{n_j}\prod\limits_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}
+-e^{-t_j^{\ne}\nu}\nu^{n_j}\prod\limits_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=},\\
+\frac{\prtl\psi_j}{\prtl\eps}&=\pi e^{-t_j^{\ne}\mu}\mu^{n_j}\sum\limits_i\frac{1_{ij}^=(e^{-t_i\mu}-1)}{\eps(e^{-t_i\mu}-1)+1}\prod\limits_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}
+\\
+&\ \ \ +(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}\sum\limits_i\frac{1_{ij}^=(e^{-t_i\nu}-1)}{\eps(e^{-t_i\nu}-1)+1}\prod\limits_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=},%\\
+\end{align*}
+\begin{align*}
+\frac{\prtl\psi_j}{\prtl\mu}&=\pi e^{-t_j^{\ne}\mu}\mu^{n_j}\prod_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}\left[\frac{n_j}{\mu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\mu}}{\eps(e^{-t_i\mu}-1)+1}\right],\\
+\frac{\prtl\psi_j}{\prtl\nu}&=(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}\prod_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=}\left[\frac{n_j}{\nu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\nu}}{\eps(e^{-t_i\nu}-1)+1}\right];
+\end{align*}
+from which it can be shown that
+\begin{align*}
+\frac{\prtl\log q_j}{\prtl\pi}&=\frac{e^{-t_j^{\ne}\nu}\nu^{n_j}}{\pi\psi_j}\prod\limits_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=},\\
+\frac{\prtl\log q_j}{\prtl\eps}&=\frac{(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}}{\psi_j}\prod_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=}\sum\limits_i\frac{1_{ij}^=(e^{-t_i\mu}-e^{-t_i\nu})}{[\eps(e^{-t_i\mu}-1)+1][\eps(e^{-t_i\mu}-1)+1]},\\
+%&\ \ \ \ \ \ \ \ \ \ \ -\left.e^{-t_j^{\ne}\mu}\mu^{n_j}\sum\limits_i\frac{1_{ij}^=(e^{-t_i\nu}-1)}{\eps(e^{-t_i\nu}-1)+1}\cdot\prod_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}\right\},\\
+\frac{\prtl\log q_j}{\prtl\mu}&=\frac{(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}}{\psi_j} \prod_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=}\left[\frac{n_j}{\mu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\mu}}{\eps(e^{-t_i\mu}-1)+1}\right],\\
+\frac{\prtl\log q_j}{\prtl\nu}&=-\frac{(1-\pi)e^{-t_j^{\ne}\nu}\nu^{n_j}}{\psi_j} \prod_i[\eps(e^{-t_i\nu}-1)+1]^{1_{ij}^=}\left[\frac{n_j}{\nu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\nu}}{\eps(e^{-t_i\nu}-1)+1}\right].
+\end{align*}
+These four partial derivatives determine the $4\times1$ column vector $\nabla_\ome\log q_j$.  Furthermore,
+\begin{align*}
+\nabla_\ome\log(1-q_j)&=-\frac{q_j}{1-q_j}\nabla_\ome\log q_j\\
+&=-\frac{\pi}{1-\pi}\frac{e^{-t_j^{\ne}\mu}\mu^{n_j}\prod_i[\eps(e^{-t_i\mu}-1)+1]^{1_{ij}^=}}{ e^{-t_j^{\ne}\nu}\nu^{n_j}\prod_i[\eps( e^{-t_i\nu}-1)+1]^{1_{ij}^=}} \nabla_\ome\log q_j,
+\end{align*}
+hence
+\begin{align*}
+&(\nabla_\ome\log q_j)[\nabla_\ome\log(1-q_j)]'\\
+=&-\frac{\pi(1-\pi)e^{-t_j^{\ne}(\mu+\nu)}(\mu\nu)^{n_j}\prod_i\{[\eps(e^{-t_i\mu}-1)+1][\eps(e^{-t_i\nu}-1)+1]\}^{1_{ij}^=}}{\psi_j^2}\phi_j\phi_j',
+\end{align*}
+where
+\begin{align*}
+\phi_j\equiv\phi_j(\ome;{\bf t};{\bf n}_j):&=
+\begin{pmatrix}
+\frac{1}{\pi(1-\pi)}\\ \\\sum\limits_i\frac{1_{ij}^=(e^{-t_i\mu}-e^{-t_i\nu})}{[\eps(e^{-t_i\mu}-1)+1][\eps(e^{-t_i\nu}-1)+1]}\\ \\\left[\frac{n_j}{\mu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\mu}}{\eps(e^{-t_i\mu}-1)+1}\right]\\ \\\left[\frac{n_j}{\nu}-t_j^{\ne}-\eps\sum\limits_i\frac{1_{ij}^=t_ie^{-t_i\nu}}{\eps(e^{-t_i\nu}-1)+1}\right]
+\end{pmatrix}.
+\end{align*}
+
+Next, for $n_{ij}=0$, 
+\begin{align*}
+r(t_i;1,0)&=\frac{\eps e^{-t_i\mu}}{\eps(e^{-t_i\mu}-1)+1},\\
+r(t_i;0,0)&=\frac{\eps e^{-t_i\nu}}{\eps(e^{-t_i\nu}-1)+1};\\
+\log r(t_i;1,0)&=\log \eps-t_i\mu-\log[\eps(e^{-t_i\mu}-1)+1],\\
+\log(1- r(t_i;1,0))&=\log(1-\eps)-\log[\eps(e^{-t_i\mu}-1)+1];\\
+\log r(t_i;0,0)&=\log \eps-t_i\nu-\log[\eps(e^{-t_i\nu}-1)+1],\\
+\log(1- r(t_i;0,0))&=\log(1-\eps)-\log[\eps(e^{-t_i\nu}-1)+1];
+\end{align*}
+so with $\ome=(\pi,\eps,\mu,\nu)$, we find that
+\begin{align*}
+\nabla_\ome\log r(t_i;1,0)&\ts=\left(0,\;\frac{1}{\eps[\eps(e^{-t_i\mu}-1)+1]},\;\frac{-(1-\eps)t_i}{\eps(e^{-t_i\mu}-1)+1},\;0\right)',\\
+\nabla_\ome\log(1- r(t_i;1,0))&\ts=\left(0,\;\frac{-e^{-t_i\mu}}{(1-\eps)[\eps(e^{-t_i\mu}-1)+1]},\;\frac{\eps t_ie^{-t_i\mu}}{\eps(e^{-t_i\mu}-1)+1},\;0\right)',\\
+\nabla_\ome\log r(t_i;0,0)&\ts=\left(0,\;\frac{1}{\eps[\eps(e^{-t_i\nu}-1)+1]},\;0,\;\frac{-(1-\eps)t_i}{\eps(e^{-t_i\nu}-1)+1}\right)',\\
+\nabla_\ome\log(1- r(t_i;0,0))&\ts=\left(0,\;\frac{-e^{-t_i\nu}}{(1-\eps)[\eps(e^{-t_i\nu}-1)+1]},\;0,\;\frac{\eps t_ie^{-t_i\nu}}{\eps(e^{-t_i\nu}-1)+1}\right)'.
+\end{align*}
+Thus 
+\begin{align*}
+&\E_\ome\Big\{(\nabla_\ome\log r(t_i;Y_j,0))[\nabla_\ome\log(1-r(t_i;Y_j,0))]'\,\Big|\,{\bf n}\Big\}\\
+=&\ \ \ (\nabla_\ome\log r(t_i;1,0))[\nabla_\ome\log(1-r(t_i;1,0))]'q_j\\
+&\hskip0pt+(\nabla_\ome\log r(t_i;0,0))[\nabla_\ome\log(1-r(t_i;0,0))]'(1-q_j)\}\\
+=&-\frac{\eps(1-\eps)e^{-t_i\mu}}{[\eps(e^{-t_i\mu}-1)+1]^2}\,\chi_i(1)\chi_i(1)'q_j\\
+ &-\frac{\eps(1-\eps)e^{-t_i\nu}}{[\eps(e^{-t_i\nu}-1)+1]^2}\,\chi_i(0)\chi_i(0)'(1-q_j);\\
+%\end{align*}
+%where
+%\begin{align*}
+\ts\chi_i(1)\equiv\chi(\eps;t_i;1):=&\ts\left(0,\ \frac{1}{\eps(1-\eps)},\ t_i,\ 0\right)',\\
+\ts\chi_i(0)\equiv\chi(\eps;t_i;0):=&\ts\left(0,\ \frac{1}{\eps(1-\eps)},\ 0,\ t_i\right)'.
+\end{align*}
+Therefore from \eqref{twosums}, the second term in \eqref{00Y1} is given by 
+\begin{align}
+&\E_\ome[\nabla_\ome^2\log  f_\ome(\mathbf{Y},\mathbf{Z}\,|\,\mathbf{n})\,|\,{\bf n}]\label{endInfo}\\
+=&\ts-\pi(1-\pi)\sum_j\frac{e^{-t_j^{\ne}(\mu+\nu)}(\mu\nu)^{n_j}\prod_i\{[\eps(e^{-t_i\mu}-1)+1][\eps(e^{-t_i\nu}-1)+1]\}^{1_{ij}^=}}{\psi_j^2}\phi_j\phi_j'\nonumber\\
+&\ts-\eps(1-\eps)\sum\limits_{i,j}1_{ij}^=\bigg\{\frac{e^{-t_i\mu}}{[\eps(e^{-t_i\mu}-1)+1]^2}\,\chi_i(1)\chi_i(1)'q_j+\frac{e^{-t_i\nu}}{[\eps(e^{-t_i\nu}-1)+1]^2}\,\chi_i(0)\chi_i(0)'(1-q_j)\bigg\}.\nonumber
+\end{align}
+{\it Together with \eqref{ZZ7}, this explicitly determines the observed information matrix $I_{\bf n}(\ome)$ in \eqref{00YZ}-\eqref{00Y1}.}
+
+%E_\ome\Big\{(\nabla_\ome\log r(t_i;Y_j,0))[\nabla_\ome\log(1-r(t_i;Y_j,0))]'\,\Big|\,{\bf n}\Big\}\\
+%=&\sum\limits_{\{i,j,k| =0\}}\Big\{(\nabla_\ome\log r(t_i;1,0))[\nabla_\ome\log(1-r(t_i;1,0))]'q_j({\bf n}_j)\\
+%&\hskip50pt+(\nabla_\ome\log r(t_i;0,0))[\nabla_\ome\log(1-r(t_i;0,0))]'(1-q_j({\bf n}_j))\Big\}
+
+
+ Now estimate $I_{\bf n}(\ome)$ in the normal approximation
+ \begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_4[0,\,KI^{-1}_{\bf n}(\ome)]\nonumber%\label{U0A}
+\end{align}
+by replacing $\ome$ in $I_{\bf n}(\ome)$ by its MLE $\^\ome\equiv(\^\pi,\^\eps,\^\mu,\^\nu)$, obtained via the EM algorithm,  to obtain
+ \begin{align}
+\sqrt{K}(\^\ome-\ome)&\approx N_4[0,\,KI^{-1}_{\bf n}(\^\ome)],\label{UA}
+\end{align}
+where $K=IJ$. This requires replacing $\pi,\eps,\mu,\nu$ by $\^\pi,\^\eps,\^\mu,\^\nu$ wherever the former appear in the entries of $I_{\bf n}(\^\ome)$, including in $q_j$, $\rho$, $\psi_j$, $\phi_j$, and $\chi_i$. For large $K$ the $4\times4$ matrix  $I_{\bf n}(\^\ome)$ is positive definite, hence invertible.
+
+Lastly, an approximate confidence interval for $\theta\equiv\mu/\nu\equiv g(\ome)$ is obtained from \eqref{UA} by propagation of error. For $\^\theta=\^\mu/\^\nu$,
+\begin{align}
+\sqrt{K}(\^\theta-\theta)&\ts\approx N[0,\,K(\nabla_\ome g(\ome)|_{\^\ome}])'I^{-1}_{\bf n}(\^\ome)\nabla_\ome g(\^\ome)|_{\^\ome}]\nonumber\\%\label{Z1}\\
+&\ts=N\left[0,\,K\left(\frac{\prtl g}{\prtl\pi}\Big|_{\^\ome},\frac{\prtl g}{\prtl\eps}\Big|_{\^\ome},\frac{\prtl g}{\prtl\mu}\Big|_{\^\ome},\frac{\prtl g}{\prtl\nu}\Big|_{\^\ome}\right)I^{-1}_{\bf n}(\^\ome)\left(\frac{\prtl g}{\prtl\pi}\Big|_{\^\ome},\frac{\prtl g}{\prtl\eps}\Big|_{\^\ome},\frac{\prtl g}{\prtl\mu}\Big|_{\^\ome},\frac{\prtl g}{\prtl\nu}\Big|_{\^\ome}\right)'\,\right]\nonumber\\%\\
+&\ts=N\left[0,\,K\left(0,0,\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)I^{-1}_{\bf n}(\^\ome)\left(0,0,\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)'\,\right]\nonumber\\%\label{Z3}\\
+&\ts=N\left[0,\,K\left(\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)(I_{22}-I_{21}I_{11}^{-1}I_{12})^{-1}\left(\frac{1}{\^\nu},\frac{-\^\mu}{\^\nu^2}\right)'\,\right]\nonumber\\%\label{Z3}\\
+&\equiv N(0,\^\tau^2),\label{Z41}
+\end{align}
+where $I_{\bf n}(\^\ome)=\begin{pmatrix}I_{11}&I_{12}\\I_{21}&I_{22}\end{pmatrix}$ is the partitioning of 
+$I_{\bf n}(\^\ome)$ into $2\times2$ blocks. Thus computation of $\^\tau^2$ only requires the inversion of two $2\times2$ matrices. This yields the following approximate $(1-\alp)$ confidence interval for $\theta$:
+\begin{align}
+\ts\^\theta\pm\frac{\^\tau}{\sqrt{K}}z_{\alp/2}.\label{VD}
+\end{align}
+%\vskip4pt
+
+\nid {\bf 4.2. Bayesian analysis.} Rewrite the joint pmf \eqref{big2} of the complete (unobserved and observed) data $(\mathbf{Y},\mathbf{Z},\mathbf{N})$ in terms of the  parameters $\pi,\eps,\theta,\lam$:  
+\begin{align}
+ f(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\pi,\eps,\theta,\lam)
+ &=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[\eps^{\bar z}(1-\eps)^{1-\bar z}\right]^K\nonumber\\
+ &\ \ \ \cdot\left[e^{-\overline{tyz}\theta\lam}(\theta\lam)^{\overline{ny}}e^{-\overline{t(1-y)z}\,\lam}\lam^{\overline{n(1-y)}}\,\right]^K\cdot\Xi_\mathbf{t}(\mathbf{z},\mathbf{n})\nonumber\\
+ % &=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[\eps^{\bar z}(1-\eps)^{1-\bar z}\right]^n\nonumber\\
+% &\ \ \ \cdot e^{-n[\overline{tyz}\theta+\overline{t(1-y)z}]\,\lam}\lam^{n[\overline{nyz}+\overline{n(1-y)z}]}\cdot\theta^{n\overline{nyz}}\cdot\Xi_\mathbf{t}(\mathbf{z},\mathbf{n})\nonumber\\
+ &=\left[\pi^{\bar y}(1-\pi)^{1-\bar y}\right]^J\left[\eps^{\bar z}(1-\eps)^{1-\bar z}\right]^K\label{big3}\\
+ &\ \ \ \cdot e^{-K[\overline{tyz}\theta+\overline{t(1-y)z}]\,\lam}\lam^{n}\cdot\theta^{K\overline{ny}}\cdot\Xi_\mathbf{t}(\mathbf{z},\mathbf{n}),\nonumber
+\end{align}
+%where $n({\bf n})=\sum\nolimits_{i,j,k}n_{ijk}$.
+%$n({\bf n})\!=\!\sum_{i,j,k} n_{ijk}$, 
+where $n=\sum_{i,j}n_{ij}$. If we assume the gamma prior density $\gam_\del(\lam)$ for $\lam$, {\it any} proper prior density $\var(\pi)$ for $\pi\in(0,\t12)$, and the beta$(\eta,\kap)$ prior density
+\begin{align*}
+\xi_{\eta,\kap}(\eps):=\frac{\Gam(\eta+\kap)}{\Gam(\eta)\Gam(\kap)}\eps^{\eta-1}(1-\eps)^{\kap-1}1_{(0,1)}(\eps)
+\end{align*}
+for $\eps$, where $\eta,\kap>0$, then from \eqref{big3} the integrated joint pmf of $(\mathbf{Y}, \mathbf{Z},\mathbf{N})$ on $\Ups\times\Ome$ is 
+\begin{align}
+f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta) &=\int_0^{1/2}\int_0^1\int_0^\infty  f(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\pi,\eps, \theta,\lam)\var(\pi)\xi_{\eta,\kap}(\eps)\gam_\del(\lam)d\pi d\eps d\lam\nonumber\\
+%&\nonumber\\
+ %&=\frac{\Gam(\gam+J\bar y)\Gam[\del+J(1-\bar y)]}{\Gam(\gam)\Gam(\del)}\cdot\frac{\Gam(\eta+n\bar z)\Gam[\kap+n(1-\bar z)]}{\Gam(\eta)\Gam(\kap)}\nonumber\\
+ &=g_\var(J\bar y)h_{\eta,\kap}(K\bar z)\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\frac{\theta^{v\overline{ny}}1_\Ups({\bf y})1_\Ome(\mathbf{z},\mathbf{n})}{\{K[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1\}^{n+\del}} ,\label{04B}
+ \end{align}
+%&=c(\bar z;\eta,\kap)\begin{pmatrix}n({\bf n})\\{\bf n}\end{pmatrix}\prod_{i,j,k}\left(t_i\theta^{y_j}\right)^{n_{ijk}}\cdot\frac{1}{[\xi(\theta)]^{n({\bf n})+1}}\label{big4}%\nonumber
+ %for $({\bf y}, {\bf z},{\bf n})\in\Ome\equiv\Ome_{\bf Y}\times\Ome_{{\bf Z},{\bf N}}$ and $0$ otherwise, 
+ (compare to \eqref{04A}), where for $0\le j\le J$ and $0\le \ell\le K$,
+ \begin{align}
+%c(\bar y,\bar z)\equiv c(\bar y,\bar z;\gam,\del,\eta,\kap):&=\frac{\Gam(\gam+J\bar y)\Gam[\del+J(1-\bar y)]}{\Gam(\gam)\Gam(\del)}\cdot\frac{\Gam(\eta+n\bar z)\Gam[\kap+n(1-\bar z)]}{\Gam(\eta)\Gam(\kap)},\nonumber\\
+g_\var(j)&=\int_0^{1/2}\pi^{j}(1-\pi)^{J-j}\var(\pi)d\pi,\nonumber\\
+h_{\eta,\kap}(\ell)&=\frac{\Gam(\eta+\kap)\Gam(\eta+\ell)\Gam[\kap+K-\ell]}{\Gam(\eta)\Gam(\kap)\Gam(\eta+\kap+K)}.\nonumber
+%\xi(\theta)\equiv\xi(\theta;{\bf t};{\bf y},{\bf z}):&= n[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1.\nonumber%
+\end{align}
+%COMMENT
+\begin{comment}
+For later use, it follows from \eqref{04B} that HEREE
+\begin{align}
+ f_{\var,\xi,\del}(\mathbf{y},\mathbf{z}\,|\,\theta)&=\sum_{{\bf n}\in \mathbf{Z}_+^{\cal K}}f_{\var,\xi,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta)\label{fndel2}\\
+ &=g_\var(J\bar y)\sum_{{\bf n}\in \mathbf{Z}_+^{\cal K}}\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\frac{\theta^{K\overline{ny}}}{\{K[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1\}^{n+\del}}\cdot 1_\Ups({\bf y})1_\Ome(\mathbf{z},\mathbf{n})\nonumber\\
+ &=g_\var(J\bar y),\nonumber
+\end{align}
+where we use the fact that $f_\del({\bf m}\,|\,{\bf y};\theta)$ in \eqref{B1} is a pmf so sums to 1, then replace $r$ by $\bar y$, $m_S$ by $K\overline{my}$, and note that $K\overline{my}+K\overline{m(1-y)}=m=m_S+m_T$.
+\end{comment}
+%END COMMENT
+
+For $\sig\subseteq{\cal J}$ and $\tau\subseteq{\cal K}$ let $1_\sig$ and $1_\tau$ denote their indicator functions. From \eqref{04B}, the integrated joint pmf $f_{\var,\eta,\kap,\del}(\mathbf{z},\mathbf{n}\,|\,\theta)$ of $({\bf Z},\mathbf{N})$  can be expressed explicitly as follows: %_{\eta,\kap}
+\begin{align}%\prod_{i,j,k}0^{n_{ijk}(1-z_{ijk})}
+&\ f_{\var,\eta,\kap,\del}(\mathbf{z},\mathbf{n}\,|\,\theta)\nonumber\\
+=&\sum\nolimits_{{\bf y}\in\Ups}f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta)\nonumber\\
+=&\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\sum_{j=0}^J\sum_{\{{\bf y}|J\bar y=j\}}\frac{g_\var(J\bar y)h_{\eta,\kap}(K\bar z)\theta^{K\overline{ny}}}{\{K[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1\}^{n+\del}}1_\Ome(\mathbf{z},\mathbf{n})\nonumber\\
+%=&\begin{pmatrix}n({\bf n})\\{\bf n}\end{pmatrix}{\ts\big(\prod\limits_it_i^{n_i}\big)}\sum_{\ell=0}^Jg_\var(\ell)\left\langle\sum_{\substack{\sig\subseteq{\cal J},\\|\sig|=\ell}}^{}\frac{\theta^{\sum_{j}n_{j}1_\sig(j)}}{\{(\theta-1)\sum_{i,j,k}t_i1_\sig(j)z_{ijk}+ \sum_{i,j,k}t_iz_{ijk}+1\}^{n({\bf n})+1}}\right\rangle h_{\eta,\kap}(n\bar z)1_\Ome(\mathbf{z},\mathbf{n})\nonumber\\
+=&\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\sum_{j=0}^Jg_\var(j)\left\langle\sum_{\sig\subseteq{\cal J},\,|\sig|=j}\frac{\theta^{n_\sig}}{\{(tz)_\sig(\theta-1)+ (tz)+1\}^{n+\del}}\right\rangle h_{\eta,\kap}(K\bar z)1_\Ome(\mathbf{z},\mathbf{n}),\label{elemsymm3}
+%&=\begin{pmatrix}m({\bf m})\\{\bf m}\end{pmatrix}\left(\prod_it_i^{m_i}\right)J^{m({\bf m})+1}\sum_{\ell=0}^J\frac{g_\var(\ell)s_\ell({\bf m};\theta)}{\{n\bar t[\ell\theta+(J-\ell)]+J\}^{m({\bf m})+1}},\label{elemsymm1}
+\end{align}
+where
+\begin{align*}
+n_\sig&\ts=\sum_jn_j1_\sig(j),\\
+%(tz)_j&=\sum_{i,j,k}t_i1_\sig(j)z_{ijk},\\
+(tz)_\sig&\ts=\sum_{i,j}t_i1_\sig(j)z_{ij}\\
+(tz)&\ts=\sum_{i,j}t_iz_{ij}=K\,\overline{tz},
+\end{align*}
+and $n_\nul=(tz)_\nul=0$. 
+The integrated likelihood $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$ of $\mathbf{N}$ itself can be obtained explicitly from \eqref{04B} as follows. Setting $\Ome_{\bf n}=\{{\bf z}|({\bf z},{\bf n})\in\Ome\}$,
+\begin{align}%\prod_{i,j,k}0^{n_{ijk}(1-z_{ijk})}%
+%\sum_{\substack{\sig\subseteq\{1,\dots,J\}\\|\sig|=\ell}}^{}
+&\ f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)\nonumber\\
+=&\sum\nolimits_{{\bf y}\in\Ups}\sum\nolimits_{{\bf z}\in\Ome_{\bf n}}f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta)\nonumber\\
+=&\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\sum_{j=0}^J\sum_{\ell=0}^K\sum_{\{{\bf y}|J\bar y=j\}}\sum_{\{{\bf z}|v\bar z=\ell\}}\frac{g_\var(J\bar y)h_{\eta,\kap}(K\bar z)\theta^{K\overline{ny}}1_{\Ome_{\bf n}}({\bf z})}{\{K[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1\}^{n+\del}}\nonumber\\
+%=&\begin{pmatrix}n({\bf n})\\{\bf n}\end{pmatrix}\!{\ts\big(\prod\limits_it_i^{n_i}\big)}\sum_{\ell=0}^J\sum_{q=0}^ng_\var(\ell)h_{\eta,\kap}(q)\left\langle\sum\limits_{\substack{\sig\subseteq{\cal J},\\|\sig|=\ell}}^{}\,\sum\limits_{\substack{\tau\subseteq\cal I\times{\cal J}\times{\cal K},\\|\tau|=q}}^{}\!\frac{\theta^{\sum_jn_j1_\sig(j)}1_{\Ome_{\bf n}}(1_\tau)}{\{(\theta\!-\!1)\!\sum\limits_{i,j,k}t_iy_jz_{ijk}\!+\!\sum\limits_{i,j,k}t_iz_{ijk}\!+\!1\}^{n({\bf n})\!+\!1}}\right\rangle\nonumber\\
+&=\frac{\Gam(n+\del)\left(\prod_it_i^{n_i}\right)}{\Gam(\del){\bf n}!}\sum\limits_{j=0}^J\sum\limits_{\ell=0}^Kg_\var(j)h_{\eta,\kap}(\ell)\left\langle\sum\limits_{\sig\subseteq{\cal J},\,|\sig|=j}\theta^{n_\sig}\Del_{\ell,\sig}({\bf n}\,|\,\theta)\right\rangle,\label{elemsymm4}
+\end{align}
+%$\sum_{\substack{\{{\bf z}=1_\tau|\\ \tau\subseteq{\cal I}\times{\cal J}\times{\cal K},\\ |\tau|=q\}}}^{}$
+where
+\begin{align}
+n_\sig&=\sum\nolimits_jn_j1_\sig(j),\label{nsig}\\
+\Del_{\ell,\sig}({\bf n}\,|\,\theta)&=\sum\limits_{\tau\subseteq{\cal K},\,|\tau|=\ell}\frac{1_{\Ome_{\bf n}}(1_\tau)}{\{t_{\sig,\tau}(\theta-1)+ t_\tau+1\}^{n+\del}},\label{Del}\\
+t_{\sig,\tau}&=\sum\nolimits_{i,j}t_i1_\sig(j)1_\tau(i,j),\nonumber\\
+t_\tau&=\sum\nolimits_{i,j}t_i1_\tau(i,j),\nonumber
+\end{align}
+and $t_{\nul,\tau}=t_{\sig,\nul}=t_\nul=0$. 
+
+Because $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$ is not an exponential family, no conjugate prior is available. However, for any prior density $\phi(\theta)$ the posterior pdf
+\begin{equation}\label{post2}
+f_{\var,\eta,\kap,\del}(\theta\,|\,\mathbf{n})\propto f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)\phi(\theta),
+\end{equation}
+ which can be obtained  explicitly\footnote{In principle. There are a total of $2^J$ subsets $\sig\subseteq{\cal J}$ and $2^K$ subsets $\tau\subseteq{\cal K}$ that appear in the summations in \eqref{elemsymm4}, where $K=IJ$, so exact calculation of $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$ is infeasible if $K$ is large. Instead, Monte Carlo simulation over $(\sig,\tau)$ can be used to approximate $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$} via \eqref{elemsymm4}-\eqref{Del}.  Thus MCMC methods (Robert and Casella (2004)) can be used to simulate the posterior distribution of $\theta$ and thereby obtain the corresponding Bayes estimator and posterior confidence intervals.
+
+Alternatively, we can adopt an empirical Bayes approach as in Section 2.2.  For the data-based prior pdf $\phi_{\alp,\bet;K\overline{tz},\bar r}(\theta)$ (cf. \eqref{D1}), where $\bar r=\frac{\overline{tyz}}{\overline{tz}}$, it follows from \eqref{04B} and \eqref{D1} that the integrated posterior pdf of $\theta$, given the complete data $({\bf y}, ({\bf z},{\bf n}))\in\Ups\times\Ome$,  satisfies
+\begin{align}
+f_{\var,\eta,\kap,\del}(\theta\,|\,\mathbf{y},\mathbf{z},\mathbf{n})
+&\propto\ f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta)\phi_{\alp,\bet;K\overline{tz},\bar r}(\theta)\nonumber\\
+&\propto\ \frac{\theta^{K\overline{ny}+\alp-1}}{\{K[\,\overline{tyz}\theta+\overline{t(1-y)z}\,]+1\}^{n+\alp+\bet+\del}} %\cdot1_\Ups({\bf y})1_\Ome(\mathbf{z},\mathbf{n}),
+\nonumber\\%\label{04AY}
+&\propto \phi_{K\overline{ny}+\alp,K\overline{n(1-y)}+\bet+\del;K\overline{tz},\bar r}(\theta),\label{04AY}%\cdot1_\Ups({\bf y})1_\Ome(\mathbf{z},\mathbf{n})
+\end{align}
+since $n=K\overline{ny}+K\overline{n(1-y)}$; note that \eqref{04AY} does not depend on $\var,\eta,\kap$.
+%COMMENT
+\begin{comment}
+Here \eqref{fmytheta} and \eqref{fmmytheta} apply with $r$ replaced by $\bar y$, so the multinomial/binomial/geometric representations \eqref{A1}-\eqref{A3} and \eqref{C1}-\eqref{C3} conditional on ${\bf Y}$  continue to hold with $r$ replaced by $\bar y$ in ${\bf p}(\theta)$, $\rho(\theta)$, $\psi(\theta)$, and $\gam(\theta)$.  Of course $(M_S,M_T)$ is unobserved so not sufficient  for $\theta$.
+\end{comment}
+%ENDCOMMENT
+Here $K\overline{ny}$, $K\overline{n(1-y)}$, $K\overline{tz}$, $K\overline{tyz}$, and thus $\bar r$, are unobserved, but we can impute their values via the above-discussed EM algorithm as follows:
+
+The EM algorithm will output
+\begin{align}
+K\widehat{\overline{ny}}&\ts=\lim_{l\to\infty}\sum_jn_j(\widehat{y_j})_{l+1},\label{aa}\\
+K\widehat{\overline{n(1-y)}}&\ts=n-K\widehat{\overline{ny}},\label{bb}\\
+K\widehat{\overline{tz}}&\ts=\lim_{l\to\infty}\sum_{i,j}t_i(\widehat{z_{ij}})_{l+1},\label{cc}\\
+K\widehat{\overline{tyz}}&\ts=\lim_{l\to\infty}\sum_{i,j}t_i(\widehat{y_jz_{ij}})_{l+1},\label{dd}\\
+\^{\bar r}&\ts=\frac{\widehat{\overline{tyz}}}{\widehat{\overline{tz}}},\label{ee}
+\end{align}
+where $(\widehat{y_j})_{l+1}$, $(\widehat{z_{ij}})_{l+1}$, and $(\widehat{y_jz_{ij}})_{l+1}$ appear in \S3.1.
+%\eqref{hatyjell1}-\eqref{hatyjell3}. 
+Now refer to \eqref{1F}-\eqref{D4} and  replace  $r$ by $\^{\bar r}$, $m_S$ by $K\widehat{\overline{ny}}$, and $m_T$ by $K\widehat{\overline{n(1-y)}}$, thus we obtain the empirical Bayes integrated posterior density 
+\begin{align}
+f_{\del,\alp,\bet}(\theta\,|\,\^{\bf y}, \^{\bf z}, {\bf n}):=\phi_{K\widehat{\overline{ny}}+\alp,\,K\widehat{\overline{n(1-y)}}+\bet+\del;\,K\widehat{\overline{tz}},\,\^{\bar r}}(\theta)\label{3BW}
+\end{align}
+%for $({\bf y}, ({\bf z},{\bf n}))\in\Ups\times\Ome$, 
+and empirical Bayes estimator\footnote{Note that the imputed values of $\{z_{ij}\}$ occur in $\^\theta_{\del,\alp,\bet}^\mathrm{EBZIP}$ through $K\widehat{\overline{ny}}$ and $K\widehat{\overline{n(1-y)}}$ as well as through $\^{\bar r}$; see  \eqref{aa}-\eqref{bb}
+%, \eqref{hatyjell1}, 
+and \eqref{B6}-\eqref{zC6}.}
+\begin{align}
+\^\theta_{\del,\alp,\bet}^\mathrm{EBZIP}:=\ts\frac{(1-\^{\bar r})(K\,\widehat{\overline{ny}}+\alp)}{\^{\bar r}\left(K\,\widehat{\overline{n(1-y)}}+\bet+\del-1\right)},\label{D5W}
+\end{align}
+provided that $K\,\widehat{\overline{n(1-y)}}+\bet+\del>1$. Empirical Bayes integrated posterior confidence intervals for $\theta$ can be obtained from \eqref{3BW}.
+\vskip4pt
+
+\nid {\bf Remark 3.1.} Taking $\alp=\bet=0$ yields the prior density $\phi_{0,0;\,K\overline{tz},\^{\bar r}}(\theta)=\theta^{-1}$. This is no longer data-based but is improper, hence cannot reflect actual prior knowledge about $\theta$. However, proceeding formally from \eqref{3BW} and \eqref{D5W}, we obtain the posterior density 
+\begin{align}
+f_{\del,0,0}(\theta\,|\,\^{\bf y}, \^{\bf z},{\bf n}):=\phi_{K\widehat{\overline{ny}},\,K\widehat{\overline{n(1-y)}}+\del;\,K\widehat{\overline{ny}},\,\^{\bar r}}(\theta),\label{3BBG}
+\end{align}
+which is a proper density if $K\widehat{\overline{ny}}>0$, 
+and from this the estimator
+\begin{align}
+\^\theta_{\del,0,0}^{\mathrm{EBZIP}}:=\ts\frac{(1-\^{\bar r})(K\,\widehat{\overline{ny}})}{\^{\bar r}\left(K\,\widehat{\overline{n(1-y)}}+\del-1\right)},\label{D556}
+\end{align}
+valid if $K\widehat{\overline{n(1-y)}}+\del>1$, and which may have desirable frequentist properties.\hfill$\square$
+\vskip4pt
+
+%\nid{\bf CUTTT?Remark 3.2.} Direct determination of the MILE of $\theta$ based on $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$ in \eqref {elemsymm4} again appears problematic. As in Remark 2.2, one might attempt to obtain this MILE by applying the EM algorithm to $f_{\var,\eta,\kap,\del}(\mathbf{y},\mathbf{z},\mathbf{n}\,|\,\theta)$ in \eqref{04B} or to $f_{\var,\eta,\kap,\del}(\mathbf{z},\mathbf{n}\,|\,\theta)$ in \eqref{elemsymm3}, but again the E-steps are challenging.\hfill$\square$
+%\vskip4pt
+
+\nid{\bf Remark 3.2.} Note that the term $1_{\Ome_{\bf n}}(1_\tau)$ in $\Del_{\ell,\sig}({\bf n}\,|\,\theta)$ (cf. \eqref{Del}) depends on ${\bf n}$ only through
+\begin{align*}
+1-0^{\bf n}:&=(1-0^{n_{ij}}\,|\,(i,j)\in{\cal K})\\
+&=\{1_{ij}^{\ne}\,|\,(i,j)\in{\cal K}),
+\end{align*}
+i.e., the indicator function over ${\cal K}\equiv{\cal I}\times{\cal J}$ of the set of nonzero $n_{ij}$'s. Thus we obtain the following interesting fact from \eqref{elemsymm4}-\eqref{Del} and the Factorization Criterion: $(N_1,\dots,N_J;1-0^{\bf N})$ is a sufficient statistic\footnote{This holds for any choice of the prior pdf $\var(\pi)$.}
+%It will be of interest to determine if this holds for other choices oKf the priors $\xi
+%_{\eta,\kap}(\eps)$ and $\gam_\del(\lam)$.} 
+for $\theta$ based on the integrated likelihood $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$. 
+
+If we recall that in the non-ZIP model of Part I, $(M_1,\dots,M_J)$ is a sufficient statistic for $\theta$ based on the integrated likelihood $f_{\var,\del}(\mathbf{m}\,|\,\theta)$ for $\theta$ given in \eqref{elemsymm1}, then this shows that in the Bayesian framework, after integrating over the parameters $\pi,\eps,\lam$, the statistic $1-0^{\bf N}$ is the only additional information needed for inference about $\theta$ when zero-inflation is present. This raises the interesting  question of determining the joint distribution of $(N_1,\dots,N_J;1-0^{\bf N})$ based on the integrated likelihood $f_{\var,\eta,\kap,\del}(\mathbf{n}\,|\,\theta)$.\hfill$\square$
+\vskip6pt
+%\newpage
+
+
+\nid{\bf 4. Conditional ZIPM = ZTP?}  
+
+\nid Consider two subsets of the index set ${\cal K}$ and two subarrays of the data array ${\bf N}\equiv(N_{ij})$:
+\begin{align*}
+%\Ome_Z^=&=\{ijk\,|\, Z_{ijk}=0\},\\Ome_N^=&=\{ijk\,|\, N_{ijk}=0\},\\
+%\Ome_Z^=&=\{ijk\,|\, Z_{ijk}=0\},\\
+\Ome_Z^{\ne}&=\{(i,j)\,|\, Z_{ij}=1\},\\
+\Ome_N^{\ne}&=\{(i,j)\,|\, N_{ij}\ne0\},\\
+{\bf N}_Z^{\ne}&=(N_{ij}\,|\,Z_{ij}=1)=(M_{ij}\,|\,Z_{ij}=1),\\
+{\bf N}^{\ne}&=(N_{ij}\,|\,N_{ij}\ne0)=(M_{ij}\,|\,M_{ij}\ne0).
+\end{align*}
+Both $\Ome_Z^{\ne}$ and $\Ome_N^{\ne}$ are random subsets, $\Ome_Z^{\ne}$ is unobserved, $\Ome_N^{\ne}$ is observed, and $\Ome_N^{\ne}\subseteq\Ome_Z^{\ne}$, so ${\bf N}^{\ne}\subseteq{\bf N}_Z^{\ne}$. Because ${\bf M}$ is independent of ${\bf Z}$, ${\bf N}_Z^{\ne}$ is a random subarray of the i.n.i.d. array $(M_{ij})$, where membership in ${\bf N}_Z^{\ne}$ depends only on ${\bf Z}$. Thus ${\bf N}^{\ne}$ is also is a (smaller) random subarray of the i.n.i.d. array $(M_{ij})$, where membership in ${\bf N}^{\ne}$ depends on both ${\bf Z}$ and the events $\{M_{ij}\ne0\}$.
+
+The latter fact suggest a question: Is the conditional distribution of the two-component ZIPM rv
+%two-Poisson-component mixture rv $M_{ijk}$ given $M_{ijk}\ne0$ 
+ $N_{ij}$ given $N_{ij}\ne0$ the same as the distribution  of the mixture of the conditional distributions of the two Poisson  components given that each is non-zero? The latter conditional distribution is the well-known {\it zero-truncated Poisson (ZTP) distribution}, also called positive Poisson, which has been thoroughly studied (cf. Johnson, Kemp, and Kotz (2005)). The ZTP distribution model also is an exponential family, with pmf given by
+\begin{align}
+g_\lam(x)=\frac{\lam^x}{(e^\lam-1)x!},\qquad x=1,2,\dots.\label{gpmf}
+\end{align}
+
+If the answer to the above question is yes, then estimation of $\pi,\mu,\nu$ and thus $\theta$ could be based on only the set of non-zero $N_{ij}$. That is, discard all 0's and view the remaining $N_{ij}$ as $\pi$-mixtures of two ZTP components with parameters $t_i\mu$ and $t_i\nu$. Because this involves only two mixture components rather than three as above, both being exponential families, and neither is degenerate, estimation methods such as the EM algorithm would be easier to carry out. 
+
+Unfortunately the answer to the question is no. If we abbreviate $N_{ij}$ by $N$, $M_{ij}$ by $M$, and $Z_{ij}$ by $Z$, then the question can be exressed as follows: 
+\begin{align*}
+\mathrm{Is}&\ \ \P[N=x\,|\,N\ne0]=\frac{\pi\mu^x}{(e^\mu-1)x!}+\frac{(1-\pi)\nu^x}{(e^\nu-1)x!},\qquad x=1,2,\dots?
+\end{align*}
+However, for $x\ge1$,
+\begin{align*}
+P[N=x\,|\,N\ne0]&=\frac{\P[ZM=x,ZM\ne0]}{P[ZM\ne0]}\\
+&=\frac{\P[M=x,Z=1,M\ne0]}{P[Z=1,M\ne0]}\\
+&=\frac{\P[M=x,M\ne0]}{P[M\ne0]}\\
+&=\frac{\frac{\pi\mu^x}{e^\mu x!}+\frac{(1-\pi)\nu^x}{e^\nu x!}} {1-\frac{\pi}{e^\mu}-\frac{(1-\pi)}{e^\nu}},
+\end{align*}
+since $M$ and $Z$ are independent, so the question becomes:
+\begin{align*}
+\mathrm{Is}&\ \ \frac{\frac{\pi\mu^x}{e^\mu x!}+\frac{(1-\pi)\nu^x}{e^\nu x!}} {1-\frac{\pi}{e^\mu}-\frac{(1-\pi)}{e^\nu}}=\frac{\pi\mu^x}{(e^\mu-1)x!}+\frac{(1-\pi)\nu^x}{(e^\nu-1)x!},\qquad x=1,2,\dots?
+\end{align*}
+After some algebra, this equation simplifies to
+\begin{align*}
+\Big(\frac{\mu}{\nu}\Big)^x&=\left(\frac{e^{\mu}-1} {e^\nu-1}\right),
+\end{align*}
+which cannot hold for all $x\ge1$ unless $\mu=\nu$.
+\vskip10pt
+
+ \nid{\it Acknowledgement.} We are grateful to the Associate Editor and two referees for their thoughtful and constructive reviews, and to Jon Wellner for his generous and always-insightful comments.
+ 
+\bigskip
+
+%\newpage
+
+\centerline{\bf References}
+\medskip
+
+\def\new{\hangindent=1.5pc}
+
+\vskip .25cm \new
+\noindent Aitken, M.  and Rubin, D. B. (1985). Estimation and hypothesis testing in finite mixture models, {\it J. Royal Statist. Soc. Series B}  {\bf 47} 67-75.
+
+\vskip .25cm \new
+\noindent Arora, M.  and Chaganty, N. R. (2021). EM estimation for zero- and $k$-inflated Poisson regression model, {\it Computation}  {\bf 9} 94.
+
+\vskip .25cm \new
+\noindent Baker, G. B.  and Holdsworth, M. (2013). Seabird monitoring study at Coringa Herald National Nature Reserve 2012. Canberra: Department of the Environment, Water, Heritage \& the Arts. Unpublished report. 
+%{\bf CITATION OK?}
+
+\vskip .25cm \new
+\noindent B\"{o}hning, D. (1998). Zero-inflated Poisson models and C.A.MAN: a tutorial collection of evidence, {\it Biometrical Journal}  {\bf 40} 833-843.
+
+\vskip .25cm \new
+\noindent Debavelaere, V.  and  S. Allassonni\`ere (2021). On the curved exponential family in the stochastic approximation expectation maximization algorithm, {\it ESAIM: Probability and Statistics} {\bf 25} 408-432.
+
+\vskip .25cm \new
+\noindent Efron, B.  and D. V. Hinkley (1978), Assessing the accuracy of the maximum likelihood estimator: observed versus expected Fisher information, {\it Biometrika}  {\bf 65} 457-482.
+
+\vskip .25cm \new
+\noindent Fahrmeir, L. (1987). Asymptotic likelihood inference for nonhomogeneous observations, {\it Statistische Hefte}  {\bf 28} 81-116.
+
+\vskip .25cm \new
+\noindent Guan, Y.  (2009). Variance stabilizing transformations of Poisson, binomial and negative binomial distributions, {\it Statist. Probability Letters} {\bf 79} 1621–1629.
+
+\vskip .25cm \new
+\noindent Hoadley, B. (1971). Asymptotic properties of maximum likelihood estimators for the independent not identically distributed case, {\it Ann. Math. Statist.}  {\bf 42} 1977-1991.
+
+\vskip .25cm \new
+\noindent Johnson, N. L.,  A. W. Kemp, and S. Kotz (2005). {\it Univariate Discrete Distributions (3rd ed.)}
+], Wiley-Interscience, Hoboken, NJ.
+
+\vskip .25cm \new
+\noindent Lambert, D.  (1992). Zero-inflated Poisson regression, with an application to defects in manufacturing, {\it Technometrics} {\bf 34} 1-14.
+ 
+\vskip .25cm \new
+\noindent Laurent, S.  and C. Lagrand (2012). A Bayesian framework for the ratio of two Poisson rates in the context of vaccine efficacy trials, {\it ESAIM: Probability and Statistics} {\bf 16} 375-398.
+
+\vskip .25cm \new
+\noindent Li, H.-Q., M.-L. Tang, and W.-K. Wong (2014).  Confidence intervals for ratio of two Poisson rates using the method of variance estimates recovery, {\it Computational Statistics} {\bf 29} 869-889.
+
+\vskip .25cm \new
+\noindent Lim, H. K., W. K. Li, and P. L. H. Yu (2014).  Zero-inflated Poisson regression mixture model, {\it Computational Statistics and Data Analysis} {\bf 71} 151-158.
+
+\vskip .25cm \new
+\noindent Louis, T. (1982). Finding the observed information matrix when using the EM Algorithm, {\it J. R. Statist. Soc. Series B} (1982) {\bf 44} 226-233.
+
+\vskip .25cm \new
+\noindent McLachlan, G. J. and T. Krishnan (2008). {\it The EM Algorithms and its Extensions, 2nd ed.}, New York: Wiley.
+
+\vskip .25cm \new
+\noindent McLachlan, G. J. and D. Peel (2000). {\it Finite Mixture Models}, New York: Wiley.
+
+\vskip .25cm \new
+\noindent Robert, C. and G. Casella (2004). {\it Monte Carlo Statistical Methods}, New York: Springer-Verlag.
+
+\vskip .25cm \new
+\noindent Silverman, B. W. (1986). {\it Density Estimation for Statistics and Data Analysis}, London: Chapman \& Hall/CRC.
+
+%\vskip .25cm \new
+%\noindent Silverman, B. W. (1986). {\it Density Estimation for Statistics and Data Analysis}, London: Chapman \& Hall/CRC.
+
+\newpage
+
+\nid  {\bf General reply to the Reviewers:}
+\vskip6pt
+
+\nid We are very grateful to the two reviewers and the Associate Editor for their careful reading and thoughtful comments. We mostly agree with their suggestions and have made appropriate changes. A detailed list appears below.
+
+In particular, the reviewers suggested that a simulation study and a numerical example be included. Michael Pearce, a senior PhD candidate, generously agreed to assist with this. The results appear in this revision and Michael has been added as a co-author of the paper. 
+
+{\bf [Summarize simulations etc]}
+\vskip4pt
+
+\nid {\bf Detailed responses to Reviewers' comments:}
+\vskip4pt
+
+\nid Reviewer 1:
+\vskip4pt
+
+\nid Thank you very much for your comments about the ZTP model in Section 4. While the question that you raise certainly is interesting, we think that it is somewhat different from the question that we address, seen as follows. 
+
+You write: ``The author's conclusion in Section 4 that ZTP approach will not work appears not correct, because the mixing probability $\pi$ is assumed to be the same before and after zero-truncation. (*) The amount of zero-truncation depends on the probability of being zero, thus it is different for Poisson components with different means. Hence the mixture probability $\pi$ will in general be different." 
+
+However, it appears to us that this statement confounds ``zero-truncation" with``zero-inflation". In the question that we address, $\pi$ (actually $1-\pi$) represents the zero-inflation probability, not a zero-truncation probability. We are assuming that the zero-inflation mechanism (represented by the $Z_{ij}$) is independent of the Poisson rvs where the zero-truncation would occur, hence $\pi$ is the same for both Poisson components in our model, contrary to the above assertion (*). We apologize for the confusion and hope that this clarifies the issue.
+
+We also thank you for your suggestion of adding a numerical study. We have done so - see our reply above.
+\vskip4pt
+
+\nid Reviewer 2:
+\vskip4pt
+
+\nid 1. The references to B\"{o}hning (1998) and  Lim et al (2014) have been added, as well as Aitken and Rubin (1985) and McLachlan and Peel (2000). Comments regarding these papers appear where appropriate, e.g., B\"{o}hning in Footnote 3 and Aitken and Rubin following eqn. \eqref{D}.
+
+\nid 2. Change made.
+
+\nid 3. We thank the reviewer for pointing this out. We have found that Aitken and Rubin addressed this question and recommended omitting the constraint when carrying out  the EM algorithm. We have followed their recommendation, see the sentences following \eqref{D} and \eqref{zC6}.
+
+\nid 4. In keeping with the spirit of the reviewer's comment, we have added two references for the speed of convergence issue.
+
+\nid 5. Change made. (Thank you for your keen eye!)
+
+\nid 6. A simulation study and numerical example have been included.
+
+\vskip4pt
+
+-----------
+
+Identification of the great frigatebird and least frigatebird during nesting is difficult unless a parent is attending a nest. Once eggs have hatched and the chick no longer requires guarding, adults are rarely in attendance at nests. In these cases the nests are recorded as ‘frigatebirds’ and no species assigned. Because identification of chicks to species level is not possible, data on the species composition of the frigatebird population is poor, particularly for all years prior to 1998. Since then we have attempted to gather data on the species composition of the NEH frigatebird population. Data collected for most years since 1999 indicate that c.40\% (range 18— 66\%) of the birds breeding on NEH are great frigatebirds.
+
+Argusia counts at SWH (84 pairs), where only great frigatebirds breed, showed that breeding was at a more advanced stage to that on NEH (68\% of pairs were on nests containing large chicks). Analysis of trend at SWH should be interpreted with caution as the data time-series is shorter (2003 -2012) and contains only eight data points. Superficially, the population appears to be declining (Figure 4), with the number of birds breeding annually decreasing by 62\% between 2003 and 2012. However, if the 2012 data point is removed, assessment of the rate of the decline is significantly reduced. The annual breeding population size estimates computed from the model indicated an average growth rate of -6.3\% per year ($\lam$ = 0.937 $\pm$ 0.001, CI 95\% 0.935–0.937; assessed by TRIM as a Steep Decline) between 2003 and 2012, and - 1.3\% per year (SE 0.0006, $\lam$  = 0.987 $\pm$ 0.001, CI 95\% 0.985–0.989 assessed by TRIM as a Moderate Decline) between 2003 and 2009.
+
+Table 2. Estimated number of breeding pairs of red-footed booby, frigatebirds and red-tailed tropicbirds breeding in Argusia shrubland on North East Herald Cay from 1992 - 2012, and the proportion of nests containing large chicks. No data are available for 1993, 2010 and 2011.
+     Year Month
+1992 Nov 1993
+1994 Jul 1995 Jun 1996 Aug 1997 Jun 1998 Sep 1999 Jul 2000 Aug 2001 Aug 2002 Aug 2003 Aug 2004 July 2005 Aug 2006 Aug 2007 Aug 2008 Sep 2009 Oct 2010
+2011
+2012 Aug
+Count 122
+no data
+    119
+     62
+     43
+      8
+    210
+    190
+    227
+     86
+    380
+    591
+    702
+     17
+    495
+    431
+    248
+    894
+no data
+no data
+402
+chicks (%)
+0.98 157
+Red-footed booby Large
+Frigatebirds Large
+Red-tailed tropicbird Large
+chicks (%)
+0.16 252
+no data 0 137 0 287 0 145 0 58 0.02 24 0 41 0 23 0 82 0 242 0.54 228 0.01 108 0 34 0.01 134 0.02 338 0.02 154 0.11 337
+no data
+no data 0.02 105
+chicks (%)
+0.84
+0.61 0.35 0.21 0.25 0.78 0.68 0.51 0.63 0.35 0.87 0.68 0.75 0.83 0.62 0.51 0.00
+0.52
+Count
+Count 0 224
+0 222 0 375 0 275
+1.00 23 0.56 98 0.65 95 0.91 135 0.93 51 0.90 114 0.13 371 0.68 143 0.43 211 0.84 174 0.95 70 0.80 2
+0.53 83
+        no data no data
+        
+        
+        
+\end{document}
+
+{\bf THE END!}
+--------------
+

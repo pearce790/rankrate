@@ -1,6 +1,6 @@
-#' Calculate the exact MLE of a Mallows-Binomial distribution using an A* algorithm based on the LP total cost heuristic
+#' Calculate the exact MLE of a Mallows-Binomial distribution using an A* search algorithm based on the LP total cost heuristic
 #' 
-#' This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm based on the LP total cost heuristic, proposed in Pearce and Erosheva (2022). This algorithm is not recommended over the faster algorithm codified in the ASTAR function of this package, but is included for replicability reasons. The algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
+#' This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm based on the LP total cost heuristic, proposed in Pearce and Erosheva (2022). This algorithm is not recommended over the faster algorithm codified in the ASTAR function of this package, but is included for replicability of the paper. The algorithm may be very slow when number of objects, J, exceeds 15, but is often still tractable for larger J when ranking and rating consensus among judges is strong.
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.

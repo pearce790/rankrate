@@ -2,7 +2,7 @@
 % Please edit documentation in R/ASTAR_LP.R
 \name{ASTAR_LP}
 \alias{ASTAR_LP}
-\title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* algorithm based on the LP total cost heuristic}
+\title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* search algorithm based on the LP total cost heuristic}
 \usage{
 ASTAR_LP(Pi, X, M)
 }
@@ -17,7 +17,7 @@ ASTAR_LP(Pi, X, M)
 List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
 }
 \description{
-This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm based on the LP total cost heuristic, proposed in Pearce and Erosheva (2022). This algorithm is not recommended over the faster algorithm codified in the ASTAR function of this package, but is included for replicability reasons. The algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
+This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm based on the LP total cost heuristic, proposed in Pearce and Erosheva (2022). This algorithm is not recommended over the faster algorithm codified in the ASTAR function of this package, but is included for replicability of the paper. The algorithm may be very slow when number of objects, J, exceeds 15, but is often still tractable for larger J when ranking and rating consensus among judges is strong.
 }
 \examples{
 Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)

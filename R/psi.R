@@ -1,6 +1,6 @@
 #' Psi function
 #' 
-#' This function calculates the normalizing constant of a Mallows distribution under the Kendall distance
+#' This function calculates the normalizing constant of a Mallows distribution under the Kendall distance.
 #' 
 #' @param theta Non-negative scale parameter.
 #' @param J Positive integer indicating total number of objects.

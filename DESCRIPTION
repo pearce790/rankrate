@@ -1,12 +1,24 @@
 Package: rankrate
-Title: Statistical Models for Preference Learning w/ Rankings and Ratings
-Version: 0.0.0.9000
+Title: Statistical Tools for Preference Learning with Rankings and
+        Ratings
+Version: 1.0.0
 Authors@R: 
-    person("Michael", "Pearce", , "mpp790@uw.edu", role = c("aut", "cre"),
+    person("Michael", "Pearce", , "pearce790@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-9313-271X"))
-Description: This package implements key estimation procedures of the Mallows-Binomial model, the first joint statistical model for preference learning for rankings and ratings. 
-License: GPL-3
+Description: An implementation of the statistical methodology proposed by Pearce and Erosheva, 
+    "A Unified Statistical Learning Model for Rankings and Scores with Application to Grant Panel Review" (2022),
+    which at time of release has been accepted in the Journal of Machine Learning Research. The package provides tools 
+    for estimating parameters of a Mallows-Binomial model, the first joint statistical preference
+    learning model for rankings and ratings. The package includes functions for simulating rankings and ratings from the model, 
+    calculating the density of Mallows-Binomial data, estimating parameters using various exact and approximate algorithms, 
+    and for obtaining approximate confidence intervals based on the nonparametric bootstrap.
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports: stats, nloptr, gtools, lpSolve, matrixStats
+Imports: stats, nloptr, gtools, lpSolve
+NeedsCompilation: no
+Packaged: 2022-06-07 20:28:18 UTC; pearce790
+Author: Michael Pearce [aut, cre, cph]
+    (<https://orcid.org/0000-0002-9313-271X>)
+Maintainer: Michael Pearce <pearce790@gmail.com>

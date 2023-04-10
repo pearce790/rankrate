@@ -2,7 +2,7 @@
 % Please edit documentation in R/ci_mb.R
 \name{ci_mb}
 \alias{ci_mb}
-\title{Calculate Confidence Intervals for Mallows-Binomial parameters.}
+\title{Calculate confidence intervals for Mallows-Binomial parameters based on the nonparametric bootstrap}
 \usage{
 ci_mb(
   Pi,
@@ -30,7 +30,7 @@ ci_mb(
 
 \item{method}{String indicating which estimation method to use when estimating parameters.}
 
-\item{localsearch}{Numeric for use with the Greedy and FV methods; see documentation of those estimation functions for details. Defaults to 0 indicating no local search.}
+\item{localsearch}{Numeric for use with the Greedy and FV methods; ignored otherwise. See documentation of those estimation functions for details. Defaults to 0, indicating no local search.}
 }
 \value{
 List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters; always returned), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).

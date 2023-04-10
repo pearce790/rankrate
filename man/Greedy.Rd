@@ -19,7 +19,7 @@ Greedy(Pi, X, M, localsearch = 0)
 List with elements pi0 (estimated consensus ranking MLE),  p (estimated object quality parameter MLE), theta (estimated scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
 }
 \description{
-This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method.
+This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method, as described in Pearce and Erosheva (2022).
 }
 \examples{
 Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)

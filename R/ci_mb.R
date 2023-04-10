@@ -1,4 +1,4 @@
-#' Calculate Confidence Intervals for Mallows-Binomial parameters.
+#' Calculate confidence intervals for Mallows-Binomial parameters based on the nonparametric bootstrap
 #' 
 #' This function calculates confidence intervals for parameters in a Mallows-Binomial model using the nonparametric bootstrap.
 #' 
@@ -9,7 +9,7 @@
 #' @param nsamples Numeric indicating desired number of bootstrap samples to be used when calculating confidence intervals. Defaults to 100.
 #' @param all Boolean indicating if estimated parameters from all bootstrap samples should be returned. Defaults to FALSE.
 #' @param method String indicating which estimation method to use when estimating parameters.
-#' @param localsearch Numeric for use with the Greedy and FV methods; see documentation of those estimation functions for details. Defaults to 0 indicating no local search.
+#' @param localsearch Numeric for use with the Greedy and FV methods; ignored otherwise. See documentation of those estimation functions for details. Defaults to 0, indicating no local search.
 #' 
 #' @return List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters; always returned), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
 #'  

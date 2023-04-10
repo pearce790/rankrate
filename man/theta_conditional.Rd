@@ -19,7 +19,7 @@ theta_conditional(Pi, order = NULL, D = NULL, J = NULL)
 Numeric specifying the MLE of theta under a constraint.
 }
 \description{
-This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint.
+This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint. The constraint is a partial or complete central ranking.
 }
 \examples{
 Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)

@@ -4,7 +4,7 @@
 \alias{dmb}
 \title{Mallows-Binomial density function}
 \usage{
-dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE, Pi_full = NULL)
+dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE)
 }
 \arguments{
 \item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
@@ -20,8 +20,6 @@ dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE, Pi_full = NULL)
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
 \item{log}{Boolean indicating if loglikelihood should be returned.}
-
-\item{Pi_full}{For rankings based on incomplete object access. See documentation for dmall.}
 }
 \value{
 (Log) likelihood of rankings under a Mallows-Binomial distribution.

@@ -1,6 +1,6 @@
 #' Estimate the MLE of a Mallows-Binomial distribution using the GreedyLocal method
 #' 
-#' This function estimates the MLE of a Mallows-Binomial distribution using the GreedyLocal method, which is identical to the Greedy method but includes an automatic and targeted post-hoc local search.
+#' This function estimates the MLE of a Mallows-Binomial distribution using the GreedyLocal method, as described in Pearce and Erosheva (2022). The method is identical to the Greedy method but includes an automatic and targeted post-hoc local search.
 #' 
 #' @param Pi Matrix of partial or complete rankings, one row per ranking.
 #' @param X Matrix of ratings, one row per judge and one column per object.
