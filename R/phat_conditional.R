@@ -2,69 +2,62 @@
 #'
 #' This function calculates the MLE of p in a Mallows-Binomial(p,theta) distribution given Order(p).
 #'
-#' @import nloptr
+#' @import stats
 #'
-#' @param X Matrix of ratings, one row per judge and one column per object.
+#' @param ratings A matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
 #' @param order Vector specifying a top-r or complete ordering of the desired p vector.
+#' @param J Numeric specifying the total number of objects to be assessed.
 #'
-#' @return Vector of length J that is the MLE of p given Order(p) and X.
+#' @return Vector of length J that is the MLE of p given order(p) and X.
 #'
 #' @examples
-#' X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-#' phat_conditional(X=X,M=5,order=c(1,2,3,4))
-#' phat_conditional(X=X,M=5,order=c(2,1))
+#' ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+#' phat_conditional(ratings=ratings,M=5,order=c(1,2,3,4),J=4)
+#' phat_conditional(ratings=ratings,M=5,order=c(2,1),J=4)
 #'
 #' @export
-phat_conditional <- function(X,M,order){
-  # get constant
-  J <- ncol(X)
+phat_conditional <- function(ratings,M,order,J){
 
-  # optimization functions: f is objective, g is order constraints
-  opt_f <- function(p,X,M,order,J){
-    # quantity that must be optimized with respect to p
-    return(-sum(apply(X,1,function(x){dbinom(x,M,p,log=T)}),na.rm=T))
+  # Initial calculations
+  R <- length(order)
+  if(R<J){unordered <- setdiff(1:J,order)}else{unordered <- c()}
+  order_and_unordered <- c(order,unordered)
+  c1 <- apply(ratings[,order_and_unordered],2,function(ratings){sum(ratings,na.rm=T)})
+  c2 <- apply(M-ratings[,order_and_unordered],2,function(ratings){sum(ratings,na.rm=T)})
+
+  # Create Objective and Gradient Functions
+  objective <- function(theta){
+    return(-sum(c1*log(theta) + c2*log(1-theta)))
   }
-  opt_g <- function(p,X,M,order,J){
-    # contraints, which are met when all quantities returned are nonpositive
-    return(c(-diff(p[order]),p[order[length(order)]]-p[setdiff(1:J,order)]))
+  gradient <- function(theta){
+    -c1/theta + c2/(1-theta)
   }
 
-  # optimize: ensure solutions are feasible (i.e., >0, <1, and in proper order!)
-  # allows for once "re-do" if no feasible solutions are found.
-  starts <- matrix(data=c(apply(X,2,function(x){mean(x,na.rm=T)})/M,runif(J*3)),
-                   ncol=J,byrow=TRUE)
-  solutions <- t(apply(starts,1,function(x0){
-    res <- nloptr(x0=apply(X,2,function(x){mean(x,na.rm=T)})/M,
-                  eval_f = opt_f, eval_g_ineq = opt_g,
-                  lb = rep(0,J), ub = rep(1,J),
-                  X = X, M = M, order = order, J = J,
-                  opts = list("algorithm"="NLOPT_LN_COBYLA","xtol_abs"=1e-8,maxeval=1000))
-    res$solution[which(res$solution==0)] <- 1e-8
-    res$solution[which(res$solution==1)] <- 1-1e-8
-    res$solution
-  }))
-  feasible <- apply(solutions,1,function(solution){all(opt_g(solution,X,M,order,J)<=0)})
-  if(all(feasible==FALSE)){
-    starts <- matrix(data=runif(J*10),
-                     ncol=J,byrow=TRUE)
-    solutions <- t(apply(starts,1,function(x0){
-      res <- nloptr(x0=apply(X,2,function(x){mean(x,na.rm=T)})/M,
-                    eval_f = opt_f, eval_g_ineq = opt_g,
-                    lb = rep(0,J), ub = rep(1,J),
-                    X = X, M = M, order = order, J = J,
-                    opts = list("algorithm"="NLOPT_LN_COBYLA","xtol_abs"=1e-8,maxeval=1000))
-      res$solution[which(res$solution==0)] <- 1e-8
-      res$solution[which(res$solution==1)] <- 1-1e-8
-      res$solution
-    }))
-    feasible <- apply(solutions,1,function(solution){all(opt_g(solution,X,M,order,J)<=0)})
-    if(all(feasible==FALSE)){stop("No feasible solutions found!")}
-  }
-  obj <- apply(solutions,1,function(solution){opt_f(solution,X,M,order,J)})
-  obj[feasible==FALSE] <- Inf
-  feasible_and_best <- which.min(obj)
+  # Create Linear Optimization Constraints
+  ui <- rbind(diag(1,nrow=J),diag(-1,nrow=J))
+  ci <- rep(c(0,-1),each=J)
+  if(R>1){for(place in 2:R){
+    ui_addition <- rep(0,J)
+    ui_addition[c(place,place-1)] <- c(1,-1)
+    ui <- rbind(ui,ui_addition)
+    ci <- c(ci,0)
+  }}
+  if(R<J){for(place in (R+1):J){
+    ui_addition <- rep(0,J)
+    ui_addition[R] <- -1
+    ui_addition[place] <- 1
+    ui <- rbind(ui,ui_addition)
+    ci <- c(ci,0)
+  }}
 
-  # return solution
-  return(solutions[feasible_and_best,])
+  # Perform Constrained Optimization
+  phat <- constrOptim(theta = seq(1/(J+1),J/(J+1),length=J),
+                              f = objective,
+                              grad = gradient,
+                              outer.iterations = 1000,
+                              ui=ui,ci=ci)
+
+  phat$par <- (phat$par)[unlist(lapply(1:J,function(j){which(order_and_unordered==j)}))]
+  return(list(phat = phat$par,objective = phat$value))
 }

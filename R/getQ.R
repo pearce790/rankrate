@@ -1,28 +1,40 @@
 #' Calculate Q Matrix
-#' 
+#'
 #' This function calculates the Q matrix given a collection of (partial) rankings.
-#' 
-#' @param Pi Matrix of partial or complete rankings, one row per ranking.
+#'
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
+#' @param I Total number of judges assessing objects.
 #' @param J Total number of objects assessed.
-#'  
+#'
 #' @return Matrix Q of dimensions J x J.
-#'  
+#'
 #' @examples
-#' Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-#' getQ(Pi=Pi,J=4)
-#' 
+#' rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+#' getQ(rankings=rankings,I=2,J=4)
+#' attr(rankings,"assignments") <- matrix(c(rep(TRUE,7),FALSE),byrow=TRUE,nrow=2,ncol=4)
+#' getQ(rankings=rankings,I=2,J=4)
+#'
 #' @export
-getQ <- function(Pi,J){
+getQ <- function(rankings,I,J){
   ## Calculate the Q matrix given a collection of (partial) rankings
   ## Inputs: Pi = I x R matrix of partial rankings, J = total number of items
   Q <- matrix(NA,nrow=J,ncol=J)
+
   for(i in 1:J){for(j in 1:J){
-    Q[i,j] <- mean(apply(Pi,1,function(pi){
-      if(i %in% pi & j %in% pi){return(which(pi==i)<which(pi==j))}
-      if(i %in% pi & !(j %in% pi)){return(TRUE)}
-      if(!(i %in% pi) & j %in% pi){return(FALSE)}
-      if(!(i %in% pi) & !(j %in% pi)){return(FALSE)}
-    }))
+    Q[i,j] <- mean(unlist(lapply(1:I,function(judge){
+      ranking <- rankings[judge,]
+      ballot <- attr(rankings,"assignments")[judge,]
+      if(any(ballot[c(i,j)] == FALSE)){return(FALSE)
+      }else{
+        if(i %in% ranking){
+          if(j %in% ranking){return(which(ranking == i) < which(ranking == j))
+          }else{return(TRUE)}
+        }else{
+          if(j %in% ranking){return(FALSE)
+          }else{return(FALSE)}
+        }
+      }
+    })))
   }}
   return(Q)
 }

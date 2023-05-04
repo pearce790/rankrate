@@ -4,30 +4,30 @@
 \alias{totalcostheuristic_MB}
 \title{Calculate the naive total cost heuristic of a Mallows-Binomial model}
 \usage{
-totalcostheuristic_MB(Q, Pi, X, M, order)
+totalcostheuristic_MB(Q, rankings, ratings, M, order)
 }
 \arguments{
 \item{Q}{Matrix of dimension J x J.}
 
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
 \item{order}{Vector specifying a top-r or complete ordering of the desired p vector.}
 }
 \value{
-Numeric specifying the total cost heuristic.
+List of three numeric values: estimated object quality vector (phat), estimated consensus scale parameter (thetahat), and the total cost heuristic (totalcostheuristic)
 }
 \description{
-This function calculates the total cost heuristic of a Mallows-Binomial model given Q, Pi, X, M, and an order, for use during an A* tree search for the MLE of a Mallows-Binomial model.
+This function calculates the total cost heuristic of a Mallows-Binomial model given Q, rankings, ratings, M, and an order, for use during an A* tree search for the MLE of a Mallows-Binomial model.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
 Q <- matrix(c(0,.5,0,0,.5,0,0,0,1,1,0,0,1,1,.5,0),nrow=4,ncol=4)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-totalcostheuristic_MB(Q=Q,Pi=Pi,X=X,M=5,order=c(1,2))
-totalcostheuristic_MB(Q=Q,Pi=Pi,X=X,M=5,order=c(2,1,4,3))
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+totalcostheuristic_MB(Q=Q,rankings=rankings,ratings=ratings,M=5,order=c(1,2))
+totalcostheuristic_MB(Q=Q,rankings=rankings,ratings=ratings,M=5,order=c(2,1,4,3))
 
 }

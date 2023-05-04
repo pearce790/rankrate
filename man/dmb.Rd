@@ -4,24 +4,22 @@
 \alias{dmb}
 \title{Mallows-Binomial density function}
 \usage{
-dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE, Pi_full = NULL)
+dmb(rankings, ratings, p, theta, M, pi0 = NULL, log = FALSE)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{Vector or matrix of ratings, with one row per ratings for each judge.}
 
 \item{p}{Vector of object qualities.}
-
-\item{pi0}{Vector specifying the consensus (modal probability) ranking (useful to break ties in p).}
 
 \item{theta}{Numeric specifying the Mallows scale parameter.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{log}{Boolean indicating if loglikelihood should be returned.}
+\item{pi0}{Vector specifying the consensus (modal probability) ranking (useful to break ties in p).}
 
-\item{Pi_full}{For rankings based on incomplete object access. See documentation for dmall.}
+\item{log}{Boolean indicating if loglikelihood should be returned.}
 }
 \value{
 (Log) likelihood of rankings under a Mallows-Binomial distribution.
@@ -30,9 +28,9 @@ dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE, Pi_full = NULL)
 This function calculates the density of observation(s) under a Mallows-Binomial distribution.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-dmb(Pi=Pi,X=X,p=c(.1,.2,.5,.9),theta=1.1,M=5,log=TRUE)
-dmb(Pi=Pi,X=X,p=c(.1,.2,.5,.9),theta=2,M=5,log=TRUE)
- 
+rankings <- matrix(c(1,2,3,1,2,3),nrow=2,byrow=TRUE)
+ratings <- matrix(c(2,4,6,4,2,6),nrow=2,byrow=TRUE)
+dmb(rankings=c(1,2,3),ratings=c(2,4,6),p=c(.25,.5,.75),theta=2,M=8)
+dmb(rankings=rankings,ratings=ratings,p=c(0.33,0.33,0.75),theta=6,M=8,pi0=c(1,2,3),log=TRUE)
+
 }

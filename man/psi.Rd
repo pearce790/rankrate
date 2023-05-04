@@ -9,20 +9,20 @@ psi(theta, J, R, log = FALSE)
 \arguments{
 \item{theta}{Non-negative scale parameter.}
 
-\item{J}{Positive integer indicating total number of objects.}
+\item{J}{Vector of positive integers indicating total number of objects. If length(J)>1, R must be of same length or a single value.}
 
-\item{R}{Positive integer <=\code{J} indicating size of partial ranking.}
+\item{R}{Vector of positive integer <=\code{J} indicating size of partial ranking. If length(R)>1, J must be of same length or a single value.}
 
-\item{log}{Boolean indicating if log(Psi) should be returned.}
+\item{log}{Boolean indicating if log(psi(theta)) should be returned.}
 }
 \value{
-Numeric representing normalizing constant of a Mallows distribution.
+Numeric vector representing normalizing constant of a Mallows distribution.
 }
 \description{
 This function calculates the normalizing constant of a Mallows distribution under the Kendall distance
 }
 \examples{
 psi(theta=1,J=10,R=8)
-psi(theta=2,J=3,R=3,log=TRUE)
- 
+psi(theta=2,J=c(4,4,3),R=c(2,2,1),log=TRUE)
+
 }

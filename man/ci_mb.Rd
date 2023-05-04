@@ -5,20 +5,19 @@
 \title{Calculate Confidence Intervals for Mallows-Binomial parameters.}
 \usage{
 ci_mb(
-  Pi,
-  X,
+  rankings,
+  ratings,
   M,
   interval = 0.9,
-  nsamples = 100,
+  nsamples = 10,
   all = FALSE,
-  method = c("ASTAR", "ASTAR_LP", "Greedy", "GreedyLocal", "FV"),
-  localsearch = 0
+  method = "ASTAR"
 )
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
@@ -28,19 +27,17 @@ ci_mb(
 
 \item{all}{Boolean indicating if estimated parameters from all bootstrap samples should be returned. Defaults to FALSE.}
 
-\item{method}{String indicating which estimation method to use when estimating parameters.}
-
-\item{localsearch}{Numeric for use with the Greedy and FV methods; see documentation of those estimation functions for details. Defaults to 0 indicating no local search.}
+\item{method}{String indicating which estimation method to use when estimating parameters. Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".}
 }
 \value{
-List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters; always returned), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
+List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters), ci_ranks (matrix of confidence intervals for object ranks), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
 }
 \description{
 This function calculates confidence intervals for parameters in a Mallows-Binomial model using the nonparametric bootstrap.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ci_mb(Pi=Pi,X=X,M=5,method="FV",interval=0.95,nsamples=20,all=TRUE,localsearch=1)
- 
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+ci_mb(rankings=rankings,ratings=ratings,M=5,method="FV",all=TRUE)
+
 }

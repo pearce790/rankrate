@@ -1,37 +1,34 @@
-#' Estimate thetahat in a Mallows-Binomial given a constraint
-#' 
-#' This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint.
-#' 
+#' Estimate theta in a Mallows-Binomial distribution under a constraint.
+#'
+#' This function calculates the MLE of the consensus scale parameter, theta, in a Mallows-Binomial(p,theta) distribution given a constraint.
+#'
 #' @import stats
-#' 
-#' @param Pi Matrix of rankings, with one row per ranking
-#' @param order Vector specifying a complete ordering of the desired p vector. Either order or D must be specified; if both, use the order.
-#' @param D Numeric specifying a minimum total kendall distance between the observed rankings and a supposed central ranking. Either order or D must be specified; if both, use the order.
-#' @param J Numeric specifying the total number of objects to be assessed. Not used if order is specified.
-#'  
+#'
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
+#' @param D Numeric specifying a minimum total kendall distance between the observed rankings and a supposed central ranking.
+#' @param J Numeric specifying the total number of objects to be assessed.
+#'
 #' @return Numeric specifying the MLE of theta under a constraint.
-#'  
+#'
 #' @examples
-#' Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-#' theta_conditional(Pi=Pi,order=c(1,2,4,3))
-#' theta_conditional(Pi=Pi,D=3,J=4)
-#' 
+#' rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+#' theta_conditional(rankings,D=1,J=4)
+#' theta_conditional(rankings,D=2,J=4)
+#'
 #' @export
-theta_conditional <- function(Pi,order=NULL,D=NULL,J=NULL){
-  # optimize for MLE of scale parameter
-  
-  if(!is.null(order)){
-    return(optim(par=1,fn=function(theta){-dmall(Pi,order,theta,log=T)},
-                 lower=1e-5,upper=Inf,method="L-BFGS-B")$par)
-  }else if(!is.null(D)){
-    if(D<0){stop("D cannot be less than 0")}
-    if(is.null(J)){stop("If D specified, then J must be specified as well.")}
-    R <- apply(Pi,1,function(pi){length(na.exclude(pi))})
-    R[which(R == J-1)] <- J #missing one object implicitly defines a complete ranking
-    
-    return(optim(1,function(theta){theta*D + mean(unlist(lapply(R,function(r){psi(theta,J,r,log=T)})),na.rm=T)},
-                 lower=1e-5,upper=Inf,method="L-BFGS-B")$par)
-  }else{
-    return(NULL)
+theta_conditional <- function(rankings,D,J){
+
+  I <- nrow(rankings)
+  if(is.null(attr(rankings,"assignments"))){attr(rankings,"assignments") <- matrix(TRUE,nrow=I,ncol=J)}
+
+  Ji <- apply(attr(rankings,"assignments"),1,sum)
+  Ri <- apply(rankings,1,function(ranking){sum(!is.na(ranking))})
+  which_valid <- Ji > 0 & Ri > 0
+
+  objective <- function(theta){
+    theta*D+sum(psi(theta,J=Ji[which_valid],R=Ri[which_valid],log=T))/I
   }
+  theta_hat <- optimize(objective,c(1e-8,1e8))
+
+  return(list(thetahat = theta_hat$minimum,objective = theta_hat$objective))
 }

@@ -4,7 +4,7 @@
 \alias{rmall}
 \title{Random Mallows generation.}
 \usage{
-rmall(I, pi0, theta, R = length(pi0))
+rmall(I, pi0, theta, R = NULL)
 }
 \arguments{
 \item{I}{Numeric indicating the number of observations to be drawn.}
@@ -13,7 +13,7 @@ rmall(I, pi0, theta, R = length(pi0))
 
 \item{theta}{Numeric specifying the Mallows scale parameter.}
 
-\item{R}{Numeric specifying the length of the (partial) rankings to be drawn.}
+\item{R}{Numeric specifying the length of the (partial) rankings to be drawn. If NULL, R = length(pi0), i.e., complete rankings are drawn.}
 }
 \value{
 Matrix of rankings, one row per ranking.
@@ -23,6 +23,7 @@ This function randomly generates rankings from a Mallows distribution.
 }
 \examples{
 rmall(I=5,pi0=1:5,theta=1,R=3)
-rmall(I=10,pi0=1:5,theta=1)
- 
+rmall(I=5,pi0=1:3,theta=.5,R=c(1,1,1,1,3))
+rmall(I=5,pi0=1:3,theta=.5)
+
 }

@@ -4,24 +4,26 @@
 \alias{ASTAR}
 \title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* algorithm}
 \usage{
-ASTAR(Pi, X, M)
+ASTAR(rankings, ratings, M, keep_nodes = FALSE)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
+
+\item{keep_nodes}{Boolean specifying if function should retain a list of nodes traversed during A* tree search. Defaults to FALSE.}
 }
 \value{
-List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
+List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity). If keep_nodes=TRUE, a list of traversed nodes is also included.
 }
 \description{
 This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). Algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ASTAR(Pi=Pi,X=X,M=5)
- 
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+ASTAR(rankings=rankings,ratings=ratings,M=5,keep_nodes=TRUE)
+
 }

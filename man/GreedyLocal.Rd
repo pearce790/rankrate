@@ -4,12 +4,12 @@
 \alias{GreedyLocal}
 \title{Estimate the MLE of a Mallows-Binomial distribution using the GreedyLocal method}
 \usage{
-GreedyLocal(Pi, X, M)
+GreedyLocal(rankings, ratings, M)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 }
@@ -20,8 +20,8 @@ List with elements pi0 (estimated consensus ranking MLE),  p (estimated object q
 This function estimates the MLE of a Mallows-Binomial distribution using the GreedyLocal method, which is identical to the Greedy method but includes an automatic and targeted post-hoc local search.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-GreedyLocal(Pi=Pi,X=X,M=5)
- 
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+ratings <- matrix(c(2,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+GreedyLocal(rankings=rankings,ratings=ratings,M=5)
+
 }

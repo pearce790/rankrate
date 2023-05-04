@@ -2,28 +2,26 @@
 % Please edit documentation in R/theta_conditional.R
 \name{theta_conditional}
 \alias{theta_conditional}
-\title{Estimate thetahat in a Mallows-Binomial given a constraint}
+\title{Estimate theta in a Mallows-Binomial distribution under a constraint.}
 \usage{
-theta_conditional(Pi, order = NULL, D = NULL, J = NULL)
+theta_conditional(rankings, D, J)
 }
 \arguments{
-\item{Pi}{Matrix of rankings, with one row per ranking}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
 
-\item{order}{Vector specifying a complete ordering of the desired p vector. Either order or D must be specified; if both, use the order.}
+\item{D}{Numeric specifying a minimum total kendall distance between the observed rankings and a supposed central ranking.}
 
-\item{D}{Numeric specifying a minimum total kendall distance between the observed rankings and a supposed central ranking. Either order or D must be specified; if both, use the order.}
-
-\item{J}{Numeric specifying the total number of objects to be assessed. Not used if order is specified.}
+\item{J}{Numeric specifying the total number of objects to be assessed.}
 }
 \value{
 Numeric specifying the MLE of theta under a constraint.
 }
 \description{
-This function calculates the MLE of theta in a Mallows-Binomial(p,theta) distribution given a constraint.
+This function calculates the MLE of the consensus scale parameter, theta, in a Mallows-Binomial(p,theta) distribution given a constraint.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-theta_conditional(Pi=Pi,order=c(1,2,4,3))
-theta_conditional(Pi=Pi,D=3,J=4)
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+theta_conditional(rankings,D=1,J=4)
+theta_conditional(rankings,D=2,J=4)
 
 }

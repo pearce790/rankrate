@@ -4,24 +4,26 @@
 \alias{phat_conditional}
 \title{Estimate phat in a Mallows-Binomial given an order constraint}
 \usage{
-phat_conditional(X, M, order)
+phat_conditional(ratings, M, order, J)
 }
 \arguments{
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
 \item{order}{Vector specifying a top-r or complete ordering of the desired p vector.}
+
+\item{J}{Numeric specifying the total number of objects to be assessed.}
 }
 \value{
-Vector of length J that is the MLE of p given Order(p) and X.
+Vector of length J that is the MLE of p given order(p) and X.
 }
 \description{
 This function calculates the MLE of p in a Mallows-Binomial(p,theta) distribution given Order(p).
 }
 \examples{
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-phat_conditional(X=X,M=5,order=c(1,2,3,4))
-phat_conditional(X=X,M=5,order=c(2,1))
+ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
+phat_conditional(ratings=ratings,M=5,order=c(1,2,3,4),J=4)
+phat_conditional(ratings=ratings,M=5,order=c(2,1),J=4)
 
 }
