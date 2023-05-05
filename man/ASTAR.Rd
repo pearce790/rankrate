@@ -22,8 +22,7 @@ List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE
 This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). Algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
 }
 \examples{
-rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ASTAR(rankings=rankings,ratings=ratings,M=5,keep_nodes=TRUE)
+data("ToyData1")
+ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M)
 
 }

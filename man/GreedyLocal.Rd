@@ -20,8 +20,7 @@ List with elements pi0 (estimated consensus ranking MLE),  p (estimated object q
 This function estimates the MLE of a Mallows-Binomial distribution using the GreedyLocal method, which is identical to the Greedy method but includes an automatic and targeted post-hoc local search.
 }
 \examples{
-rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-ratings <- matrix(c(2,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-GreedyLocal(rankings=rankings,ratings=ratings,M=5)
+data("ToyData1")
+GreedyLocal(ToyData1$rankings,ToyData1$ratings,ToyData1$M)
 
 }

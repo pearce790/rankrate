@@ -28,9 +28,9 @@ dmb(rankings, ratings, p, theta, M, pi0 = NULL, log = FALSE)
 This function calculates the density of observation(s) under a Mallows-Binomial distribution.
 }
 \examples{
-rankings <- matrix(c(1,2,3,1,2,3),nrow=2,byrow=TRUE)
-ratings <- matrix(c(2,4,6,4,2,6),nrow=2,byrow=TRUE)
-dmb(rankings=c(1,2,3),ratings=c(2,4,6),p=c(.25,.5,.75),theta=2,M=8)
-dmb(rankings=rankings,ratings=ratings,p=c(0.33,0.33,0.75),theta=6,M=8,pi0=c(1,2,3),log=TRUE)
+data(ToyData1)
+dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.2,.5,.7),theta=1,M=ToyData1$M)
+dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.25,.25,.7),theta=1,M=ToyData1$M,
+pi0=c(1,2,3),log=TRUE)
 
 }

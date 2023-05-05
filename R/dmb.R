@@ -15,10 +15,10 @@
 #' @return (Log) likelihood of rankings under a Mallows-Binomial distribution.
 #'
 #' @examples
-#' rankings <- matrix(c(1,2,3,1,2,3),nrow=2,byrow=TRUE)
-#' ratings <- matrix(c(2,4,6,4,2,6),nrow=2,byrow=TRUE)
-#' dmb(rankings=c(1,2,3),ratings=c(2,4,6),p=c(.25,.5,.75),theta=2,M=8)
-#' dmb(rankings=rankings,ratings=ratings,p=c(0.33,0.33,0.75),theta=6,M=8,pi0=c(1,2,3),log=TRUE)
+#' data(ToyData1)
+#' dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.2,.5,.7),theta=1,M=ToyData1$M)
+#' dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.25,.25,.7),theta=1,M=ToyData1$M,
+#' pi0=c(1,2,3),log=TRUE)
 #'
 #' @export
 dmb <- function(rankings,ratings,p,theta,M,pi0=NULL,log=FALSE){
@@ -32,7 +32,7 @@ dmb <- function(rankings,ratings,p,theta,M,pi0=NULL,log=FALSE){
   J <- length(p)
   if(any(dim(rankings) != c(I,J))){stop("rankings matrix must be dimension I x J")}
   if(any(dim(ratings) != c(I,J))){stop("ratings matrix must be dimension I x J")}
-  if(any(ratings<0 | ratings > M | ratings%%1 != 0)){stop("ratings must be integers between 0 and M")}
+  if(any(ratings<0 | ratings > M | ratings%%1 != 0,na.rm=T)){stop("ratings must be integers between 0 and M")}
   if(is.null(pi0)){
     if(length(unique(p)) == length(p)){pi0 <- order(p)
     }else{stop("Must specify unique p if pi0 is not supplied")}

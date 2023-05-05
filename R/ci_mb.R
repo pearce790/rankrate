@@ -13,9 +13,8 @@
 #' @return List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters), ci_ranks (matrix of confidence intervals for object ranks), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
 #'
 #' @examples
-#' rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-#' ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-#' ci_mb(rankings=rankings,ratings=ratings,M=5,method="FV",all=TRUE)
+#' data("ToyData1")
+#' ci_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="ASTAR",all=TRUE)
 #'
 #' @export
 ci_mb <- function(rankings,ratings,M,interval=0.90,nsamples=10,all=FALSE,method="ASTAR"){

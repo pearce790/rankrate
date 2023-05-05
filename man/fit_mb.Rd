@@ -27,11 +27,10 @@ List with elements pi0 (estimated consensus ranking MLE),  p (estimated object q
 This function calculates the exact or approximate MLE of a Mallows-Binomial distribution using a user-specified method.
 }
 \examples{
-rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-fit_mb(rankings=rankings,ratings=ratings,M=5,method="ASTAR")
-fit_mb(rankings=rankings,ratings=ratings,M=5,method="Greedy")
-fit_mb(rankings=rankings,ratings=ratings,M=5,method="GreedyLocal")
-fit_mb(rankings=rankings,ratings=ratings,M=5,method="FV")
+data("ToyData1")
+fit_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="ASTAR")
+fit_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="Greedy")
+fit_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="GreedyLocal")
+fit_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="FV")
 
 }

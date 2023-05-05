@@ -36,8 +36,7 @@ List with elements ci (matrix of confidence intervals for Mallows-Binomial param
 This function calculates confidence intervals for parameters in a Mallows-Binomial model using the nonparametric bootstrap.
 }
 \examples{
-rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-ratings <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ci_mb(rankings=rankings,ratings=ratings,M=5,method="FV",all=TRUE)
+data("ToyData1")
+ci_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="ASTAR",all=TRUE)
 
 }
