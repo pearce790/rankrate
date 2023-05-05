@@ -13,6 +13,9 @@ LazyData: TRUE
 Imports: stats, gtools, isotone
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2,
+    pander,
+    reshape2
 VignetteBuilder: knitr
 URL: https://pearce790.github.io/rankrate/

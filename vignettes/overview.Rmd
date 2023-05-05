@@ -3,7 +3,7 @@ title: "rankrate: Joint Statistical Models for Preference Learning with Rankings
 output: rmarkdown::html_vignette
 bibliography: rankrate.bib
 vignette: >
-  %\VignetteIndexEntry{rankrate-overview}
+  %\VignetteIndexEntry{overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,28 +14,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-Suppose that we use a CART regression tree [@breiman1984classification], fit using the ``rpart`` package [@therneau2015package], to identify subgroups of patients in the Box Lunch Study (BLS) who share similar values of the response variable and are also described by common covariate values. The BLS dataset was originally provided in the ``visTree`` package (@venkat2018package) and is described in detail in @venkatasubramaniam2017decision. The response variable is the number of calories consumed in 24 hours and the covariates include measures of eating habits and attitudes towards food. One possible CART tree fit to this dataset is shown below. 
+This package allows for joint modeling of ranking and rating preference data via the Mallows-Binomial model [@pearce2022unified]. Functions in the package may be used for density calculation, random data generation, and fitting the Mallows-Binomial model to data via multiple exact and approximate methods. Uncertainty quantification and estimation of confidence intervals is also possible via the nonparametric bootstrap, whose asymptotic validity was proven in @pearce2022validity. Additionally, the package includes 3 "toy" data sets and 1 real data from the American Institute of Biological Sciences, which were all studied in @gallo2022new.
 
-```{r, out.width="90%", dpi=300}
-library(rpart)
-library(rpart.plot)
-data(blsdata, package="treevalues")
-bls.tree <-rpart(kcal24h0~hunger+disinhibition+resteating+rrvfood+liking+wanting, model = TRUE, data = blsdata, cp=0.02)
-rpart.plot(bls.tree, extra=1, nn=TRUE)
-```
+For more details on how to use this package, see the [tutorial](https://pearce790.github.io/rankrate/articles/tutorial.html). 
 
-Suppose that we want to know whether the first split in the tree is statistically significant. In other words, we want to know if the average number of calories consumed by individuals with ``hunger < 11`` is truly different than the average number of calories consumed by individuals with ``hunger >= 11``. Because we used our data to select these two subgroups, we cannot naively "double dip" in the same data to test for a difference in means between the two subgroups. The package ``treevalues`` provides a way to test for this difference in means without double-dipping in the data. The package implements the selective inference framework described in @neufeld2021treevalues; for more details, see the [preprint](https://arxiv.org/abs/2106.07816). 
-
-Apart from providing p-values for the difference in means across binary splits, the framework in ``treevalues`` also provides confidence intervals for the mean response within a given region. For more details on how to use the package to conduct inference, see the [tutorial](https://anna-neufeld.github.io/treevalues/articles/inference_tutorial.html). 
-
-Make sure that ``devtools`` is installed by running ``install.packages("devtools")``, then type
-
+A published version of the package may be install from CRAN, or a development version for the most up-to-date functionality:
 ```{r, eval=FALSE}
-devtools::install_github("anna-neufeld/treevalues")
+# CRAN version
+install.packages("rankrate")  
+
+# Development version
+install.packages("devtools")  
+devtools::install_github("pearce790/rankrate")
 ```
+
+After installation, load the package with the following code:
 ```{r, out.width="90%", dpi=300}
-library(treevalues)
-treeval.plot(bls.tree)
+library(rankrate)
 ```
 
 # References
