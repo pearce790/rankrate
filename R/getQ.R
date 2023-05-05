@@ -2,11 +2,12 @@
 #'
 #' This function calculates the Q matrix given a collection of (partial) rankings.
 #'
-#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
-#' @param I Total number of judges assessing objects.
-#' @param J Total number of objects assessed.
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
+#' @param I A numeric entry indicating the total number of judges providing rankings and ratings.
+#' @param J A numeric entry or vector of positive integers indicating total number of objects.
 #'
-#' @return Matrix Q of dimensions J x J.
+#' @return A matrix with dimension \code{J} x \code{J}.
 #'
 #' @examples
 #' rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)

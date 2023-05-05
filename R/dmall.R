@@ -1,15 +1,17 @@
-#' Mallows density function
+#' Calculate the density of rankings under a Mallows distribution
 #'
 #' This function calculates the density of observation(s) under a Mallows distribution.
 #'
 #' @import stats
 #'
-#' @param rankings A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.
-#' @param pi0 Vector specifying the consensus (modal probability) ranking.
-#' @param theta Numeric specifying the Mallows scale parameter.
-#' @param log Boolean indicating if loglikelihood should be returned.
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
+#' @param pi0 A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+#'   equal values in \code{p}.
+#' @param theta A numeric entry specifying the Mallows scale parameter.
+#' @param log A boolean indicating if the log likelihood should be returned.
 #'
-#' @return (Log) likelihood of rankings under a Mallows distribution.
+#' @return A numeric value indicating the (log) likelihood of rankings under a Mallows distribution.
 #'
 #' @examples
 #' rankings1 <- matrix(c(1,2,3,3,1,2),nrow=2,byrow=TRUE)

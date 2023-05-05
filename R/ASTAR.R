@@ -5,16 +5,23 @@
 #' @import gtools
 #' @import isotone
 #'
-#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
 #' @param ratings A matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
-#' @param keep_nodes Boolean specifying if function should retain a list of nodes traversed during A* tree search. Defaults to FALSE.
+#' @param keep_nodes Boolean specifying if function should retain the list of open nodes traversed during A*
+#'   tree search. Defaults to \code{FALSE}.
 #'
-#' @return List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity). If keep_nodes=TRUE, a list of traversed nodes is also included.
+#' @return A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+#'   estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+#'   \code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+#'   If \code{keep_nodes == TRUE}, then the list also contains \code{nodes}, a matrix of open nodes remaining
+#'   at the end of search. If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+#'   one row per MLE.
 #'
 #' @examples
 #' data("ToyData1")
-#' ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M)
+#' ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M,keep_nodes=TRUE)
 #'
 #' @export
 ASTAR <- function(rankings,ratings,M,keep_nodes=FALSE){

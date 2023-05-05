@@ -1,27 +1,36 @@
-#' Calculate Confidence Intervals for Mallows-Binomial parameters.
+#' Bootstrap Confidence Intervals for Mallows-Binomial parameters.
 #'
-#' This function calculates confidence intervals for parameters in a Mallows-Binomial model using the nonparametric bootstrap.
+#' This function calculates confidence intervals for parameters in a Mallows-Binomial model
+#' using the nonparametric bootstrap.
 #'
-#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
 #' @param ratings A matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
-#' @param interval Numeric between 0 and 1 specifying the confidence interval (e.g., .90 indicates a 90% confidence interval). Defaults to 0.90.
-#' @param nsamples Numeric indicating desired number of bootstrap samples to be used when calculating confidence intervals. Defaults to 100.
-#' @param all Boolean indicating if estimated parameters from all bootstrap samples should be returned. Defaults to FALSE.
-#' @param method String indicating which estimation method to use when estimating parameters. Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".
+#' @param interval A numeric entry between 0 and 1 specifying the confidence interval (e.g.,
+#'   .90 indicates a 90% confidence interval). Defaults to 0.90.
+#' @param nsamples A numeric entry indicating desired number of bootstrap samples to be used when
+#'   calculating confidence intervals. Defaults to 50.
+#' @param all A boolean indicating if estimated parameters from all bootstrap samples should be returned.
+#'   Defaults to \code{FALSE}.
+#' @param method A character string indicating which estimation method to use when estimating parameters.
+#'   Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".
 #'
-#' @return List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters), ci_ranks (matrix of confidence intervals for object ranks), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
+#' @return A list with elements \code{ci}, a matrix of confidence intervals for Mallows-Binomial parameters,
+#'   \code{ci_ranks}, a matrix of confidence intervals for object ranks, \code{bootstrap_pi0}, a matrix of
+#'   bootstrap consensus rankings (returned only if \code{all==TRUE}), and \code{bootstrap_ptheta}, a
+#'   matrix of bootstrap estimates of (p,theta) (returned only if \code{all==TRUE}).
 #'
 #' @examples
 #' data("ToyData1")
 #' ci_mb(ToyData1$rankings,ToyData1$ratings,ToyData1$M,method="ASTAR",all=TRUE)
 #'
 #' @export
-ci_mb <- function(rankings,ratings,M,interval=0.90,nsamples=10,all=FALSE,method="ASTAR"){
+ci_mb <- function(rankings,ratings,M,interval=0.90,nsamples=50,all=FALSE,method="ASTAR"){
   I <- nrow(rankings)
   J <- ncol(rankings)
   if(any(dim(ratings)!=c(I,J))){stop("rankings and ratings must be of the same dimension")}
-  if(all){bs_pi0 <- matrix(NA,nrow=nsamples,ncol=J)}
+  bs_pi0 <- matrix(NA,nrow=nsamples,ncol=J)
   bs_parameters <- matrix(NA,nrow=nsamples,ncol=J+1)
 
   for(sample in 1:nsamples){
@@ -33,7 +42,7 @@ ci_mb <- function(rankings,ratings,M,interval=0.90,nsamples=10,all=FALSE,method=
       bs_res$p <- bs_res$p[which_keep,]
       bs_res$theta <- bs_res$theta[which_keep,]
     }
-    if(all){bs_pi0[sample,] <- bs_res$pi0}
+    bs_pi0[sample,] <- bs_res$pi0
     bs_parameters[sample,] <- c(bs_res$p,bs_res$theta)
   }
   ci <- as.matrix(apply(bs_parameters,2,function(parameter){quantile(parameter,probs=c((1-interval)/2,1-(1-interval)/2))}))
@@ -42,7 +51,7 @@ ci_mb <- function(rankings,ratings,M,interval=0.90,nsamples=10,all=FALSE,method=
     quantile(apply(bs_pi0,1,function(pi0){which(pi0==j)}),probs=c((1-interval)/2,1-(1-interval)/2))
   })),nrow=2)
   rownames(ci_ranks) <- rownames(ci)
-  colnames(ci_ranks) <- paste0("Item",1:J)
+  colnames(ci_ranks) <- paste0("Object",1:J)
 
   if(all){return(list(ci=ci,ci_ranks=ci_ranks,
                       bootstrap_pi0=bs_pi0,

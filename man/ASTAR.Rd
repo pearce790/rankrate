@@ -7,22 +7,29 @@
 ASTAR(rankings, ratings, M, keep_nodes = FALSE)
 }
 \arguments{
-\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
 \item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{keep_nodes}{Boolean specifying if function should retain a list of nodes traversed during A* tree search. Defaults to FALSE.}
+\item{keep_nodes}{Boolean specifying if function should retain the list of open nodes traversed during A*
+tree search. Defaults to \code{FALSE}.}
 }
 \value{
-List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity). If keep_nodes=TRUE, a list of traversed nodes is also included.
+A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+\code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+If \code{keep_nodes == TRUE}, then the list also contains \code{nodes}, a matrix of open nodes remaining
+at the end of search. If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+one row per MLE.
 }
 \description{
 This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). Algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
 }
 \examples{
 data("ToyData1")
-ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M)
+ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M,keep_nodes=TRUE)
 
 }

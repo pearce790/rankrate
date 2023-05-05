@@ -2,27 +2,29 @@
 % Please edit documentation in R/dmb.R
 \name{dmb}
 \alias{dmb}
-\title{Mallows-Binomial density function}
+\title{Calculate the density of rankings and ratings under a Mallows-Binomial distribution.}
 \usage{
 dmb(rankings, ratings, p, theta, M, pi0 = NULL, log = FALSE)
 }
 \arguments{
-\item{rankings}{A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{ratings}{Vector or matrix of ratings, with one row per ratings for each judge.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
-\item{p}{Vector of object qualities.}
+\item{p}{A vector specifying the underlying object qualities. All values between be between 0 and 1, inclusive.}
 
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking (useful to break ties in p).}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
 
-\item{log}{Boolean indicating if loglikelihood should be returned.}
+\item{log}{A boolean indicating if the log likelihood should be returned.}
 }
 \value{
-(Log) likelihood of rankings under a Mallows-Binomial distribution.
+A numeric value indicating the (log) likelihood of rankings and ratings under a Mallows distribution.
 }
 \description{
 This function calculates the density of observation(s) under a Mallows-Binomial distribution.

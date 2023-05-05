@@ -2,12 +2,15 @@
 #'
 #' This function randomly generates rankings from a Mallows distribution.
 #'
-#' @param I Numeric indicating the number of observations to be drawn.
-#' @param pi0 Vector specifying the consensus (modal probability) ranking.
-#' @param theta Numeric specifying the Mallows scale parameter.
-#' @param R Numeric specifying the length of the (partial) rankings to be drawn. If NULL, R = length(pi0), i.e., complete rankings are drawn.
+#' @param I A numeric entry indicating the number of observations to be drawn, i.e., the number of judges
+#'   providing rankings and ratings.
+#' @param pi0 A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+#'   equal values in \code{p}.
+#' @param theta A numeric entry specifying the Mallows scale parameter.
+#' @param R A numeric entry specifying the length of the rankings to be drawn. When \code{R<=length(p)}, partial
+#'   rankings are drawn by definition.
 #'
-#' @return Matrix of rankings, one row per ranking.
+#' @return A matrix of rankings (orderings) with one row per judge.
 #'
 #' @examples
 #' rmall(I=5,pi0=1:5,theta=1,R=3)

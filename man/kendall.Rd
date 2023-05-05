@@ -2,17 +2,18 @@
 % Please edit documentation in R/kendall.R
 \name{kendall}
 \alias{kendall}
-\title{Kendall's tau function}
+\title{Calculate the Kendall's tau between rankings}
 \usage{
 kendall(rankings, pi0)
 }
 \arguments{
-\item{rankings}{A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{pi0}{A vector containing a complete ranking}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking.}
 }
 \value{
-Vector of the Kendall's tau distance between each ranking and pi0.
+A vector of the Kendall's tau distance between each ranking in \code{rankings} and \code{pi0}.
 }
 \description{
 This function calculates Kendall's tau distance between ranking(s) and a central permutation, pi0

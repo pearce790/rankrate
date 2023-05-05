@@ -7,16 +7,19 @@
 rmall(I, pi0, theta, R = NULL)
 }
 \arguments{
-\item{I}{Numeric indicating the number of observations to be drawn.}
+\item{I}{A numeric entry indicating the number of observations to be drawn, i.e., the number of judges
+providing rankings and ratings.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
 
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
-\item{R}{Numeric specifying the length of the (partial) rankings to be drawn. If NULL, R = length(pi0), i.e., complete rankings are drawn.}
+\item{R}{A numeric entry specifying the length of the rankings to be drawn. When \code{R<=length(p)}, partial
+rankings are drawn by definition.}
 }
 \value{
-Matrix of rankings, one row per ranking.
+A matrix of rankings (orderings) with one row per judge.
 }
 \description{
 This function randomly generates rankings from a Mallows distribution.

@@ -2,21 +2,23 @@
 % Please edit documentation in R/dmall.R
 \name{dmall}
 \alias{dmall}
-\title{Mallows density function}
+\title{Calculate the density of rankings under a Mallows distribution}
 \usage{
 dmall(rankings, pi0, theta, log = FALSE)
 }
 \arguments{
-\item{rankings}{A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
 
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
-\item{log}{Boolean indicating if loglikelihood should be returned.}
+\item{log}{A boolean indicating if the log likelihood should be returned.}
 }
 \value{
-(Log) likelihood of rankings under a Mallows distribution.
+A numeric value indicating the (log) likelihood of rankings under a Mallows distribution.
 }
 \description{
 This function calculates the density of observation(s) under a Mallows distribution.

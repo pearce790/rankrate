@@ -7,14 +7,19 @@
 Greedy(rankings, ratings, M)
 }
 \arguments{
-\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
 \item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 }
 \value{
-List with elements pi0 (estimated consensus ranking MLE),  p (estimated object quality parameter MLE), theta (estimated scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
+A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+\code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+one row per MLE.
 }
 \description{
 This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method.

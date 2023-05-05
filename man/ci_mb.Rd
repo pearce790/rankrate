@@ -2,38 +2,47 @@
 % Please edit documentation in R/ci_mb.R
 \name{ci_mb}
 \alias{ci_mb}
-\title{Calculate Confidence Intervals for Mallows-Binomial parameters.}
+\title{Bootstrap Confidence Intervals for Mallows-Binomial parameters.}
 \usage{
 ci_mb(
   rankings,
   ratings,
   M,
   interval = 0.9,
-  nsamples = 10,
+  nsamples = 50,
   all = FALSE,
   method = "ASTAR"
 )
 }
 \arguments{
-\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
 \item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{interval}{Numeric between 0 and 1 specifying the confidence interval (e.g., .90 indicates a 90\% confidence interval). Defaults to 0.90.}
+\item{interval}{A numeric entry between 0 and 1 specifying the confidence interval (e.g.,
+.90 indicates a 90\% confidence interval). Defaults to 0.90.}
 
-\item{nsamples}{Numeric indicating desired number of bootstrap samples to be used when calculating confidence intervals. Defaults to 100.}
+\item{nsamples}{A numeric entry indicating desired number of bootstrap samples to be used when
+calculating confidence intervals. Defaults to 50.}
 
-\item{all}{Boolean indicating if estimated parameters from all bootstrap samples should be returned. Defaults to FALSE.}
+\item{all}{A boolean indicating if estimated parameters from all bootstrap samples should be returned.
+Defaults to \code{FALSE}.}
 
-\item{method}{String indicating which estimation method to use when estimating parameters. Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".}
+\item{method}{A character string indicating which estimation method to use when estimating parameters.
+Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".}
 }
 \value{
-List with elements ci (matrix of confidence intervals for Mallows-Binomial parameters), ci_ranks (matrix of confidence intervals for object ranks), bootstrap_pi0 (matrix of bootstrap consensus rankings; returned only if all=TRUE), and bootstrap_ptheta (matrix of bootstrap estimates of (p,theta); returned only if all=TRUE).
+A list with elements \code{ci}, a matrix of confidence intervals for Mallows-Binomial parameters,
+\code{ci_ranks}, a matrix of confidence intervals for object ranks, \code{bootstrap_pi0}, a matrix of
+bootstrap consensus rankings (returned only if \code{all==TRUE}), and \code{bootstrap_ptheta}, a
+matrix of bootstrap estimates of (p,theta) (returned only if \code{all==TRUE}).
 }
 \description{
-This function calculates confidence intervals for parameters in a Mallows-Binomial model using the nonparametric bootstrap.
+This function calculates confidence intervals for parameters in a Mallows-Binomial model
+using the nonparametric bootstrap.
 }
 \examples{
 data("ToyData1")

@@ -5,11 +5,16 @@
 #' @import gtools
 #' @import isotone
 #'
-#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
 #' @param ratings A matrix of ratings, one row per judge and one column per object.
 #' @param M Numeric specifying maximum (=worst quality) integer rating.
 #'
-#' @return List with elements pi0 (estimated consensus ranking MLE),  p (estimated object quality parameter MLE), theta (estimated scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
+#' @return A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+#'   estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+#'   \code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+#'   If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+#'   one row per MLE.
 #'
 #' @examples
 #' data("ToyData1")

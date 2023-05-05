@@ -7,14 +7,15 @@
 getQ(rankings, I, J)
 }
 \arguments{
-\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One ranking per row.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{I}{Total number of judges assessing objects.}
+\item{I}{A numeric entry indicating the total number of judges providing rankings and ratings.}
 
-\item{J}{Total number of objects assessed.}
+\item{J}{A numeric entry or vector of positive integers indicating total number of objects.}
 }
 \value{
-Matrix Q of dimensions J x J.
+A matrix with dimension \code{J} x \code{J}.
 }
 \description{
 This function calculates the Q matrix given a collection of (partial) rankings.

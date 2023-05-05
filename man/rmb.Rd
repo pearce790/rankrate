@@ -2,25 +2,30 @@
 % Please edit documentation in R/rmb.R
 \name{rmb}
 \alias{rmb}
-\title{Random Mallows-Binomial generation.}
+\title{Random Mallows-Binomial generation}
 \usage{
 rmb(I, p, theta, M, pi0 = NULL, R = NULL)
 }
 \arguments{
-\item{I}{Numeric indicating the number of observations to be drawn, i.e., the number of judges providing rankings and ratings.}
+\item{I}{A numeric entry indicating the number of observations to be drawn, i.e., the number of judges
+providing rankings and ratings.}
 
-\item{p}{Vector specifying the underlying object qualities.}
+\item{p}{A vector specifying the underlying object qualities. All values between be between 0 and 1, inclusive.}
 
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
-\item{M}{Numeric specifying the maximum integer rating.}
+\item{M}{A numeric entry specifying the maximum integer rating.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking equal values in p.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
 
-\item{R}{Numeric specifying the length of the (partial) rankings to be drawn.}
+\item{R}{A numeric entry specifying the length of the rankings to be drawn. When \code{R<=length(p)}, partial
+rankings are drawn by definition.}
 }
 \value{
-List containing elements X (I x J matrix of ratings) and Pi (I x R matrix of rankings).
+A list containing elements \code{ratings}, a matrix of integer ratings with one row per judge
+and one column per object, \code{rankings}, and matrix of rankings (orderings) with one row per judge,
+and \code{M}, the inputted maximum integer rating.
 }
 \description{
 This function randomly generates rankings and ratings from a Mallows-Binomial distribution.

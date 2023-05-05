@@ -1,13 +1,14 @@
-#' Kendall's tau function
+#' Calculate the Kendall's tau between rankings
 #'
 #' This function calculates Kendall's tau distance between ranking(s) and a central permutation, pi0
 #'
 #' @import stats
 #'
-#' @param rankings A vector or matrix of rankings, potentially with attribute "assignments" to signify separate reviewer assignments. One rankings per row.
-#' @param pi0 A vector containing a complete ranking
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
+#' @param pi0 A vector specifying the consensus (modal probability) ranking.
 #'
-#' @return Vector of the Kendall's tau distance between each ranking and pi0.
+#' @return A vector of the Kendall's tau distance between each ranking in \code{rankings} and \code{pi0}.
 #'
 #' @examples
 #' ranking1 <- c(2,1,3)

@@ -2,21 +2,23 @@
 % Please edit documentation in R/psi.R
 \name{psi}
 \alias{psi}
-\title{Psi function}
+\title{Normalizing constant function of a Mallows distribution, psi}
 \usage{
 psi(theta, J, R, log = FALSE)
 }
 \arguments{
-\item{theta}{Non-negative scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
-\item{J}{Vector of positive integers indicating total number of objects. If length(J)>1, R must be of same length or a single value.}
+\item{J}{A numeric entry or vector of positive integers indicating total number of objects each judge has access to.
+If \code{length(J)>1}, \code{R} must be of same length or a single value.}
 
-\item{R}{Vector of positive integer <=\code{J} indicating size of partial ranking. If length(R)>1, J must be of same length or a single value.}
+\item{R}{A numeric entry or vector of positive integers indicating the length of the ranking provided by each judge.
+If \code{length(R)>1}, \code{J} must be of same length or a single value.}
 
-\item{log}{Boolean indicating if log(psi(theta)) should be returned.}
+\item{log}{A boolean indicating if \code{log(psi)} should be returned.}
 }
 \value{
-Numeric vector representing normalizing constant of a Mallows distribution.
+A numeric value or vector representing normalizing constant of a Mallows distribution.
 }
 \description{
 This function calculates the normalizing constant of a Mallows distribution under the Kendall distance

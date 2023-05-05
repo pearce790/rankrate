@@ -1,13 +1,15 @@
-#' Psi function
+#' Normalizing constant function of a Mallows distribution, psi
 #'
 #' This function calculates the normalizing constant of a Mallows distribution under the Kendall distance
 #'
-#' @param theta Non-negative scale parameter.
-#' @param J Vector of positive integers indicating total number of objects. If length(J)>1, R must be of same length or a single value.
-#' @param R Vector of positive integer <=\code{J} indicating size of partial ranking. If length(R)>1, J must be of same length or a single value.
-#' @param log Boolean indicating if log(psi(theta)) should be returned.
+#' @param theta A numeric entry specifying the Mallows scale parameter.
+#' @param J A numeric entry or vector of positive integers indicating total number of objects each judge has access to.
+#'   If \code{length(J)>1}, \code{R} must be of same length or a single value.
+#' @param R A numeric entry or vector of positive integers indicating the length of the ranking provided by each judge.
+#'   If \code{length(R)>1}, \code{J} must be of same length or a single value.
+#' @param log A boolean indicating if \code{log(psi)} should be returned.
 #'
-#' @return Numeric vector representing normalizing constant of a Mallows distribution.
+#' @return A numeric value or vector representing normalizing constant of a Mallows distribution.
 #'
 #' @examples
 #' psi(theta=1,J=10,R=8)

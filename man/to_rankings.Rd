@@ -7,17 +7,25 @@
 to_rankings(ranks, assignments = NULL, rankings = NULL)
 }
 \arguments{
-\item{ranks}{Matrix or vector of ranks, such that the (i,j) entry includes the rank given by judge i to proposal j. NA used to indicate no rank was assigned to a proposal, which may occur for two reasons: (1) If "assignments" is not specified or the (i,j) entry of assignments is TRUE, NA indicates a proposal was considered worse than all ranked proposals. If the (i,j) entry of assignments is FALSE, NA indicates a proposal simply was not considered by the judge and no information can be gleaned from the missing rank.}
+\item{ranks}{A matrix or vector of ranks, such that the (i,j) entry includes the rank given by judge i to proposal j.
+\code{NA} is used to indicate that no rank was assigned to a proposal, which may occur for two reasons: (1)
+If the \code{assignments} matrix is not specified or the (i,j) entry of assignments is \code{TRUE}, then an \code{NA} indicates that
+a proposal was considered worse than all ranked proposals. (2) If the (i,j) entry of \code{assignments} is \code{FALSE}, then \code{NA}
+indicates that a proposal was not considered by the judge and no information can be gleaned from the missing rank.}
 
-\item{assignments}{Matrix of booleans, such that the (i,j) entry is TRUE if judge i was assigned to review proposal j, and FALSE otherwise. If assignments is NULL, we assume all judges considered all proposals.}
+\item{assignments}{A matrix of booleans, such that the (i,j) entry is \code{TRUE} if judge i was assigned to review proposal j, and
+\code{FALSE} otherwise. If \code{assignments} is \code{NULL}, we assume all judges considered all proposals.}
 
-\item{rankings}{Matrix or vector of rankings, with one row per judge. If rankings is specified, the function is used only to add the assignments attribute to the rankings file; any ranks input is ignored.}
+\item{rankings}{A matrix or vector of rankings. If a matrix, there should be one ranking per row.}
 }
 \value{
-Matrix of rankings, one row per ranking. If "assignments" argument is specified, then the rankings matrix will have the attribute "assignments".
+A matrix of rankings, with one row per ranking. If \code{assignments} argument is specified, then the rankings matrix will have
+the attribute "assignments".
 }
 \description{
-This function converts a matrix of ranks into a matrix of orderings, potentially including reviewer assignments as an attribute of the ranking matrix.
+This function converts a matrix of ranks into a matrix of rankings (i.e., orderings), potentially including reviewer
+assignments as an attribute of the ranking matrix. Additionally, it can be used to add an assignments matrix to an existing
+matrix of rankings.
 }
 \examples{
 ranks <- matrix(data=c(4,2,3,1,NA,1,2,3,NA,NA,1,NA),byrow=TRUE,nrow=3)

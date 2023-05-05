@@ -5,9 +5,9 @@
 \alias{ToyData3}
 \title{Toy data set of rankings and ratings when judges express internally inconsistent preferences}
 \format{
-list with three elements: (1) rankings, a 16 x 3 matrix of rankings with one row per judge;
-(2) ratings, a 16 x 3 matrix of ratings, with one row per judge and one column per object; and
-(3) M, a number indicating the maximum (worst) integer score.
+list with three elements: (1) \code{rankings}, a 16 x 3 matrix of rankings with one row per judge;
+(2) \code{ratings}, a 16 x 3 matrix of ratings, with one row per judge and one column per object; and
+(3) \code{M}, a number indicating the maximum (worst) integer score.
 }
 \source{
 {Originally published in: Gallo, Stephen A., et al. "A new approach to peer review assessments: Score, then rank." Research Integrity and Peer Review (2023).}
