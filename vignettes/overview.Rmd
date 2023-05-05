@@ -12,6 +12,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE
 )
+options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 This package allows for joint modeling of ranking and rating preference data via the Mallows-Binomial model [@pearce2022unified]. Functions in the package may be used for density calculation, random data generation, and fitting the Mallows-Binomial model to data via multiple exact and approximate methods. Uncertainty quantification and estimation of confidence intervals is also possible via the nonparametric bootstrap, whose asymptotic validity was proven in @pearce2022validity. Additionally, the package includes 3 "toy" data sets and 1 real data from the American Institute of Biological Sciences, which were all studied in @gallo2022new.
