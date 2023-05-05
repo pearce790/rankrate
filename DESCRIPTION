@@ -1,5 +1,5 @@
 Package: rankrate
-Title: Statistical Models for Preference Learning w/ Rankings and Ratings
+Title: Joint Statistical Models for Preference Learning with Rankings and Ratings
 Version: 0.0.0.9000
 Authors@R: 
     person("Michael", "Pearce", , "mpp790@uw.edu", role = c("aut", "cre"),
@@ -11,3 +11,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 LazyData: TRUE
 Imports: stats, gtools, isotone
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://pearce790.github.io/rankrate/
