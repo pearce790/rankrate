@@ -18,7 +18,7 @@ reviewer assignments. One ranking per row.}
 A matrix with dimension \code{J} x \code{J}.
 }
 \description{
-This function calculates the Q matrix given a collection of (partial) rankings. For use in estimation functions, but not likely on its own.
+This function calculates the Q matrix given a collection of (partial) rankings.
 }
 \examples{
 rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)

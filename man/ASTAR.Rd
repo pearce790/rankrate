@@ -2,7 +2,7 @@
 % Please edit documentation in R/ASTAR.R
 \name{ASTAR}
 \alias{ASTAR}
-\title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* search algorithm}
+\title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* algorithm}
 \usage{
 ASTAR(rankings, ratings, M, keep_nodes = FALSE)
 }
@@ -26,7 +26,7 @@ at the end of search. If multiple MLEs are found, \code{pi0}, \code{p}, and \cod
 one row per MLE.
 }
 \description{
-This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). The algorithm may be very slow when number of objects, J, exceeds 15, but is often still tractable for larger J when ranking and rating consensus among judges is strong.
+This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). Algorithm may be very slow when number of objects exceeds 15, but is often still tractable for larger J when consensus is strong.
 }
 \examples{
 data("ToyData1")

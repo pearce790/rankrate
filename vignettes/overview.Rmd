@@ -21,16 +21,19 @@ For more details on how to use this package, see the [tutorial](https://pearce79
 
 A published version of the package may be install from CRAN, or a development version for the most up-to-date functionality:
 ```{r, eval=FALSE}
-# CRAN version
+## CRAN version
 install.packages("rankrate")  
 
-# Development version
-install.packages("devtools")  
+## Development version
+# install.packages("devtools") # uncomment if you haven't installed 'devtools' before
 devtools::install_github("pearce790/rankrate")
 ```
 
 After installation, load the package with the following code:
-```{r, out.width="90%", dpi=300}
+```{r echo=FALSE,results='hide',message=FALSE,warning=FALSE}
+devtools::install_github("pearce790/rankrate")
+```
+```{r}
 library(rankrate)
 ```
 

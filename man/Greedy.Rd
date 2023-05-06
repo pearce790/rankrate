@@ -22,7 +22,7 @@ If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned 
 one row per MLE.
 }
 \description{
-This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method, as described in Pearce and Erosheva (2022).
+This function estimates the MLE of a Mallows-Binomial distribution using the Greedy method.
 }
 \examples{
 data("ToyData1")

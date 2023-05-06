@@ -21,7 +21,7 @@ If \code{length(R)>1}, \code{J} must be of same length or a single value.}
 A numeric value or vector representing normalizing constant of a Mallows distribution.
 }
 \description{
-This function calculates the normalizing constant of a Mallows distribution under the Kendall distance.
+This function calculates the normalizing constant of a Mallows distribution under the Kendall distance
 }
 \examples{
 psi(theta=1,J=10,R=8)

@@ -81,10 +81,12 @@ GreedyLocal <- function(rankings,ratings,M){
     order_meanratings <- c(order,setdiff(order(meanratings),order))
     start <- gpava(1:J,meanratings[order_meanratings])
     start <- start$x[order(order_meanratings)]
+    start[start==0] <- 1e-7
+    start[start==1] <- 1-1e-7
 
     # optimize for p conditional on an ordering of parameters
-    result <- constrOptim(theta = start,f = t3,grad = t3_gradient,ui=ui,ci=ci-1e-8,
-                          mu=.1,control = list(reltol = 1e-10))
+    result <- suppressWarnings(constrOptim(theta = start,f = t3,grad = t3_gradient,ui=ui,ci=ci-1e-8,
+                                           mu=.1,control = list(reltol = 1e-10)))
     return(list(phat = result$par,objective = result$value))
   }
 

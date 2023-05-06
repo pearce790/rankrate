@@ -1,5 +1,5 @@
 ---
-title: "Tutorial"
+title: "Tutorial: Toy Data Set"
 output: rmarkdown::html_vignette
 bibliography: rankrate.bib
 vignette: >
@@ -16,41 +16,71 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-```{r eval=FALSE}
-devtools::install_github("pearce790/rankrate")
-```
-
-```{r}
-library(rankrate)
-data("ToyData2")
-```
-
-## Viewing Rankings and Ratings
+In this tutorial, we demonstrate the key functionality of the `rankrate` package on a toy data set first analyzed in @gallo2022new. The tutorial includes code for visualization of rankings and ratings, as well as demonstration of functions for model estimation and inference. We begin by loading necessary packages.
 
 ```{r warning=FALSE,message=FALSE}
-library(pander)
-library(reshape2)
-library(ggplot2)
-rankings_table <- as.data.frame(ToyData2$rankings)
+library(rankrate)
+library(pander) # creating nice tables
+library(reshape2) # data reformatting
+library(ggplot2) # creating nice figures
+```
+
+## Exploratory Data Analysis
+
+We now load the `ToyData1` data set, which is included in the `rankrate` package. The data set includes `r nrow(ToyData1$rankings)` judges who asses `r ncol(ToyData1$rankings)` objects with rankings and ratings. The rankings are complete rankings of all objects, and the ratings are integers between 0 (best) and `r ToyData1$M` (worst).
+
+```{r}
+data("ToyData1")
+```
+
+### Visualizing rankings
+
+Let's start by displaying rankings from the toy data set in tabular and graphical form. 
+
+```{r warning=FALSE, fig.asp = 0.7, out.width="90%",dpi=300}
+rankings_table <- as.data.frame(ToyData1$rankings)
 rownames(rankings_table) <- paste0("Judge ",1:16)
 names(rankings_table) <- paste0("Rank ",1:8)
-pander(ratings_table)
-rankings_long <- melt(ToyData2$rankings)
+pander(rankings_table)
+rankings_long <- melt(ToyData1$rankings)
 names(rankings_long) <- c("Judge","Rank","Proposal")
-ggplot(rankings_long,aes(x=Proposal,fill=factor(Rank)))+theme_bw(base_size=12)+
+ggplot(rankings_long,aes(x=Proposal,fill=factor(Rank)))+theme_bw(base_size=6)+
   geom_bar()+scale_fill_manual(values=c("#31A354","#A1D99B","#E5F5E0"))+
   labs(fill="Rank",y="Count")+ggtitle("Ranks by Proposal")+
   theme(legend.position = c(.8,.9),legend.direction = "horizontal",
         panel.grid = element_blank())
+```
 
-ratings_table <- as.data.frame(ToyData2$ratings)
+### Visualizing ratings
+
+Let's start by displaying rankings from the toy data set in tabular and graphical form. 
+
+```{r warning=FALSE, fig.asp = 0.7, out.width="90%",dpi=300}
+ratings_table <- as.data.frame(ToyData1$ratings)
 rownames(ratings_table) <- paste0("Judge ",1:16)
-names(ratings_table) <- paste0("Proposal ",1:8)
+names(ratings_table) <- c("Proposal: 1",2:8)
+set.alignment("right")
 pander(ratings_table)
-ratings_long <- melt(ToyData2$ratings)
+ratings_long <- melt(ToyData1$ratings)
 names(ratings_long) <- c("Judge","Proposal","Rating")
-ggplot(ratings_long,aes(x=factor(Proposal),y=Rating))+theme_bw(base_size=12)+
+ggplot(ratings_long,aes(x=factor(Proposal),y=Rating))+theme_bw(base_size=6)+
   geom_boxplot(color="gray")+geom_jitter(height=0,width=0.4,alpha=0.75)+
   labs(x="Proposal",y="Rating")+ggtitle("Ratings by Proposal")+
   theme(panel.grid = element_blank())
 ```
+
+
+
+
+
+
+## Estimation
+
+Now, let's fit a Mallows-Binomial model to our toy dataset. Given the relatively small size of the data, we will use the exact MLE search method, "ASTAR". 
+
+```{r}
+fit_mb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M,method="ASTAR")
+ASTAR(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M)
+```
+
+## References
