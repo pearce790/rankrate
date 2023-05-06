@@ -40,7 +40,7 @@ Let's start by displaying rankings from the toy data set in tabular and graphica
 ```{r warning=FALSE, fig.asp = 0.7, out.width="90%",dpi=300}
 rankings_table <- as.data.frame(ToyData1$rankings)
 rownames(rankings_table) <- paste0("Judge ",1:16)
-names(rankings_table) <- paste0("Rank ",1:8)
+names(rankings_table) <- paste0("Rank ",1:3)
 pander(rankings_table)
 rankings_long <- melt(ToyData1$rankings)
 names(rankings_long) <- c("Judge","Rank","Proposal")
@@ -58,7 +58,7 @@ Let's start by displaying rankings from the toy data set in tabular and graphica
 ```{r warning=FALSE, fig.asp = 0.7, out.width="90%",dpi=300}
 ratings_table <- as.data.frame(ToyData1$ratings)
 rownames(ratings_table) <- paste0("Judge ",1:16)
-names(ratings_table) <- c("Proposal: 1",2:8)
+names(ratings_table) <- c("Proposal: 1",2:3)
 set.alignment("right")
 pander(ratings_table)
 ratings_long <- melt(ToyData1$ratings)
@@ -79,8 +79,29 @@ ggplot(ratings_long,aes(x=factor(Proposal),y=Rating))+theme_bw(base_size=6)+
 Now, let's fit a Mallows-Binomial model to our toy dataset. Given the relatively small size of the data, we will use the exact MLE search method, "ASTAR". 
 
 ```{r}
-fit_mb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M,method="ASTAR")
-ASTAR(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M)
+MLE_mb <- fit_mb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M,method="ASTAR")
+data.frame(Parameter=c("Consensus Ranking, pi_0",
+                       "Object Quality Parameter, p",
+                       "Consensus Scale Parameter, theta"),
+           MLE=c(paste0(MLE_mb$pi0,collapse="<"),
+                 paste0("(",paste0(MLE_mb$p,collapse=","),")"),
+                 round(MLE_mb$theta)))
+```
+
+## Inference
+
+Furthermore, we can bootstrap confidence intervals using the `ci_mb` function. We plot the confidence intervals for the object quality parameters.
+
+```{r, fig.asp = 0.7, out.width="90%",dpi=300}
+CI_mb <- ci_mb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,M=ToyData1$M,
+               interval=0.95,nsamples=200,method="ASTAR")
+plot_p <- as.data.frame(cbind(1:3,MLE_mb$p,t(CI_mb$ci[,1:3])))
+names(plot_p) <- c("Proposal","PointEstimate","Lower","Upper")
+ggplot(plot_p,aes(x=Proposal,y=PointEstimate,ymin=Lower,ymax=Upper))+
+  geom_point()+geom_errorbar()+ylim(c(0,1))+theme_bw()+
+  labs(x="Proposal",y="Estimated p (95% CI)")+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank())
 ```
 
 ## References
