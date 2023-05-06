@@ -1,4 +1,58 @@
-url: https://pearce790.github.io/rankrate/
 template:
-  bootstrap: 5
+  params:
+    bootswatch: flatly
 
+navbar:
+  structure:
+    left:
+    - home
+    - tutorial
+    - reference
+    right:
+    - github
+  components:
+    home:
+      text: Overview
+      href: articles/overview.html
+    tutorial:
+      text: Tutorial
+      href: articles/tutorial.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text:
+      menu:
+
+
+reference:
+- title: Density, Random Data Generation, and Helper Functions
+  desc: ~
+  contents:
+  - dmall
+  - dmb
+  - rmall
+  - rmb
+  - psi
+  - kendall
+  - to_rankings
+
+
+- title: Model Estimation Functions
+  desc: ~
+  contents:
+  - fit_mb
+  - ci_mb
+  - ASTAR
+  - FV
+  - Greedy
+  - GreedyLocal
+  - getQ
+
+- title: Built-In Datasets
+  desc: ~
+  contents:
+    - AIBS
+    - ToyData1
+    - ToyData2
+    - ToyData3
