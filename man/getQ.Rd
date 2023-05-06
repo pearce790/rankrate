@@ -4,21 +4,26 @@
 \alias{getQ}
 \title{Calculate Q Matrix}
 \usage{
-getQ(Pi, J)
+getQ(rankings, I, J)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{J}{Total number of objects assessed.}
+\item{I}{A numeric entry indicating the total number of judges providing rankings and ratings.}
+
+\item{J}{A numeric entry or vector of positive integers indicating total number of objects.}
 }
 \value{
-Matrix Q of dimensions J x J.
+A matrix with dimension \code{J} x \code{J}.
 }
 \description{
 This function calculates the Q matrix given a collection of (partial) rankings. For use in estimation functions, but not likely on its own.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-getQ(Pi=Pi,J=4)
+rankings <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
+getQ(rankings=rankings,I=2,J=4)
+attr(rankings,"assignments") <- matrix(c(rep(TRUE,7),FALSE),byrow=TRUE,nrow=2,ncol=4)
+getQ(rankings=rankings,I=2,J=4)
 
 }

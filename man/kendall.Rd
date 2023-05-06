@@ -2,23 +2,30 @@
 % Please edit documentation in R/kendall.R
 \name{kendall}
 \alias{kendall}
-\title{Kendall's tau function}
+\title{Calculate the Kendall's tau between rankings}
 \usage{
-kendall(pi, pi0)
+kendall(rankings, pi0)
 }
 \arguments{
-\item{pi}{A partial or complete ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{pi0}{A complete ranking.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking.}
 }
 \value{
-Numeric Kendall's tau distance between pi and pi0.
+A vector of the Kendall's tau distance between each ranking in \code{rankings} and \code{pi0}.
 }
 \description{
-This function calculates Kendall's tau distance between a (partial) ranking pi and a complete ranking pi0.
+This function calculates Kendall's tau distance between ranking(s) and a central permutation, pi0
 }
 \examples{
-kendall(pi=c(1,2,3),pi0=c(4,3,2,1))
-kendall(pi=c(1,2,3),pi0=c(1,3,2))
- 
+ranking1 <- c(2,1,3)
+ranking2 <- matrix(c(2,1,3,1,2,3),byrow=TRUE,nrow=2)
+ranking3 <- matrix(c(1,2,3,4,2,4,NA,NA),byrow=TRUE,nrow=2)
+attr(ranking3,"assignments") <- matrix(c(TRUE,TRUE,TRUE,TRUE,
+  FALSE,TRUE,FALSE,TRUE),byrow=TRUE,nrow=2)
+kendall(ranking1,c(1,2,3))
+kendall(ranking2,c(1,2,3))
+kendall(ranking3,c(1,2,3,4))
+
 }

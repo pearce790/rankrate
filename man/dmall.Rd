@@ -2,27 +2,33 @@
 % Please edit documentation in R/dmall.R
 \name{dmall}
 \alias{dmall}
-\title{Mallows density function}
+\title{Calculate the density of rankings under a Mallows distribution}
 \usage{
-dmall(Pi, pi0, theta, log = FALSE)
+dmall(rankings, pi0, theta, log = FALSE)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
 
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
-\item{log}{Boolean indicating if loglikelihood should be returned.}
+\item{log}{A boolean indicating if the log likelihood should be returned.}
 }
 \value{
-(Log) likelihood of rankings under a Mallows distribution.
+A numeric value indicating the (log) likelihood of rankings under a Mallows distribution.
 }
 \description{
 This function calculates the density of observation(s) under a Mallows distribution.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-dmall(Pi=Pi,pi0=c(2,1,3,4),theta=1,log=TRUE)
- 
+rankings1 <- matrix(c(1,2,3,3,1,2),nrow=2,byrow=TRUE)
+rankings2 <- matrix(c(1,2,3,4,2,3,NA,NA),nrow=2,byrow=TRUE)
+attr(rankings2,"assignments") <- matrix(c(rep(TRUE,4),FALSE,TRUE,TRUE,TRUE),nrow=2,byrow=TRUE)
+dmall(rankings=c(1,2,3,NA),pi0=c(1,2,3,4),theta=2)
+dmall(rankings=rankings1,pi0=c(1,2,3),theta=2)
+dmall(rankings=rankings2,pi0=c(1,2,3,4),theta=3,log=TRUE)
+
 }

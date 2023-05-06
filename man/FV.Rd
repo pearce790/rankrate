@@ -4,27 +4,28 @@
 \alias{FV}
 \title{Estimate the MLE of a Mallows-Binomial distribution using the FV method}
 \usage{
-FV(Pi, X, M, localsearch = 0)
+FV(rankings, ratings, M)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
-
-\item{localsearch}{Numberic specifying the maximum Kendall distance to the first-estimated consensus ranking of rankings which should be considered during a post-hoc local search; defaults to 0 (indicating no local search).}
 }
 \value{
-List with elements pi0 (estimated consensus ranking MLE),  p (estimated object quality parameter MLE), theta (estimated scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
+A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+\code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+one row per MLE.
 }
 \description{
 This function estimates the MLE of a Mallows-Binomial distribution using the FV method.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-FV(Pi=Pi,X=X,M=5)
-FV(Pi=Pi,X=X,M=5,localsearch=2)
- 
+data("ToyData1")
+FV(ToyData1$rankings,ToyData1$ratings,ToyData1$M)
+
 }

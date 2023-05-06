@@ -4,24 +4,32 @@
 \alias{ASTAR}
 \title{Calculate the exact MLE of a Mallows-Binomial distribution using an A* search algorithm}
 \usage{
-ASTAR(Pi, X, M)
+ASTAR(rankings, ratings, M, keep_nodes = FALSE)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
+
+\item{keep_nodes}{Boolean specifying if function should retain the list of open nodes traversed during A*
+tree search. Defaults to \code{FALSE}.}
 }
 \value{
-List with elements pi0 (consensus ranking MLE),  p (object quality parameter MLE), theta (scale parameter MLE), and numnodes (number of nodes traversed during algorithm, a measure of computational complexity).
+A list with elements \code{pi0}, the estimated consensus ranking MLE, \code{p}, the
+estimated object quality parameter MLE, \code{theta}, the estimated scale parameter MLE, and
+\code{numnodes}, number of nodes traversed during algorithm and a measure of computational complexity.
+If \code{keep_nodes == TRUE}, then the list also contains \code{nodes}, a matrix of open nodes remaining
+at the end of search. If multiple MLEs are found, \code{pi0}, \code{p}, and \code{theta} are returned a matrix elements, with
+one row per MLE.
 }
 \description{
 This function estimates the exact MLE of a Mallows-Binomial distribution using an A* tree search algorithm proposed in Pearce and Erosheva (2022). The algorithm may be very slow when number of objects, J, exceeds 15, but is often still tractable for larger J when ranking and rating consensus among judges is strong.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-ASTAR(Pi=Pi,X=X,M=5)
- 
+data("ToyData1")
+ASTAR(ToyData1$rankings,ToyData1$ratings,ToyData1$M,keep_nodes=TRUE)
+
 }

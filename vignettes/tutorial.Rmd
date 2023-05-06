@@ -1,0 +1,56 @@
+---
+title: "Tutorial"
+output: rmarkdown::html_vignette
+bibliography: rankrate.bib
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+```{r eval=FALSE}
+devtools::install_github("pearce790/rankrate")
+```
+
+```{r}
+library(rankrate)
+data("ToyData2")
+```
+
+## Viewing Rankings and Ratings
+
+```{r warning=FALSE,message=FALSE}
+library(pander)
+library(reshape2)
+library(ggplot2)
+rankings_table <- as.data.frame(ToyData2$rankings)
+rownames(rankings_table) <- paste0("Judge ",1:16)
+names(rankings_table) <- paste0("Rank ",1:8)
+pander(ratings_table)
+rankings_long <- melt(ToyData2$rankings)
+names(rankings_long) <- c("Judge","Rank","Proposal")
+ggplot(rankings_long,aes(x=Proposal,fill=factor(Rank)))+theme_bw(base_size=12)+
+  geom_bar()+scale_fill_manual(values=c("#31A354","#A1D99B","#E5F5E0"))+
+  labs(fill="Rank",y="Count")+ggtitle("Ranks by Proposal")+
+  theme(legend.position = c(.8,.9),legend.direction = "horizontal",
+        panel.grid = element_blank())
+
+ratings_table <- as.data.frame(ToyData2$ratings)
+rownames(ratings_table) <- paste0("Judge ",1:16)
+names(ratings_table) <- paste0("Proposal ",1:8)
+pander(ratings_table)
+ratings_long <- melt(ToyData2$ratings)
+names(ratings_long) <- c("Judge","Proposal","Rating")
+ggplot(ratings_long,aes(x=factor(Proposal),y=Rating))+theme_bw(base_size=12)+
+  geom_boxplot(color="gray")+geom_jitter(height=0,width=0.4,alpha=0.75)+
+  labs(x="Proposal",y="Rating")+ggtitle("Ratings by Proposal")+
+  theme(panel.grid = element_blank())
+```

@@ -2,35 +2,37 @@
 % Please edit documentation in R/dmb.R
 \name{dmb}
 \alias{dmb}
-\title{Mallows-Binomial density function}
+\title{Calculate the density of rankings and ratings under a Mallows-Binomial distribution.}
 \usage{
-dmb(Pi, X, p, pi0 = NULL, theta, M, log = FALSE)
+dmb(rankings, ratings, p, theta, M, pi0 = NULL, log = FALSE)
 }
 \arguments{
-\item{Pi}{Matrix of partial or complete rankings, one row per ranking.}
+\item{rankings}{A matrix of rankings, potentially with attribute "assignments" to signify separate
+reviewer assignments. One ranking per row.}
 
-\item{X}{Matrix of ratings, one row per judge and one column per object.}
+\item{ratings}{A matrix of ratings, one row per judge and one column per object.}
 
-\item{p}{Vector of object qualities.}
+\item{p}{A vector specifying the underlying object qualities. All values between be between 0 and 1, inclusive.}
 
-\item{pi0}{Vector specifying the consensus (modal probability) ranking (useful to break ties in p).}
-
-\item{theta}{Numeric specifying the Mallows scale parameter.}
+\item{theta}{A numeric entry specifying the Mallows scale parameter.}
 
 \item{M}{Numeric specifying maximum (=worst quality) integer rating.}
 
-\item{log}{Boolean indicating if loglikelihood should be returned.}
+\item{pi0}{A vector specifying the consensus (modal probability) ranking; should be used only for tie-breaking
+equal values in \code{p}.}
+
+\item{log}{A boolean indicating if the log likelihood should be returned.}
 }
 \value{
-(Log) likelihood of rankings under a Mallows-Binomial distribution.
+A numeric value indicating the (log) likelihood of rankings and ratings under a Mallows distribution.
 }
 \description{
 This function calculates the density of observation(s) under a Mallows-Binomial distribution.
 }
 \examples{
-Pi <- matrix(c(1,2,3,4,2,1,NA,NA),byrow=TRUE,nrow=2)
-X <- matrix(c(0,1,2,3,1,2,2,5),byrow=TRUE,nrow=2)
-dmb(Pi=Pi,X=X,p=c(.1,.2,.5,.9),theta=1.1,M=5,log=TRUE)
-dmb(Pi=Pi,X=X,p=c(.1,.2,.5,.9),theta=2,M=5,log=TRUE)
- 
+data(ToyData1)
+dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.2,.5,.7),theta=1,M=ToyData1$M)
+dmb(rankings=ToyData1$rankings,ratings=ToyData1$ratings,p=c(.25,.25,.7),theta=1,M=ToyData1$M,
+pi0=c(1,2,3),log=TRUE)
+
 }

@@ -1,33 +1,54 @@
-#' Kendall's tau function
-#' 
-#' This function calculates Kendall's tau distance between a (partial) ranking pi and a complete ranking pi0.
-#' 
+#' Calculate the Kendall's tau between rankings
+#'
+#' This function calculates Kendall's tau distance between ranking(s) and a central permutation, pi0
+#'
 #' @import stats
-#' 
-#' @param pi A partial or complete ranking.
-#' @param pi0 A complete ranking.
-#'  
-#' @return Numeric Kendall's tau distance between pi and pi0.
-#'  
-#' @examples 
-#' kendall(pi=c(1,2,3),pi0=c(4,3,2,1))
-#' kendall(pi=c(1,2,3),pi0=c(1,3,2))
-#'  
+#'
+#' @param rankings A matrix of rankings, potentially with attribute "assignments" to signify separate
+#'   reviewer assignments. One ranking per row.
+#' @param pi0 A vector specifying the consensus (modal probability) ranking.
+#'
+#' @return A vector of the Kendall's tau distance between each ranking in \code{rankings} and \code{pi0}.
+#'
+#' @examples
+#' ranking1 <- c(2,1,3)
+#' ranking2 <- matrix(c(2,1,3,1,2,3),byrow=TRUE,nrow=2)
+#' ranking3 <- matrix(c(1,2,3,4,2,4,NA,NA),byrow=TRUE,nrow=2)
+#' attr(ranking3,"assignments") <- matrix(c(TRUE,TRUE,TRUE,TRUE,
+#'   FALSE,TRUE,FALSE,TRUE),byrow=TRUE,nrow=2)
+#' kendall(ranking1,c(1,2,3))
+#' kendall(ranking2,c(1,2,3))
+#' kendall(ranking3,c(1,2,3,4))
+#'
 #' @export
-kendall <- function(pi,pi0){
-  # calculate kendall distance between a ranking pi and a central ranking, pi0
-  pi <- na.exclude(as.vector(pi))
+kendall <- function(rankings,pi0){
+
+  # check data formats
+  if(is.vector(rankings)){rankings <- matrix(rankings,nrow=1)}
+  if(!is.matrix(rankings)){stop("rankings must be either a vector or matrix")}
+  I <- nrow(rankings)
+  J <- ncol(rankings)
   pi0 <- as.vector(pi0)
-  
-  R <- length(pi)
-  J <- length(pi0)
-  if(length(setdiff(1:J,pi0))!=0){stop("pi0 must be a complete ranking")}
-  if(any(pi>J,na.rm=T)){stop("pi cannot contain items not in pi0")}
-  if(R>J){stop("R must be <= J")}
-  dist <- 0
-  for(r in 1:R){
-    dist <- dist + (which(pi0 == pi[r]) - 1)
-    pi0 <- setdiff(pi0,pi[r])
-  }
-  return(dist)
+  if(is.null(attr(rankings,"assignments"))){attr(rankings,"assignments") <- matrix(TRUE,nrow=nrow(rankings),ncol=J)}
+
+  # calculate distance for each ranking individually
+  dists <- unlist(lapply(1:I,function(i){
+    ranking <- na.exclude(rankings[i,])
+    not_in_ballot <- which(attr(rankings,"assignments")[i,] == FALSE)
+    R <- length(ranking)
+    if(R==0){return(NA)}
+    pi0_curr <- setdiff(pi0,not_in_ballot)
+    J <- length(pi0_curr)
+
+    if(R>J){stop("R must be <=J for all judges")}
+    if(any(!(ranking %in% pi0_curr))){stop("No ranking can contain items not in their ballot")}
+    dist <- 0
+    for(r in 1:R){
+      dist <- dist + (which(pi0_curr == ranking[r])-1)
+      pi0_curr <- setdiff(pi0_curr,ranking[r])
+    }
+    return(dist)
+  }))
+
+  return(dists)
 }
