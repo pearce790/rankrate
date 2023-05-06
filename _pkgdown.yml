@@ -1,15 +1,14 @@
+url: https://pearce790.github.io/rankrate/
 template:
   params:
     bootswatch: flatly
-
 navbar:
   structure:
     left:
     - home
     - tutorial
     - reference
-    right:
-    - github
+    right: github
   components:
     home:
       text: Overview
@@ -21,10 +20,8 @@ navbar:
       text: Reference
       href: reference/index.html
     articles:
-      text:
-      menu:
-
-
+      text: ~
+      menu: ~
 reference:
 - title: Density, Random Data Generation, and Helper Functions
   desc: ~
@@ -36,8 +33,6 @@ reference:
   - psi
   - kendall
   - to_rankings
-
-
 - title: Model Estimation Functions
   desc: ~
   contents:
@@ -48,11 +43,11 @@ reference:
   - Greedy
   - GreedyLocal
   - getQ
-
 - title: Built-In Datasets
   desc: ~
   contents:
-    - AIBS
-    - ToyData1
-    - ToyData2
-    - ToyData3
+  - AIBS
+  - ToyData1
+  - ToyData2
+  - ToyData3
+
