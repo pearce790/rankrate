@@ -1,5 +1,9 @@
-## version 1.0.0
-First release.
+# rankrate 1.1.0
 
-## version 1.1.0
-Updated estimation functions that remove bugs found in the prior version related to conditional updating of the object quality vector, p, given an ordering of parameters. Estimation functions are now faster and allow for identication of multiple MLEs, when present. Additionally, vignettes have been added for demonstration purposes.
+* Removed bugs in estimation of object quality vector, p.
+* Allow for identification of multiple MLEs, if ties between objects.
+* Added vignettes.
+
+# rankrate 1.0.0
+
+* First release.
