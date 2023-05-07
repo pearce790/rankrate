@@ -19,12 +19,12 @@ This package allows for joint modeling of ranking and rating preference data via
 
 For more details on how to use this package, see the [tutorial](https://pearce790.github.io/rankrate/articles/tutorial.html). 
 
-A published version of the package may be install from CRAN, or a development version for the most up-to-date functionality:
+A published version of the package may be installed from CRAN, or a development version from Github for the most up-to-date functionality:
 ```{r, eval=FALSE}
-## CRAN version
+## Published (CRAN) version
 install.packages("rankrate")  
 
-## Development version
+## Development (Github) version
 # install.packages("devtools") # uncomment if you haven't installed 'devtools' before
 devtools::install_github("pearce790/rankrate")
 ```
