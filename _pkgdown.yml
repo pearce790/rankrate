@@ -24,7 +24,9 @@ navbar:
       menu: ~
 reference:
 - title: Density, Random Data Generation, and Helper Functions
-  desc: Functions that allow for calculating the density of rankings and ratings, random sampling of Mallows and Mallows-Binomial random variables, and associated helper functions.
+  desc: Functions that allow for calculating the density of rankings and ratings,
+    random sampling of Mallows and Mallows-Binomial random variables, and associated
+    helper functions.
   contents:
   - dmall
   - dmb
@@ -35,7 +37,8 @@ reference:
   - to_rankings
   - getQ
 - title: Model Estimation Functions
-  desc: Functions that allow for estimation of Mallows-Binomial models and uncertainty quantification via the nonparametric bootstrap.
+  desc: Functions that allow for estimation of Mallows-Binomial models and uncertainty
+    quantification via the nonparametric bootstrap.
   contents:
   - fit_mb
   - ci_mb
@@ -44,7 +47,8 @@ reference:
   - Greedy
   - GreedyLocal
 - title: Built-In Datasets
-  desc: Four data sets of rankings and ratings to demonstrate model capabilities and key functions.
+  desc: Four data sets of rankings and ratings to demonstrate model capabilities and
+    key functions.
   contents:
   - AIBS
   - ToyData1
