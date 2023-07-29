@@ -1,1 +1,0 @@
-"0","model_ci <- ci_mb(Pi,X,M,interval = 0.95,nsamples = 100, all=TRUE,method=""ASTAR"")"
