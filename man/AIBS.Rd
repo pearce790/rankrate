@@ -12,7 +12,7 @@ A list with three elements: (1) \code{rankings}, a 12 x 18 matrix of rankings wi
 \source{
 {Originally published in: Gallo, Stephen A.. "Grant Peer Review Scoring Data with Criteria Scores" (2023). \url{https://figshare.com/articles/dataset/Grant_Peer_Review_Scoring_Data_with_Criteria_Scores/12728087/1}.}
 
-{Originally analyzed in: Gallo, Stephen A., et al. "A new approach to peer review assessments: Score, then rank." Research Integrity and Peer Review (2023).}
+{Originally analyzed in: Gallo, Stephen A., et al. "A new approach to peer review assessments: Score, then rank" (2023). Research Integrity and Peer Review 8:10 (10). \url{https://researchintegrityjournal.biomedcentral.com/articles/10.1186/s41073-023-00131-7}.}
 }
 \usage{
 AIBS
