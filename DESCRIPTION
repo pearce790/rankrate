@@ -4,7 +4,7 @@ Version: 1.3.0
 Authors@R: 
     person("Michael", "Pearce", , "michaelpearce@reed.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9313-271X"))
-Description: This package implements key estimation procedures of the Mallows-Binomial model, the first joint statistical model for preference learning for rankings and ratings. 
+Description: Statistical tools for the Mallows-Binomial model, the first joint statistical model for preference learning for rankings and ratings. 
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
