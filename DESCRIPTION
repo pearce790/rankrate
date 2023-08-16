@@ -1,6 +1,6 @@
 Package: rankrate
 Title: Joint Statistical Models for Preference Learning with Rankings and Ratings
-Version: 1.2.0
+Version: 1.3.0
 Authors@R: 
     person("Michael", "Pearce", , "michaelpearce@reed.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9313-271X"))

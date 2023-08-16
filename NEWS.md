@@ -1,3 +1,5 @@
+# rankrate 1.3.0
+
 # rankrate 1.2.0
 
 * Removed bugs in estimation of object quality vector, p.
