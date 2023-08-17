@@ -2,10 +2,10 @@ Package: rankrate
 Title: Joint Statistical Models for Preference Learning with Rankings and Ratings
 Version: 1.2.0
 Authors@R: 
-    person("Michael", "Pearce", , "pearce790@gmail.com", role = c("aut", "cre"),
+    person("Michael", "Pearce", , "pearce790@gmail.com", role = c("aut", "cre","cph"),
            comment = c(ORCID = "0000-0002-9313-271X"))
 Description: Statistical tools for the Mallows-Binomial model, the first joint statistical model for preference learning for rankings and ratings. 
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
