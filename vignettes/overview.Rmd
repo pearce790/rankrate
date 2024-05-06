@@ -37,4 +37,8 @@ devtools::install_github("pearce790/rankrate")
 library(rankrate)
 ```
 
+# Funding
+
+This project was supported by the National Science Foundation under Grant No. 2019901.
+
 # References
