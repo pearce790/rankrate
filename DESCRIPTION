@@ -19,4 +19,5 @@ Suggests:
     pander,
     reshape2
 VignetteBuilder: knitr
-URL: https://pearce790.github.io/rankrate/
+URL: https://pearce790.github.io/rankrate/, https://github.com/pearce790/rankrate
+BugReports: https://github.com/pearce790/rankrate/issues
