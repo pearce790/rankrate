@@ -1,11 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   overview: overview.html
   tutorial: tutorial.html
-last_built: 2024-05-06T01:08Z
+last_built: 2025-03-25T19:09Z
 urls:
   reference: https://pearce790.github.io/rankrate/reference
   article: https://pearce790.github.io/rankrate/articles
-

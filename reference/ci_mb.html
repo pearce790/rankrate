@@ -4,7 +4,7 @@ using the nonparametric bootstrap."><!-- mathjax --><script src="https://cdnjs.c
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -36,13 +36,13 @@ using the nonparametric bootstrap."><!-- mathjax --><script src="https://cdnjs.c
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bootstrap Confidence Intervals for Mallows-Binomial parameters.</h1>
-    
+
     <div class="hidden name"><code>ci_mb.Rd</code></div>
     </div>
 
@@ -65,44 +65,44 @@ using the nonparametric bootstrap.</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>rankings</dt>
+
+
+<dl><dt id="arg-rankings">rankings<a class="anchor" aria-label="anchor" href="#arg-rankings"></a></dt>
 <dd><p>A matrix of rankings, potentially with attribute "assignments" to signify separate
 reviewer assignments. One ranking per row.</p></dd>
 
 
-<dt>ratings</dt>
+<dt id="arg-ratings">ratings<a class="anchor" aria-label="anchor" href="#arg-ratings"></a></dt>
 <dd><p>A matrix of ratings, one row per judge and one column per object.</p></dd>
 
 
-<dt>M</dt>
+<dt id="arg-m">M<a class="anchor" aria-label="anchor" href="#arg-m"></a></dt>
 <dd><p>Numeric specifying maximum (=worst quality) integer rating.</p></dd>
 
 
-<dt>interval</dt>
+<dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
 <dd><p>A numeric entry between 0 and 1 specifying the confidence interval (e.g.,
 .90 indicates a 90% confidence interval). Defaults to 0.90.</p></dd>
 
 
-<dt>nsamples</dt>
+<dt id="arg-nsamples">nsamples<a class="anchor" aria-label="anchor" href="#arg-nsamples"></a></dt>
 <dd><p>A numeric entry indicating desired number of bootstrap samples to be used when
 calculating confidence intervals. Defaults to 50.</p></dd>
 
 
-<dt>all</dt>
+<dt id="arg-all">all<a class="anchor" aria-label="anchor" href="#arg-all"></a></dt>
 <dd><p>A boolean indicating if estimated parameters from all bootstrap samples should be returned.
 Defaults to <code>FALSE</code>.</p></dd>
 
 
-<dt>method</dt>
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>A character string indicating which estimation method to use when estimating parameters.
 Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list with elements <code>ci</code>, a matrix of confidence intervals for Mallows-Binomial parameters,
+    <p>A list with elements <code>ci</code>, a matrix of confidence intervals for Mallows-Binomial parameters,
 <code>ci_ranks</code>, a matrix of confidence intervals for object ranks, <code>bootstrap_pi0</code>, a matrix of
 bootstrap consensus rankings (returned only if <code>all==TRUE</code>), and <code>bootstrap_ptheta</code>, a
 matrix of bootstrap estimates of (p,theta) (returned only if <code>all==TRUE</code>).</p>
@@ -243,15 +243,15 @@ matrix of bootstrap estimates of (p,theta) (returned only if <code>all==TRUE</co
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

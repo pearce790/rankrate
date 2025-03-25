@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -35,13 +35,13 @@
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate the exact or approximate MLE of a Mallows-Binomial distribution using various methods</h1>
-    
+
     <div class="hidden name"><code>fit_mb.Rd</code></div>
     </div>
 
@@ -60,29 +60,29 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>rankings</dt>
+
+
+<dl><dt id="arg-rankings">rankings<a class="anchor" aria-label="anchor" href="#arg-rankings"></a></dt>
 <dd><p>A matrix of rankings, potentially with attribute "assignments" to signify separate
 reviewer assignments. One ranking per row.</p></dd>
 
 
-<dt>ratings</dt>
+<dt id="arg-ratings">ratings<a class="anchor" aria-label="anchor" href="#arg-ratings"></a></dt>
 <dd><p>A matrix of ratings, one row per judge and one column per object.</p></dd>
 
 
-<dt>M</dt>
+<dt id="arg-m">M<a class="anchor" aria-label="anchor" href="#arg-m"></a></dt>
 <dd><p>Numeric specifying maximum (=worst quality) integer rating.</p></dd>
 
 
-<dt>method</dt>
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>A character string indicating which estimation method to use when estimating parameters.
 Allowable options are currently "ASTAR", "Greedy", "GreedyLocal", and "FV". Defaults to exact search, "ASTAR".</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list with elements <code>pi0</code>, the estimated consensus ranking MLE, <code>p</code>, the
+    <p>A list with elements <code>pi0</code>, the estimated consensus ranking MLE, <code>p</code>, the
 estimated object quality parameter MLE, <code>theta</code>, the estimated scale parameter MLE, and
 <code>numnodes</code>, number of nodes traversed during algorithm and a measure of computational complexity.
 If multiple MLEs are found, <code>pi0</code>, <code>p</code>, and <code>theta</code> are returned a matrix elements, with
@@ -159,15 +159,15 @@ one row per MLE.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
