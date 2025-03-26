@@ -1,3 +1,7 @@
+# rankrate 1.2.1
+
+* Minor fixes to package vignettes to meet CRAN policy.
+
 # rankrate 1.2.0
 
 * Removed bugs in estimation of object quality vector, p.
