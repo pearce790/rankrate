@@ -1,6 +1,6 @@
 Package: rankrate
 Title: Joint Statistical Models for Preference Learning with Rankings and Ratings
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: 
     person("Michael", "Pearce", , "pearce790@gmail.com", role = c("aut", "cre","cph"),
            comment = c(ORCID = "0000-0002-9313-271X"))
@@ -19,5 +19,5 @@ Suggests:
     pander,
     reshape2
 VignetteBuilder: knitr
-URL: https://pearce790.github.io/rankrate/, https://github.com/pearce790/rankrate
+URL: https://pearce790.github.io/rankrate/, https://github.com/pearce790/rankrate/
 BugReports: https://github.com/pearce790/rankrate/issues
